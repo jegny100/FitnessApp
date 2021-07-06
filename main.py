@@ -1,4 +1,4 @@
-from kivy.app import App
+from kivymd.app import MDApp
 from kivy.uix.widget import Widget
 
 
@@ -6,7 +6,7 @@ class FitnessWindow(Widget):
     pass
 
 
-class FitnessApp(App):
+class FitnessApp(MDApp):
     def build(self):
         return FitnessWindow()
 
