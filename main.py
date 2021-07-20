@@ -3,6 +3,28 @@ from kivymd.uix.label import MDLabel, MDIcon
 from kivymd.uix.button import MDFillRoundFlatButton, MDIconButton
 from kivymd.uix.screen import Screen
 
+from kivy.lang import Builder
+
+KV = '''
+MDBoxLayout:
+    orientation: "vertical"
+
+    MDToolbar:
+        title: "Fitness App"
+        
+    MDBoxLayout:
+
+        MDNavigationRail:
+            md_bg_color: app.theme_cls.primary_color
+            
+            MDNavigationRailItem:
+                icon: "book-open-variant"
+
+            MDNavigationRailItem:
+                icon: "chart-line"
+
+'''
+
 
 class FitnessApp(MDApp):
     def build(self):
@@ -24,7 +46,7 @@ class FitnessApp(MDApp):
                                 md_bg_color=(154 / 255.0, 212 / 255.0, 194 / 255.0, 1))
         homescreen.add_widget(plus_btn)
 
-        return homescreen
+        return Builder.load_string(KV)
 
 
 FitnessApp().run()
