@@ -15,25 +15,12 @@ KV = '''
     IconLeftWidget:
         id: icon
         icon: root.icon
-        theme_text_color: "Custom"
-        text_color: root.text_color
 
 
 <ContentNavigationDrawer>:
     orientation: "vertical"
     padding: "8dp"
     spacing: "8dp"
-
-    AnchorLayout:
-        anchor_x: "left"
-        size_hint_y: None
-        height: avatar.height
-
-        Image:
-            id: avatar
-            size_hint: None, None
-            size: "56dp", "56dp"
-            source: "data/logo/kivy-icon-256.png"
 
     MDLabel:
         text: "Menü"
@@ -100,7 +87,9 @@ class DrawerList(ThemableBehavior, MDList):
 
 
 class TestNavigationDrawer(MDApp):
+
     def build(self):
+        self.theme_cls.primary_palette = "Teal"
         return Builder.load_string(KV)
 
     def on_start(self):
