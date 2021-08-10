@@ -7,7 +7,7 @@ from kivymd.uix.button import MDFillRoundFlatButton, MDIconButton
 from kivymd.uix.screen import Screen
 
 KV = '''
-<ContentNavigationDrawer>:
+<ContentNavigationDrawer22>:
     ScrollView:
         MDList:
             OneLineListItem:
@@ -51,12 +51,12 @@ MDScreen:
         MDNavigationDrawer:
             id: nav_drawer
 
-            ContentNavigationDrawer:
+            ContentNavigationDrawer22:
                 screen_manager: screen_manager
                 nav_drawer: nav_drawer
 '''
 
-class ContentNavigationDrawer(MDBoxLayout):
+class ContentNavigationDrawer22(MDBoxLayout):
     screen_manager = ObjectProperty()  # TODO check documentary
     nav_drawer = ObjectProperty()
 

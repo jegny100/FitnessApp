@@ -36,14 +36,8 @@ KV = '''
             source: "data/logo/kivy-icon-256.png"
 
     MDLabel:
-        text: "KivyMD library"
+        text: "Menü"
         font_style: "Button"
-        size_hint_y: None
-        height: self.texture_size[1]
-
-    MDLabel:
-        text: "kivydevelopment@gmail.com"
-        font_style: "Caption"
         size_hint_y: None
         height: self.texture_size[1]
 
@@ -62,15 +56,13 @@ MDScreen:
             id: screen_manager
 
             MDScreen:
-
                 BoxLayout:
                     orientation: 'vertical'
 
                     MDToolbar:
-                        title: "Navigation Drawer"
+                        title: "Fitness App"
                         elevation: 10
-                        left_action_items: [['menu', lambda x: nav_drawer.
-        toggle()]]
+                        left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
 
                     Widget:
                 
