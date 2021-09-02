@@ -6,8 +6,11 @@ from kivymd.uix.label import MDLabel, MDIcon
 from kivymd.uix.button import MDFillRoundFlatButton, MDIconButton
 from kivymd.uix.screen import Screen
 
+from kivy.core.window import Window
+Window.size = (350, 600)
+
 KV = '''
-<ContentNavigationDrawer22>:
+<ContentNavigationDrawer>:
     ScrollView:
         MDList:
             OneLineListItem:
@@ -38,9 +41,25 @@ MDScreen:
             
             MDScreen:
                 name: "activities"
-                MDLabel:
-                    text: "Aktivitäten"
-                    halign: "center"
+                
+                MDBoxLayout:
+                    orientation: "vertical"
+                        
+                    MDLabel:
+                        text :'Hello'
+                        halign : 'center'
+                        valign : 'top'
+                        font_style : 'H1'  
+                        
+                    MDFillRoundFlatButton:
+                        text: 'Aktivität hinzufügen'
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                        
+                    MDIconButton:
+                        icon: 'plus'
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.125}
+                        md_bg_color : (154 / 255.0, 212 / 255.0, 194 / 255.0, 1)
+                        
             
             MDScreen:
                 name: "statistics"
@@ -51,12 +70,12 @@ MDScreen:
         MDNavigationDrawer:
             id: nav_drawer
 
-            ContentNavigationDrawer22:
+            ContentNavigationDrawer:
                 screen_manager: screen_manager
                 nav_drawer: nav_drawer
 '''
 
-class ContentNavigationDrawer22(MDBoxLayout):
+class ContentNavigationDrawer(MDBoxLayout):
     screen_manager = ObjectProperty()  # TODO check documentary
     nav_drawer = ObjectProperty()
 
@@ -70,16 +89,6 @@ class FitnessApp(MDApp):
                         theme_text_color='Custom',
                         text_color=(154 / 255.0, 212 / 255.0, 194 / 255.0, 1),
                         font_style='H1')
-        activities.add_widget(label)
-
-        btn_flat = MDFillRoundFlatButton(text='Aktivität hinzufügen',
-                                         pos_hint={'center_x': 0.5, 'center_y': 0.25})
-        activities.add_widget(btn_flat)
-
-        plus_btn = MDIconButton(icon='plus',
-                                pos_hint={'center_x': 0.5, 'center_y': 0.125},
-                                md_bg_color=(154 / 255.0, 212 / 255.0, 194 / 255.0, 1))
-        activities.add_widget(plus_btn)
 
         return Builder.load_string(KV)
 
