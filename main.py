@@ -83,12 +83,6 @@ class ContentNavigationDrawer(MDBoxLayout):
 class FitnessApp(MDApp):
     def build(self):
         self.theme_cls.primary_palette = "Teal"
-        activities = Screen()
-
-        label = MDLabel(text='Hello', halign='center', valign='top',
-                        theme_text_color='Custom',
-                        text_color=(154 / 255.0, 212 / 255.0, 194 / 255.0, 1),
-                        font_style='H1')
 
         return Builder.load_string(KV)
 
