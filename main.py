@@ -49,15 +49,11 @@ MDScreen:
                         text :'Hello'
                         halign : 'center'
                         valign : 'top'
-                        font_style : 'H1'  
-                        
-                    MDFillRoundFlatButton:
-                        text: 'Aktivität hinzufügen'
-                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                        font_style : 'H3'  
                         
                     MDIconButton:
                         icon: 'plus'
-                        pos_hint: {'center_x': 0.5, 'center_y': 0.125}
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
                         md_bg_color : (154 / 255.0, 212 / 255.0, 194 / 255.0, 1)
                         
             
