@@ -26,6 +26,7 @@ class FitnessApp(MDApp):
     def show_dialog(self, obj):
         self.dialog = MDDialog(title='Aktivität hinzufügen',
                                text='Test test tesst', size_hint=(0.8, 1),
+
                                buttons=[MDFlatButton(text='Close', on_release=self.close_dialog),
                                         MDFlatButton(text='Save')]
                                )
