@@ -44,13 +44,19 @@ MDScreen:
                         icon: 'plus'
                         pos_hint: {'center_x': 0.5, 'center_y': 0.5}
                         md_bg_color : (154 / 255.0, 212 / 255.0, 194 / 255.0, 1)
-                        on_press: app.show_dialog(self)
+                        on_press: screen_manager.current = "logging"
                         
             
             MDScreen:
                 name: "statistics"
                 MDLabel:
                     text: "Statistics"
+                    halign: "center"
+                    
+            MDScreen:
+                name: "logging"
+                MDLabel:
+                    text: "logging Activity"
                     halign: "center"
 
         MDNavigationDrawer:

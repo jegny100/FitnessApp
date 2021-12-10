@@ -1,14 +1,13 @@
+from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty
 from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
+from kivymd.uix.button import MDFlatButton
 from kivymd.uix.dialog import MDDialog
-from kivymd.uix.label import MDLabel, MDIcon
-from kivymd.uix.button import MDFillRoundFlatButton, MDIconButton, MDFlatButton
-from kivymd.uix.screen import Screen
+
 import main_kivy
 
-from kivy.core.window import Window
 Window.size = (350, 600)
 
 
