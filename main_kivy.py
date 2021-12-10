@@ -55,9 +55,57 @@ MDScreen:
                     
             MDScreen:
                 name: "logging"
-                MDLabel:
-                    text: "logging Activity"
-                    halign: "center"
+                MDBoxLayout:
+                    orientation: "vertical"
+                    
+                    MDLabel:
+                        text: "Logging Activity"
+                        halign: "center"                        
+                        valign: "bottom"
+                        
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        
+                        MDLabel:
+                            text: "Choose Activity"
+                            halign: "center"
+                            
+                        MDLabel:
+                            text: "choosing thing placeholder"
+                            halign: "center"
+                            
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        
+                        MDLabel:
+                            text: "Time"
+                            halign: "center"
+                            
+                        MDLabel:
+                            text: "placeholder"
+                            halign: "center"
+                        
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        
+                        MDLabel:
+                            text: "Repetitions"
+                            halign: "center"
+                            
+                        MDLabel:
+                            text: "placeholder"
+                            halign: "center"
+                            
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        
+                        MDLabel:
+                            text: "Weight"
+                            halign: "center"
+                            
+                        MDLabel:
+                            text: "placeholder"
+                            halign: "center"
 
         MDNavigationDrawer:
             id: nav_drawer

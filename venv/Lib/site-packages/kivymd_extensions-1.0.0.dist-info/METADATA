@@ -1,0 +1,62 @@
+Metadata-Version: 2.1
+Name: kivymd-extensions
+Version: 1.0.0
+Summary: Additional packages for KivyMD library
+Home-page: https://github.com/kivymd-extensions/KivyMD_Extensions
+Author: KivyMD Team and other contributors
+Author-email: kivydevelopment@gmail.com
+License: MIT
+Project-URL: Tracker, https://github.com/kivymd-extensions/KivyMD_Extensions/issues
+Keywords: kivymd_extensions,kivymd,kivy,material,ui
+Platform: any
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Operating System :: OS Independent
+Classifier: Operating System :: Android
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Operating System :: POSIX :: BSD :: FreeBSD
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: iOS
+Classifier: Operating System :: MacOS
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Environment :: MacOS X
+Classifier: Environment :: Win32 (MS Windows)
+Classifier: Environment :: X11 Applications
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: Intended Audience :: Information Technology
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Software Development :: User Interfaces
+Classifier: Topic :: Scientific/Engineering :: Human Machine Interfaces
+Classifier: Topic :: Scientific/Engineering :: Visualization
+Description-Content-Type: text/markdown; charset=UTF-8
+
+# KivyMD Extensions
+
+<img align="left" width="256" src="https://github.com/kivymd/internal/raw/main/logo/kivymd_extensions.png"/>
+
+KivyMD Extensions is a project to centralize community addons for KivyMD.
+You can find all extensions under [@kivymd-extensions](https://github.com/kivymd-extensions)
+organization.
+
+Extensions are maintained by community members such as yourself.
+If you want to create new extension,
+generate a repository from [extension_template](https://github.com/kivymd-extensions/extension_template),
+change all `extension_template` and `example_extension` to your new extension
+name and edit code.
+When you will be ready to publish extension,
+create new issue at [kivymd-extensions/KivyMD_Extensions](https://github.com/kivymd-extensions/KivyMD_Extensions/issues)
+with a link to your repository.
+We will create repository under organization profile and push your code there.
+
+## License
+
+KivyMD Extensions is released under the terms of the [MIT License](https://github.com/kivymd-extensions/KivyMD_Extensions/blob/main/LICENSE), same as [KivyMD](https://github.com/kivymd/KivyMD/blob/master/LICENSE).
+
+

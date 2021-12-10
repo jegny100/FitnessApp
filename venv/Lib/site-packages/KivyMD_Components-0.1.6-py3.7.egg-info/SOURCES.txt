@@ -1,0 +1,11 @@
+README.md
+setup.cfg
+setup.py
+KivyMD_Components.egg-info/PKG-INFO
+KivyMD_Components.egg-info/SOURCES.txt
+KivyMD_Components.egg-info/dependency_links.txt
+KivyMD_Components.egg-info/requires.txt
+KivyMD_Components.egg-info/top_level.txt
+bin/components
+bin/components.bat
+components/__init__.py
