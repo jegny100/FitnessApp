@@ -23,16 +23,19 @@ class ContentNavigationDrawer(MDBoxLayout):
 class ItemConfirm(OneLineAvatarIconListItem):
     divider = None
 
+    # checks an item in a list with icon
     def set_icon(self, instance_check):
         instance_check.active = True
         check_list = instance_check.get_widgets(instance_check.group)
         for check in check_list:
             if check != instance_check:
                 check.active = False
+        print(self.text)
 
 
 class FitnessApp(MDApp):
     dialog = None
+    chosen_activity = "Choose an activity"
 
     def build(self):
         self.theme_cls.primary_palette = "Teal"
@@ -48,12 +51,21 @@ class FitnessApp(MDApp):
                        ItemConfirm(text="Joggen"),
                        ItemConfirm(text="Liegestütze")],
                 buttons=[MDFlatButton(text="CANCEL",
-                                      text_color=self.theme_cls.primary_color),
+                                      text_color=self.theme_cls.primary_color,
+                                      on_release=self.cancel_dialog),
                          MDFlatButton(text="OK",
-                                      text_color=self.theme_cls.primary_color)
+                                      text_color=self.theme_cls.primary_color,
+                                      on_release=self.confirm_dialog)
                          ],
             )
         self.dialog.open()
+
+    def cancel_dialog(self, obj):
+        self.dialog.dismiss()
+
+    def confirm_dialog(self, obj):
+        # TODO read out checked box
+        self.dialog.dismiss()
 
 
 FitnessApp().run()

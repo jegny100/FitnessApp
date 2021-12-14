@@ -1,6 +1,7 @@
 KV = '''
 <ItemConfirm>
     on_release: root.set_icon(check)
+    
 
     CheckboxLeftWidget:
         id: check
@@ -78,8 +79,9 @@ MDScreen:
                             halign: "center"
                             
                         MDFlatButton:
-                            text: "..Activity"
-                            pos_hint: {'center_x': .5, 'center_y': .5}
+                            id: chosen_activity
+                            text: app.chosen_activity
+                            halign: "center"
                             on_release: app.show_activities_dialog()
                             
                     MDBoxLayout:
