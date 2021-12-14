@@ -1,4 +1,11 @@
 KV = '''
+<ItemConfirm>
+    on_release: root.set_icon(check)
+
+    CheckboxLeftWidget:
+        id: check
+        group: "check"
+
 <ContentNavigationDrawer>:
     ScrollView:
         MDList:
@@ -70,9 +77,10 @@ MDScreen:
                             text: "Choose Activity"
                             halign: "center"
                             
-                        MDLabel:
-                            text: "choosing thing placeholder"
-                            halign: "center"
+                        MDFlatButton:
+                            text: "..Activity"
+                            pos_hint: {'center_x': .5, 'center_y': .5}
+                            on_release: app.show_activities_dialog()
                             
                     MDBoxLayout:
                         orientation: "horizontal"
