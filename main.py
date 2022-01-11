@@ -22,15 +22,17 @@ class ContentNavigationDrawer(MDBoxLayout):
 # Dialog Choice Confirmation (Single Choice)
 class ItemConfirm(OneLineAvatarIconListItem):
     divider = None
+    chosen_activity_item = "itemsDings"
 
-    # checks an item in a list with icon
+    # checks an item in a list with a check icon
     def set_icon(self, instance_check):
         instance_check.active = True
         check_list = instance_check.get_widgets(instance_check.group)
         for check in check_list:
             if check != instance_check:
                 check.active = False
-        print(self.text)
+        ItemConfirm.chosen_activity_item = self.text
+
 
 
 class FitnessApp(MDApp):
@@ -64,7 +66,7 @@ class FitnessApp(MDApp):
         self.dialog.dismiss()
 
     def confirm_dialog(self, obj):
-        # TODO read out checked box
+        print(ItemConfirm.chosen_activity_item)
         self.dialog.dismiss()
 
 
