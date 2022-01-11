@@ -11,10 +11,10 @@ KV = '''
     ScrollView:
         MDList:
             OneLineListItem:
-                text: "activities"
+                text: "Home"
                 on_press:
                     root.nav_drawer.set_state("close")
-                    root.screen_manager.current = "activities"
+                    root.screen_manager.current = "homescreen"
                     
             OneLineListItem:
                 text: "statistics"
@@ -26,21 +26,23 @@ MDScreen:
     MDToolbar:
         id: toolbar
         pos_hint: {"top":1}
-        elevation: 5
+        elevation: 5        
         title: "FitnessApp"
         left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
         
     MDNavigationLayout:
         x: toolbar.height
+        size_hint_y: 1.0 - toolbar.height/root.height
         
         ScreenManager:
             id: screen_manager
             
             MDScreen:
-                name: "activities"
-                
+                name: "homescreen"
+            
                 MDBoxLayout:
                     orientation: "vertical"
+                    padding: "32dp"
                         
                     MDLabel:
                         text :'Hello'
@@ -50,6 +52,7 @@ MDScreen:
                         
                     MDIconButton:
                         icon: 'plus'
+                        spacing: '10dp'
                         pos_hint: {'center_x': 0.5, 'center_y': 0.5}
                         md_bg_color : (154 / 255.0, 212 / 255.0, 194 / 255.0, 1)
                         on_press: screen_manager.current = "logging"
@@ -63,13 +66,16 @@ MDScreen:
                     
             MDScreen:
                 name: "logging"
+                
                 MDBoxLayout:
+                    id: logging_box
                     orientation: "vertical"
                     
                     MDLabel:
                         text: "Logging Activity"
                         halign: "center"                        
                         valign: "bottom"
+                        font_style : 'H5' 
                         
                     MDBoxLayout:
                         orientation: "horizontal"
@@ -77,11 +83,13 @@ MDScreen:
                         MDLabel:
                             text: "Choose Activity"
                             halign: "center"
+                            valign: "center"
                             
                         MDFlatButton:
                             id: chosen_activity
                             text: app.chosen_activity
                             halign: "center"
+                            valign: "middle"
                             on_release: app.show_activities_dialog()
                             
                     MDBoxLayout:
