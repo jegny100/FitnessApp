@@ -13,7 +13,7 @@ import main_kivy
 Window.size = (350, 600)
 
 
-# Menu class to navigate trough screens
+# Menu class to navigate through screens
 class ContentNavigationDrawer(MDBoxLayout):
     screen_manager = ObjectProperty()
     nav_drawer = ObjectProperty()
@@ -69,6 +69,9 @@ class FitnessApp(MDApp):
         self.chosen_activity = ItemConfirm.chosen_activity_item
         self.root.ids.chosen_activity.text = self.chosen_activity
         self.dialog.dismiss()
+
+
+
 
 
 FitnessApp().run()

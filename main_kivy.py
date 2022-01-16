@@ -137,7 +137,9 @@ MDScreen:
                         text: 'CONFIRM'
                         md_bg_color: app.theme_cls.primary_color
                         pos_hint: {"center_x": .5, "center_y": .5}
-                        on_release: #test
+                        on_release: 
+                            screen_manager.transition.direction = 'right'
+                            screen_manager.current = "homescreen"
                             
                         
 
