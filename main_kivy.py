@@ -71,7 +71,7 @@ MDScreen:
                     id: logging_box
                     orientation: "vertical"
                     spacing : '15dp'
-                    
+                    padding: "12dp"
                     
                     MDLabel:
                         text: "Logging Activity"
@@ -82,7 +82,7 @@ MDScreen:
                         
                     MDBoxLayout:
                         orientation: "horizontal"
-                        padding: "12dp"
+                        
                                   
                         MDLabel:
                             text: "Choose Activity"
@@ -119,14 +119,27 @@ MDScreen:
                             
                     MDBoxLayout:
                         orientation: "horizontal"
+                        padding: '10dp'
                         
                         MDLabel:
                             text: "Weight"
                             halign: "center"
                             
-                        MDLabel:
-                            text: "placeholder"
-                            halign: "center"
+                        MDTextField:
+                            icon_right: "weight-kilogram"
+                            mode: "rectangle"
+                            size_hint_x: 0.5
+                            pos_hint: {"center_x": .5, "center_y": .5}
+                            
+                    MDIconButton:
+                        id: confirm_logging
+                        icon: 'check'
+                        text: 'CONFIRM'
+                        md_bg_color: app.theme_cls.primary_color
+                        pos_hint: {"center_x": .5, "center_y": .5}
+                        on_release: #test
+                            
+                        
 
         MDNavigationDrawer:
             id: nav_drawer
