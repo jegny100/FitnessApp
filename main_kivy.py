@@ -70,16 +70,20 @@ MDScreen:
                 MDBoxLayout:
                     id: logging_box
                     orientation: "vertical"
+                    spacing : '15dp'
+                    
                     
                     MDLabel:
                         text: "Logging Activity"
                         halign: "center"                        
                         valign: "bottom"
                         font_style : 'H5' 
+                        theme_text_color : 'Secondary'
                         
                     MDBoxLayout:
                         orientation: "horizontal"
-                        
+                        padding: "12dp"
+                                  
                         MDLabel:
                             text: "Choose Activity"
                             halign: "center"
@@ -88,9 +92,8 @@ MDScreen:
                         MDFlatButton:
                             id: chosen_activity
                             text: app.chosen_activity
-                            halign: "center"
-                            valign: "middle"
                             on_release: app.show_activities_dialog()
+                            pos_hint: {"center_x": .5, "center_y": .5}
                             
                     MDBoxLayout:
                         orientation: "horizontal"
