@@ -67,7 +67,7 @@ class FitnessApp(MDApp):
 
     def confirm_dialog(self, obj):
         self.chosen_activity = ItemConfirm.chosen_activity_item
-        self.root.ids.chosen_activity.text = self.chosen_activity
+        self.root.ids.logger_chosen_activity.text = self.chosen_activity
         self.dialog.dismiss()
 
 

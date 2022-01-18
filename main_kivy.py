@@ -71,7 +71,7 @@ MDScreen:
                     id: logging_box
                     orientation: "vertical"
                     spacing : '15dp'
-                    padding: "12dp"
+                    padding : '12dp'
                     
                     MDLabel:
                         text: "Logging Activity"
@@ -82,7 +82,7 @@ MDScreen:
                         
                     MDBoxLayout:
                         orientation: "horizontal"
-                        
+                        padding: '10dp'                        
                                   
                         MDLabel:
                             text: "Choose Activity"
@@ -90,13 +90,14 @@ MDScreen:
                             valign: "center"
                             
                         MDFlatButton:
-                            id: chosen_activity
+                            id: logger_chosen_activity
                             text: app.chosen_activity
                             on_release: app.show_activities_dialog()
                             pos_hint: {"center_x": .5, "center_y": .5}
                             
                     MDBoxLayout:
                         orientation: "horizontal"
+                        padding: '10dp'
                         
                         MDLabel:
                             text: "Time"
@@ -108,14 +109,17 @@ MDScreen:
                         
                     MDBoxLayout:
                         orientation: "horizontal"
+                        padding: '10dp'
                         
                         MDLabel:
                             text: "Repetitions"
                             halign: "center"
                             
-                        MDLabel:
-                            text: "placeholder"
-                            halign: "center"
+                        MDTextField:
+                            id : logger_repetition
+                            mode: "rectangle"
+                            size_hint_x: 0.5
+                            pos_hint: {"center_x": .5, "center_y": .5}
                             
                     MDBoxLayout:
                         orientation: "horizontal"
@@ -126,13 +130,14 @@ MDScreen:
                             halign: "center"
                             
                         MDTextField:
+                            id : logger_weight
                             icon_right: "weight-kilogram"
                             mode: "rectangle"
                             size_hint_x: 0.5
                             pos_hint: {"center_x": .5, "center_y": .5}
                             
                     MDIconButton:
-                        id: confirm_logging
+                        id: logger_confirm
                         icon: 'check'
                         text: 'CONFIRM'
                         md_bg_color: app.theme_cls.primary_color
