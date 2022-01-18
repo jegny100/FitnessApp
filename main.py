@@ -6,6 +6,7 @@ from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.button import MDFlatButton
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.list import OneLineAvatarIconListItem
+from kivymd.uix.picker import MDDatePicker
 import main_kivy
 
 Window.size = (350, 600)
@@ -66,6 +67,15 @@ class FitnessApp(MDApp):
         self.chosen_activity = ItemConfirm.chosen_activity_item
         self.root.ids.logger_chosen_activity.text = self.chosen_activity
         self.dialog.dismiss()
+
+    def show_date_picker(self):
+        date_dialog = MDDatePicker()
+        date_dialog.open()
+
+    def get_date(self, date):
+        '''
+        :type date: <class 'datetime.date'>
+        '''
 
 
 FitnessApp().run()

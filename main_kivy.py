@@ -95,7 +95,19 @@ MDScreen:
                             on_release: app.show_activities_dialog()
                             pos_hint: {"center_x": .5, "center_y": .5}
                     
-                    
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        padding: '10dp'
+                        
+                        MDLabel:
+                            text: "Date"
+                            halign: "center"
+                            
+                        MDFlatButton:
+                            id: logger_date
+                            text: "app.chosen_activity"
+                            on_release: app.show_date_picker
+                            pos_hint: {"center_x": .5, "center_y": .5}
                     
                             
                     MDBoxLayout:
