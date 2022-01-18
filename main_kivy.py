@@ -94,19 +94,39 @@ MDScreen:
                             text: app.chosen_activity
                             on_release: app.show_activities_dialog()
                             pos_hint: {"center_x": .5, "center_y": .5}
+                    
+                    
+                    
                             
                     MDBoxLayout:
                         orientation: "horizontal"
-                        padding: '10dp'
+                        padding : '10dp'
                         
                         MDLabel:
                             text: "Time"
                             halign: "center"
                             
-                        MDLabel:
-                            text: "placeholder"
-                            halign: "center"
+                        MDBoxLayout:
+                            orientation: "horizontal"
+                            spacing : '25dp'
+                            size_hint_x: None
+                            height: self.minimum_width
+                            
+                            MDTextField:
+                                id : logger_time_hour
+                                hint_text: "h"
+                                mode: "rectangle"
+                            
+                            MDTextField:
+                                id : logger_time_min
+                                hint_text: "m"
+                                mode: "rectangle"
                         
+                            MDTextField:
+                                id : logger_time_sec
+                                hint_text: "s"
+                                mode : "rectangle"
+                            
                     MDBoxLayout:
                         orientation: "horizontal"
                         padding: '10dp'

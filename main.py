@@ -3,11 +3,9 @@ from kivy.lang import Builder
 from kivy.properties import ObjectProperty
 from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
-
 from kivymd.uix.button import MDFlatButton
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.list import OneLineAvatarIconListItem
-
 import main_kivy
 
 Window.size = (350, 600)
@@ -32,7 +30,6 @@ class ItemConfirm(OneLineAvatarIconListItem):
             if check != instance_check:
                 check.active = False
         ItemConfirm.chosen_activity_item = self.text
-
 
 
 class FitnessApp(MDApp):
@@ -69,9 +66,6 @@ class FitnessApp(MDApp):
         self.chosen_activity = ItemConfirm.chosen_activity_item
         self.root.ids.logger_chosen_activity.text = self.chosen_activity
         self.dialog.dismiss()
-
-
-
 
 
 FitnessApp().run()
