@@ -9,18 +9,20 @@ KV = '''
 
 <ContentNavigationDrawer>:
     ScrollView:
-        MDList:
+        MDList:            
             OneLineListItem:
                 text: "Home"
                 on_press:
                     root.nav_drawer.set_state("close")
                     root.screen_manager.current = "homescreen"
+                    root.screen_manager.transition.direction = 'left'
                     
             OneLineListItem:
                 text: "statistics"
                 on_press:
                     root.nav_drawer.set_state("close")
                     root.screen_manager.current = "statistics"
+                    root.screen_manager.transition.direction = 'left'
                     
 MDScreen:
     MDToolbar:
@@ -55,7 +57,9 @@ MDScreen:
                         spacing: '10dp'
                         pos_hint: {'center_x': 0.5, 'center_y': 0.5}
                         md_bg_color : (154 / 255.0, 212 / 255.0, 194 / 255.0, 1)
-                        on_press: screen_manager.current = "logging"
+                        on_release: 
+                            screen_manager.current = "logging"
+                            screen_manager.transition.direction = 'left'
                         
             
             MDScreen:
@@ -105,7 +109,7 @@ MDScreen:
                             
                         MDFlatButton:
                             id: logger_date
-                            text: "app.chosen_activity"
+                            text: "date?"
                             on_release: app.show_date_picker
                             pos_hint: {"center_x": .5, "center_y": .5}
                     
@@ -115,7 +119,7 @@ MDScreen:
                         padding : '10dp'
                         
                         MDLabel:
-                            text: "Time"
+                            text: "Duration"
                             halign: "center"
                             
                         MDBoxLayout:
