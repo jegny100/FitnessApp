@@ -61,7 +61,6 @@ MDScreen:
                             screen_manager.current = "logging"
                             screen_manager.transition.direction = 'left'
                         
-            
             MDScreen:
                 name: "statistics"
                 MDLabel:
@@ -129,17 +128,17 @@ MDScreen:
                             height: self.minimum_width
                             
                             MDTextField:
-                                id : logger_time_hour
+                                id : logger_duration_hour
                                 hint_text: "h"
                                 mode: "rectangle"
                             
                             MDTextField:
-                                id : logger_time_min
+                                id : logger_duration_min
                                 hint_text: "m"
                                 mode: "rectangle"
                         
                             MDTextField:
-                                id : logger_time_sec
+                                id : logger_duration_sec
                                 hint_text: "s"
                                 mode : "rectangle"
                             
@@ -181,9 +180,8 @@ MDScreen:
                         on_release: 
                             screen_manager.transition.direction = 'right'
                             screen_manager.current = "homescreen"
+                            app.get_logger([logger_duration_hour.text,logger_duration_min.text,logger_duration_sec.text],logger_repetition.text, logger_weight.text)
                             
-                        
-
         MDNavigationDrawer:
             id: nav_drawer
 

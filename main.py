@@ -8,7 +8,7 @@ from kivymd.uix.dialog import MDDialog
 from kivymd.uix.list import OneLineAvatarIconListItem
 from kivymd.uix.picker import MDDatePicker
 from datetime import datetime
-
+import json
 import main_kivy
 
 Window.size = (350, 600)
@@ -23,7 +23,7 @@ class ContentNavigationDrawer(MDBoxLayout):
 # Dialog Choice Confirmation (Single Choice)
 class ItemConfirm(OneLineAvatarIconListItem):
     divider = None
-    chosen_activity_item = "itemsDings"
+    chosen_activity = None
 
     # checks an item in a list with a check icon
     def set_icon(self, instance_check):
@@ -32,19 +32,26 @@ class ItemConfirm(OneLineAvatarIconListItem):
         for check in check_list:
             if check != instance_check:
                 check.active = False
-        ItemConfirm.chosen_activity_item = self.text
+        ItemConfirm.chosen_activity = self.text
 
 
 class FitnessApp(MDApp):
     dialog = None
     date = datetime.today().strftime('%Y-%m-%d')
     chosen_activity = "Choose an activity"
+    logger_capsule = {"activity": None,
+                      "date": date,
+                      "duration": None,
+                      "repetition": None,
+                      "weight": None}
 
     def build(self):
         self.theme_cls.primary_palette = "Teal"
-
         return Builder.load_string(main_kivy.KV)
 
+    """ LOGGER FUNCTIONS  """
+
+    # ACTIVITY FUNCTIONS
     def show_activities_dialog(self):
         if not self.dialog:
             self.dialog = MDDialog(
@@ -67,31 +74,32 @@ class FitnessApp(MDApp):
         self.dialog.dismiss()
 
     def confirm_dialog(self, obj):
-        self.chosen_activity = ItemConfirm.chosen_activity_item
+        self.chosen_activity = ItemConfirm.chosen_activity
         self.root.ids.logger_chosen_activity.text = self.chosen_activity
+        self.logger_capsule["activity"] = self.chosen_activity
         self.dialog.dismiss()
 
+    # DATE FUNCTIONS
     def show_date_picker(self):
         date_dialog = MDDatePicker()
         date_dialog.bind(on_save=self.on_save, on_cancel=self.on_cancel)
         date_dialog.open()
 
     def on_save(self, instance, value, date_range):
-        """Events called when the "OK" dialog box button is clicked.
-
-        :type instance: <kivymd.uix.picker.MDDatePicker object>;
-
-        :param value: selected date;
-        :type value: <class 'datetime.date'>;
-
-        :param date_range: list of 'datetime.date' objects in the selected range;
-        :type date_range: <class 'list'>;
-        """
         self.date = str(value)
         self.root.ids.logger_date.text = self.date
+        self.logger_capsule["date"] = self.date
 
     def on_cancel(self, instance, value):
-        '''Events called when the "CANCEL" dialog box button is clicked.'''
+        """Events called when the "CANCEL" dialog box button is clicked."""
 
+    # CAPSULE WEIGHT, REPETITION & DURATION
+    def get_logger(self, duration, repetition, weight):
+        self.logger_capsule["duration"] = duration
+        self.logger_capsule["repetition"] = repetition
+        self.logger_capsule["weight"] = weight
+
+        with open('logger.json', 'w') as fp:
+            json.dump(self.logger_capsule, fp)
 
 FitnessApp().run()
