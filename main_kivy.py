@@ -109,8 +109,8 @@ MDScreen:
                             
                         MDFlatButton:
                             id: logger_date
-                            text: "date?"
-                            on_release: app.show_date_picker
+                            text: app.date
+                            on_release: app.show_date_picker()
                             pos_hint: {"center_x": .5, "center_y": .5}
                     
                             
