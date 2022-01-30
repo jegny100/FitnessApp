@@ -8,7 +8,7 @@ from kivymd.uix.dialog import MDDialog
 from kivymd.uix.list import OneLineAvatarIconListItem
 from kivymd.uix.picker import MDDatePicker
 from datetime import datetime
-import json
+import pandas as pd
 import main_kivy
 
 Window.size = (350, 600)
@@ -99,7 +99,11 @@ class FitnessApp(MDApp):
         self.logger_capsule["repetition"] = repetition
         self.logger_capsule["weight"] = weight
 
-        with open('logger.json', 'w') as fp:
-            json.dump(self.logger_capsule, fp)
+        try:
+            df = pd.read_csv('logged_activities.csv')
+        except:
+            df = pd.DataFrame.from_dict(self.logger_capsule)
+            df.to_csv('logged_activities.csv')
+
 
 FitnessApp().run()
