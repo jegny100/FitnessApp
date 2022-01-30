@@ -8,6 +8,7 @@ from kivymd.uix.dialog import MDDialog
 from kivymd.uix.list import OneLineAvatarIconListItem
 from kivymd.uix.picker import MDDatePicker
 from datetime import datetime
+import os
 import pandas as pd
 import main_kivy
 
@@ -95,15 +96,23 @@ class FitnessApp(MDApp):
 
     # CAPSULE WEIGHT, REPETITION & DURATION
     def get_logger(self, duration, repetition, weight):
+        #TODO check on_save vs get_logger functions: unnecessarily splited?
         self.logger_capsule["duration"] = duration
         self.logger_capsule["repetition"] = repetition
         self.logger_capsule["weight"] = weight
 
-        try:
-            df = pd.read_csv('logged_activities.csv')
-        except:
-            df = pd.DataFrame.from_dict(self.logger_capsule)
-            df.to_csv('logged_activities.csv')
+        print("capsule: ", self.logger_capsule)
+
+        if os.path.isfile('./logged_activities.csv'):
+            print("existend file")
+            df = pd.read_csv('logged_activities.csv', index_col="Unnamed: 0")
+        else:
+            df = pd.DataFrame(columns=["activity", "date", "duration", "repetition", "weight"])
+
+        #data_capsule = pd.DataFrame.from_dict()
+        df = df.append(self.logger_capsule, ignore_index=True)
+        df.to_csv('logged_activities.csv')
+        print(df)
 
 
 FitnessApp().run()

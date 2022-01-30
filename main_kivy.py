@@ -155,7 +155,7 @@ MDScreen:
                             mode: "rectangle"
                             size_hint_x: 0.5
                             pos_hint: {"center_x": .5, "center_y": .5}
-                            
+                        
                     MDBoxLayout:
                         orientation: "horizontal"
                         padding: '10dp'
