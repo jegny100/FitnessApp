@@ -96,23 +96,26 @@ class FitnessApp(MDApp):
 
     # CAPSULE WEIGHT, REPETITION & DURATION
     def get_logger(self, duration, repetition, weight):
-        #TODO check on_save vs get_logger functions: unnecessarily splited?
         self.logger_capsule["duration"] = duration
         self.logger_capsule["repetition"] = repetition
         self.logger_capsule["weight"] = weight
-
-        print("capsule: ", self.logger_capsule)
-
         if os.path.isfile('./logged_activities.csv'):
             print("existend file")
             df = pd.read_csv('logged_activities.csv', index_col="Unnamed: 0")
         else:
             df = pd.DataFrame(columns=["activity", "date", "duration", "repetition", "weight"])
-
-        #data_capsule = pd.DataFrame.from_dict()
         df = df.append(self.logger_capsule, ignore_index=True)
         df.to_csv('logged_activities.csv')
         print(df)
+
+    def empty_logger(self):
+        self.root.ids.logger_chosen_activity.text = "Choose an activity"
+        self.root.ids.logger_date.text = datetime.today().strftime('%Y-%m-%d')
+        self.root.ids.logger_duration_hour.text = ""
+        self.root.ids.logger_duration_min.text = ""
+        self.root.ids.logger_duration_sec.text = ""
+        self.root.ids.logger_repetition.text = ""
+        self.root.ids.logger_weight.text = ""
 
 
 FitnessApp().run()
