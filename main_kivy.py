@@ -170,17 +170,32 @@ MDScreen:
                             size_hint_x: 0.5
                             pos_hint: {"center_x": .5, "center_y": .5}
                             
-                    MDIconButton:
-                        id: logger_confirm
-                        icon: 'check'
-                        text: 'CONFIRM'
-                        md_bg_color: app.theme_cls.primary_color
-                        pos_hint: {"center_x": .5, "center_y": .5}
-                        on_release: 
-                            screen_manager.transition.direction = 'right'
-                            screen_manager.current = "homescreen"
-                            app.get_logger([logger_duration_hour.text,logger_duration_min.text,logger_duration_sec.text],logger_repetition.text, logger_weight.text)
-                            app.empty_logger()
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        padding: '10dp'
+                    
+                        MDIconButton:
+                            id: logger_cancel
+                            icon: 'close'
+                            md_bg_color: app.theme_cls.primary_color      
+                            on_release:
+                                screen_manager.transition.direction = 'right'
+                                screen_manager.current = "homescreen"
+                                app.empty_logger()
+                            
+                        MDLabel:              
+                        
+                        MDIconButton:
+                            id: logger_confirm
+                            icon: 'check'
+                            text: 'CONFIRM'
+                            md_bg_color: app.theme_cls.primary_color
+                            on_release: 
+                                screen_manager.transition.direction = 'right'
+                                screen_manager.current = "homescreen"
+                                app.get_logger([logger_duration_hour.text,logger_duration_min.text,logger_duration_sec.text],logger_repetition.text, logger_weight.text)
+                                app.empty_logger()
+
                             
         MDNavigationDrawer:
             id: nav_drawer
