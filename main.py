@@ -27,17 +27,18 @@ class ItemConfirm(OneLineAvatarIconListItem):
 
     # checks an item in a list with a check icon
     def set_icon(self, instance_check):
-        instance_check.active = True
+        instance_check.active = not instance_check.active
         check_list = instance_check.get_widgets(instance_check.group)
         self.check_list = check_list
-        print("instance_check ", instance_check)
-        print("checklist ", check_list)
+        # ensures single choice
         for check in check_list:
             if check != instance_check:
                 check.active = False
-        FitnessApp.chosen_activity = self.text
-        print("self.text in ItemConfirm", self.text)
-        # MDApp.get_running_app().chosen_activity = self.text
+
+        if instance_check.active:
+            FitnessApp.chosen_activity = self.text
+        else:
+            FitnessApp.chosen_activity = "Choose an activity"
         FitnessApp.check_list = check_list
 
 
@@ -69,22 +70,21 @@ class FitnessApp(MDApp):
                 items=self.items,
                 buttons=[MDFlatButton(text="CANCEL",
                                       text_color=self.theme_cls.primary_color,
-                                      on_release=self.cancel_dialog),
+                                      on_release=self.cancel_activity_dialog),
                          MDFlatButton(text="OK",
                                       text_color=self.theme_cls.primary_color,
-                                      on_release=self.confirm_dialog)
+                                      on_release=self.confirm__activity_dialog)
                          ],
             )
-
         self.dialog.open()
 
-    def cancel_dialog(self, obj):
+    def cancel_activity_dialog(self, obj):
         self.dialog.dismiss()
 
-    def confirm_dialog(self, obj):
-        # self.chosen_activity = ItemConfirm.chosen_activity
+    def confirm__activity_dialog(self, obj):
         self.root.ids.logger_chosen_activity.text = self.chosen_activity
-        self.logger_capsule["activity"] = self.chosen_activity
+        if self.chosen_activity != "Choose an activity":
+            self.logger_capsule["activity"] = self.chosen_activity
         self.dialog.dismiss()
 
     # DATE FUNCTIONS
@@ -111,7 +111,6 @@ class FitnessApp(MDApp):
     # save data to df and csv
     def logger_save_to_csv(self):
         if os.path.isfile('./logged_activities.csv'):
-            print("existend file")
             df = pd.read_csv('logged_activities.csv', index_col="Unnamed: 0")
         else:
             df = pd.DataFrame(columns=["activity", "date", "duration", "repetition", "weight"])
