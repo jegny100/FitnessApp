@@ -193,8 +193,8 @@ MDScreen:
                             on_release: 
                                 screen_manager.transition.direction = 'right'
                                 screen_manager.current = "homescreen"
-                                app.get_logger([logger_duration_hour.text,logger_duration_min.text,logger_duration_sec.text],logger_repetition.text, logger_weight.text)
-                                app.empty_logger()
+                                app.handle_logger([logger_duration_hour.text,logger_duration_min.text,logger_duration_sec.text],logger_repetition.text, logger_weight.text)
+                                
 
                             
         MDNavigationDrawer:

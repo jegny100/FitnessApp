@@ -24,16 +24,21 @@ class ContentNavigationDrawer(MDBoxLayout):
 # Dialog Choice Confirmation (Single Choice)
 class ItemConfirm(OneLineAvatarIconListItem):
     divider = None
-    chosen_activity = None
 
     # checks an item in a list with a check icon
     def set_icon(self, instance_check):
         instance_check.active = True
         check_list = instance_check.get_widgets(instance_check.group)
+        self.check_list = check_list
+        print("instance_check ", instance_check)
+        print("checklist ", check_list)
         for check in check_list:
             if check != instance_check:
                 check.active = False
-        ItemConfirm.chosen_activity = self.text
+        FitnessApp.chosen_activity = self.text
+        print("self.text in ItemConfirm", self.text)
+        # MDApp.get_running_app().chosen_activity = self.text
+        FitnessApp.check_list = check_list
 
 
 class FitnessApp(MDApp):
@@ -55,12 +60,13 @@ class FitnessApp(MDApp):
     # ACTIVITY FUNCTIONS
     def show_activities_dialog(self):
         if not self.dialog:
+            self.items = [ItemConfirm(text="Spazieren"),
+                          ItemConfirm(text="Joggen"),
+                          ItemConfirm(text="Liegestütze")]
             self.dialog = MDDialog(
                 title="Choose activity",
                 type="confirmation",
-                items=[ItemConfirm(text="Spazieren"),
-                       ItemConfirm(text="Joggen"),
-                       ItemConfirm(text="Liegestütze")],
+                items=self.items,
                 buttons=[MDFlatButton(text="CANCEL",
                                       text_color=self.theme_cls.primary_color,
                                       on_release=self.cancel_dialog),
@@ -69,13 +75,14 @@ class FitnessApp(MDApp):
                                       on_release=self.confirm_dialog)
                          ],
             )
+
         self.dialog.open()
 
     def cancel_dialog(self, obj):
         self.dialog.dismiss()
 
     def confirm_dialog(self, obj):
-        self.chosen_activity = ItemConfirm.chosen_activity
+        # self.chosen_activity = ItemConfirm.chosen_activity
         self.root.ids.logger_chosen_activity.text = self.chosen_activity
         self.logger_capsule["activity"] = self.chosen_activity
         self.dialog.dismiss()
@@ -87,18 +94,22 @@ class FitnessApp(MDApp):
         date_dialog.open()
 
     def on_save(self, instance, value, date_range):
-        self.date = str(value)
-        self.root.ids.logger_date.text = self.date
-        self.logger_capsule["date"] = self.date
+        self.root.ids.logger_date.text = str(value)
+        self.logger_capsule["date"] = str(value)
 
     def on_cancel(self, instance, value):
         """Events called when the "CANCEL" dialog box button is clicked."""
 
-    # CAPSULE WEIGHT, REPETITION & DURATION
-    def get_logger(self, duration, repetition, weight):
+    # GET INPUT, SAVE TO CSV, RESET LOGGER
+    def handle_logger(self, duration, repetition, weight):
         self.logger_capsule["duration"] = duration
         self.logger_capsule["repetition"] = repetition
         self.logger_capsule["weight"] = weight
+        self.logger_save_to_csv()
+        self.empty_logger()
+
+    # save data to df and csv
+    def logger_save_to_csv(self):
         if os.path.isfile('./logged_activities.csv'):
             print("existend file")
             df = pd.read_csv('logged_activities.csv', index_col="Unnamed: 0")
@@ -108,14 +119,25 @@ class FitnessApp(MDApp):
         df.to_csv('logged_activities.csv')
         print(df)
 
+    # reset all variables of the logger
     def empty_logger(self):
         self.root.ids.logger_chosen_activity.text = "Choose an activity"
+        self.logger_capsule["activity"] = None
+        self.empty_checkbox()
         self.root.ids.logger_date.text = datetime.today().strftime('%Y-%m-%d')
         self.root.ids.logger_duration_hour.text = ""
         self.root.ids.logger_duration_min.text = ""
         self.root.ids.logger_duration_sec.text = ""
         self.root.ids.logger_repetition.text = ""
         self.root.ids.logger_weight.text = ""
+
+    # uncheck activities in "show_activities_dialog"
+    def empty_checkbox(self):
+        try:
+            for item in self.check_list:
+                item.active = False
+        except:
+            pass
 
 
 FitnessApp().run()
