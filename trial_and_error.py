@@ -24,7 +24,7 @@ class Test(MDApp):
 
     def on_save(self, instance, value, date_range):
         '''
-        Events called when the "OK" dialog box button is clicked.
+        Events called when the "OK" dialogActivity box button is clicked.
 
         :type instance: <kivymd.uix.picker.MDDatePicker object>;
 
@@ -38,7 +38,7 @@ class Test(MDApp):
         print(instance, value, date_range)
 
     def on_cancel(self, instance, value):
-        '''Events called when the "CANCEL" dialog box button is clicked.'''
+        '''Events called when the "CANCEL" dialogActivity box button is clicked.'''
 
     def show_date_picker(self):
         date_dialog = MDDatePicker()

@@ -192,9 +192,8 @@ MDScreen:
                             md_bg_color: app.theme_cls.primary_color
                             on_release: 
                                 screen_manager.transition.direction = 'right'
-                                screen_manager.current = "homescreen"
-                                app.handle_logger([logger_duration_hour.text,logger_duration_min.text,logger_duration_sec.text],logger_repetition.text, logger_weight.text)
-                                
+                                if app.chosen_activity_check() : app.handle_logger([logger_duration_hour.text,logger_duration_min.text,logger_duration_sec.text],logger_repetition.text, logger_weight.text)
+                                else: app.error_activity_dialog()
 
                             
         MDNavigationDrawer:

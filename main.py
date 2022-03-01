@@ -37,13 +37,15 @@ class ItemConfirm(OneLineAvatarIconListItem):
 
         if instance_check.active:
             FitnessApp.chosen_activity = self.text
+            print("self.text")
         else:
             FitnessApp.chosen_activity = "Choose an activity"
         FitnessApp.check_list = check_list
 
 
 class FitnessApp(MDApp):
-    dialog = None
+    dialogActivity = None
+    dialogError = None
     date = datetime.today().strftime('%Y-%m-%d')
     chosen_activity = "Choose an activity"
     logger_capsule = {"activity": None,
@@ -60,11 +62,11 @@ class FitnessApp(MDApp):
 
     # ACTIVITY FUNCTIONS
     def show_activities_dialog(self):
-        if not self.dialog:
+        if not self.dialogActivity:
             self.items = [ItemConfirm(text="Spazieren"),
                           ItemConfirm(text="Joggen"),
                           ItemConfirm(text="Liegestütze")]
-            self.dialog = MDDialog(
+            self.dialogActivity = MDDialog(
                 title="Choose activity",
                 type="confirmation",
                 items=self.items,
@@ -76,16 +78,19 @@ class FitnessApp(MDApp):
                                       on_release=self.confirm__activity_dialog)
                          ],
             )
-        self.dialog.open()
+        self.dialogActivity.open()
 
     def cancel_activity_dialog(self, obj):
-        self.dialog.dismiss()
+        self.dialogActivity.dismiss()
 
     def confirm__activity_dialog(self, obj):
         self.root.ids.logger_chosen_activity.text = self.chosen_activity
         if self.chosen_activity != "Choose an activity":
             self.logger_capsule["activity"] = self.chosen_activity
-        self.dialog.dismiss()
+        else:
+            self.logger_capsule["activity"] = ""
+
+        self.dialogActivity.dismiss()
 
     # DATE FUNCTIONS
     def show_date_picker(self):
@@ -98,15 +103,39 @@ class FitnessApp(MDApp):
         self.logger_capsule["date"] = str(value)
 
     def on_cancel(self, instance, value):
-        """Events called when the "CANCEL" dialog box button is clicked."""
+        """Events called when the "CANCEL" dialogActivity box button is clicked."""
 
     # GET INPUT, SAVE TO CSV, RESET LOGGER
     def handle_logger(self, duration, repetition, weight):
+        self.root.ids.screen_manager.current = "homescreen"
         self.logger_capsule["duration"] = duration
         self.logger_capsule["repetition"] = repetition
         self.logger_capsule["weight"] = weight
         self.logger_save_to_csv()
         self.empty_logger()
+
+    # checks if an activity is chosen, otherwise throws an error message
+    def chosen_activity_check(self):
+        print("AKTUElL :  ", self.chosen_activity)
+        if self.chosen_activity == "Choose an activity":
+            return False
+        else:
+            return True
+
+    def error_activity_dialog(self):
+        if not self.dialogError:
+            self.dialogError = MDDialog(
+                title="Missing Activity",
+                text="Please choose an activity to log your training session",
+                buttons=[MDFlatButton(text="OK",
+                                      text_color=self.theme_cls.primary_color,
+                                      on_release=self.confirm_error_activity_dialog)
+                         ],
+            )
+        self.dialogError.open()
+
+    def confirm_error_activity_dialog(self, obj):
+        self.dialogError.dismiss()
 
     # save data to df and csv
     def logger_save_to_csv(self):
