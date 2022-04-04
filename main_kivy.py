@@ -17,10 +17,10 @@ KV = '''
                     root.screen_manager.transition.direction = 'left'
                     
             OneLineListItem:
-                text: "statistics"
+                text: "Activity Collection"
                 on_press:
                     root.nav_drawer.set_state("close")
-                    root.screen_manager.current = "statistics"
+                    root.screen_manager.current = "activity_collection"
                     root.screen_manager.transition.direction = 'left'
                     
 MDScreen:
@@ -61,10 +61,19 @@ MDScreen:
                             screen_manager.transition.direction = 'left'
                         
             MDScreen:
-                name: "statistics"
+                name: "activity_collection"
                 MDLabel:
-                    text: "Statistics"
+                    text: "Activity Collection"
                     halign: "center"
+                
+                
+                    
+                MDIconButton:
+                    icon: 'plus'
+                    spacing: '10dp'
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    md_bg_color : (154 / 255.0, 212 / 255.0, 194 / 255.0, 1)
+                    on_release: 
                     
             MDScreen:
                 name: "logging"

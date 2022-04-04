@@ -1,8 +1,11 @@
 from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty
+from kivy.uix.anchorlayout import AnchorLayout
+from kivy.metrics import dp
 from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
+from kivymd.uix.datatables import MDDataTable
 from kivymd.uix.button import MDFlatButton
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.list import OneLineAvatarIconListItem
@@ -34,10 +37,8 @@ class ItemConfirm(OneLineAvatarIconListItem):
         for check in check_list:
             if check != instance_check:
                 check.active = False
-
         if instance_check.active:
             FitnessApp.chosen_activity = self.text
-            print("self.text")
         else:
             FitnessApp.chosen_activity = "Choose an activity"
         FitnessApp.check_list = check_list
@@ -56,11 +57,26 @@ class FitnessApp(MDApp):
 
     def build(self):
         self.theme_cls.primary_palette = "Teal"
+
+        # check if activity_collection.csv is existent
+        if os.path.isfile('./activity_collection.csv'):
+            activity_collection_df = pd.read_csv('activity_collection.csv', index_col="Unnamed: 0")
+        else:
+            activity_collection_df = pd.DataFrame(columns=["activity", "buddy", "duration", "repetition", "weight"])
+            activity_collection_df.to_csv('activity_collection.csv')
+            print(activity_collection_df)
+
         return Builder.load_string(main_kivy.KV)
 
     """ LOGGER FUNCTIONS  """
 
-    # ACTIVITY FUNCTIONS
+    # ACTIVITY COLLECTION FUNCTIONS
+
+    def get_activity_collection(self):
+        print(self.activity_collection_df[1])
+
+
+    # ACTIVITY LOGGER FUNCTIONS
     def show_activities_dialog(self):
         if not self.dialogActivity:
             self.items = [ItemConfirm(text="Spazieren"),
@@ -75,7 +91,7 @@ class FitnessApp(MDApp):
                                       on_release=self.cancel_activity_dialog),
                          MDFlatButton(text="OK",
                                       text_color=self.theme_cls.primary_color,
-                                      on_release=self.confirm__activity_dialog)
+                                      on_release=self.confirm_activity_dialog)
                          ],
             )
         self.dialogActivity.open()
@@ -83,10 +99,10 @@ class FitnessApp(MDApp):
     def cancel_activity_dialog(self, obj):
         self.dialogActivity.dismiss()
 
-    def confirm__activity_dialog(self, obj):
-        self.root.ids.logger_chosen_activity.text = self.chosen_activity
+    def confirm_activity_dialog(self, obj):
+        self.root.ids.logger_chosen_activity.text = FitnessApp.chosen_activity
         if self.chosen_activity != "Choose an activity":
-            self.logger_capsule["activity"] = self.chosen_activity
+            self.logger_capsule["activity"] = FitnessApp.chosen_activity
         else:
             self.logger_capsule["activity"] = ""
 
@@ -116,8 +132,7 @@ class FitnessApp(MDApp):
 
     # checks if an activity is chosen, otherwise throws an error message
     def chosen_activity_check(self):
-        print("AKTUElL :  ", self.chosen_activity)
-        if self.chosen_activity == "Choose an activity":
+        if FitnessApp.chosen_activity == "Choose an activity":
             return False
         else:
             return True
@@ -140,16 +155,17 @@ class FitnessApp(MDApp):
     # save data to df and csv
     def logger_save_to_csv(self):
         if os.path.isfile('./logged_activities.csv'):
-            df = pd.read_csv('logged_activities.csv', index_col="Unnamed: 0")
+            logged_activities_df = pd.read_csv('logged_activities.csv', index_col="Unnamed: 0")
         else:
-            df = pd.DataFrame(columns=["activity", "date", "duration", "repetition", "weight"])
-        df = df.append(self.logger_capsule, ignore_index=True)
-        df.to_csv('logged_activities.csv')
-        print(df)
+            logged_activities_df = pd.DataFrame(columns=["activity", "date", "duration", "repetition", "weight"])
+        logged_activities_df = logged_activities_df.append(self.logger_capsule, ignore_index=True)
+        logged_activities_df.to_csv('logged_activities.csv')
+        print(logged_activities_df, "\n")
 
     # reset all variables of the logger
     def empty_logger(self):
         self.root.ids.logger_chosen_activity.text = "Choose an activity"
+        FitnessApp.chosen_activity = "Choose an activity"
         self.logger_capsule["activity"] = None
         self.empty_checkbox()
         self.root.ids.logger_date.text = datetime.today().strftime('%Y-%m-%d')

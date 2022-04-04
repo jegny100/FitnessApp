@@ -1,49 +1,58 @@
-from kivy.lang import Builder
+from kivy.metrics import dp
+from kivy.uix.anchorlayout import AnchorLayout
 
 from kivymd.app import MDApp
-from kivymd.uix.picker import MDDatePicker
-
-KV = '''
-MDFloatLayout:
-
-    MDToolbar:
-        title: "MDDatePicker"
-        pos_hint: {"top": 1}
-        elevation: 10
-
-    MDRaisedButton:
-        text: "Open time picker"
-        pos_hint: {'center_x': .5, 'center_y': .5}
-        on_release: app.show_date_picker()
-'''
+from kivymd.uix.datatables import MDDataTable
 
 
-class Test(MDApp):
+class Example(MDApp):
     def build(self):
-        return Builder.load_string(KV)
+        layout = AnchorLayout()
+        data_tables = MDDataTable(
+            check=True,
+            size_hint=(0.9, 0.6),
+            column_data=[
+                ("ID", dp(20)),
+                ("Column 2", dp(30)),
+                ("Column 3", dp(50), self.sort_on_col_3)
+            ],
+            row_data=[
+                # The number of elements must match the length
+                # of the `column_data` list.
+                (
+                    "1",
+                    ("alert", [255 / 256, 165 / 256, 0, 1], "No Signal"),
+                    "Astrid: NE shared managed"
+                ),
+                (
+                    "2",
+                    ("alert-circle", [1, 0, 0, 1], "Offline"),
+                    "Cosmo: prod shared ares"
+                )
+            ],
+        )
+        data_tables.bind(on_check_press=self.on_check_press)
+        layout.add_widget(data_tables)
+        return layout
 
-    def on_save(self, instance, value, date_range):
-        '''
-        Events called when the "OK" dialogActivity box button is clicked.
+    def on_check_press(self, instance_table, current_row):
+        print("CHECKED ROW!")
+        '''Called when the check box in the table row is checked.'''
 
-        :type instance: <kivymd.uix.picker.MDDatePicker object>;
+    def sort_on_col_3(self, data):
+        return zip(
+            *sorted(
+                enumerate(data),
+                key=lambda l: l[1][3]
+            )
+        )
 
-        :param value: selected date;
-        :type value: <class 'datetime.date'>;
+    def sort_on_col_2(self, data):
+        return zip(
+            *sorted(
+                enumerate(data),
+                key=lambda l: l[1][-1]
+            )
+        )
 
-        :param date_range: list of 'datetime.date' objects in the selected range;
-        :type date_range: <class 'list'>;
-        '''
-
-        print(instance, value, date_range)
-
-    def on_cancel(self, instance, value):
-        '''Events called when the "CANCEL" dialogActivity box button is clicked.'''
-
-    def show_date_picker(self):
-        date_dialog = MDDatePicker()
-        date_dialog.bind(on_save=self.on_save, on_cancel=self.on_cancel)
-        date_dialog.open()
-
-
-Test().run()
+Example().run()
