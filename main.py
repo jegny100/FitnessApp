@@ -58,14 +58,12 @@ class FitnessApp(MDApp):
     def build(self):
         self.theme_cls.primary_palette = "Teal"
 
-        # check if activity_collection.csv is existent
-        if os.path.isfile('./activity_collection.csv'):
-            activity_collection_df = pd.read_csv('activity_collection.csv', index_col="Unnamed: 0")
-        else:
+        # generate basic activity collection if not existent
+        if not os.path.isfile('./activity_collection.csv'):
             activity_collection_df = pd.DataFrame(columns=["activity", "buddy", "duration", "repetition", "weight"])
+            activity_row = {'activity': 'Liegestütze', 'buddy': "", 'duration': 0, 'repetition': 1, 'weight': 0}
+            activity_collection_df = activity_collection_df.append(activity_row, ignore_index=True)
             activity_collection_df.to_csv('activity_collection.csv')
-        #print(activity_collection_df)
-        #print(activity_collection_df["activity"].to_list())
         self.get_activity_collection()
 
         return Builder.load_string(main_kivy.KV)
@@ -74,12 +72,15 @@ class FitnessApp(MDApp):
 
     # ACTIVITY COLLECTION FUNCTIONS
 
+    # get the most current activity collection
     def get_activity_collection(self):
         activity_collection_df = pd.read_csv('activity_collection.csv', index_col="Unnamed: 0")
         print(activity_collection_df)
         return activity_collection_df
 
     # ACTIVITY LOGGER FUNCTIONS
+
+    # creates choose-an-activity-dialog
     def show_activities_dialog(self):
         if not self.dialogActivity:
             activity_collection_df = self.get_activity_collection()
@@ -101,6 +102,7 @@ class FitnessApp(MDApp):
     def cancel_activity_dialog(self, obj):
         self.dialogActivity.dismiss()
 
+    # confirming the choose-an-activity-dialog and handling chosen activity
     def confirm_activity_dialog(self, obj):
         self.root.ids.logger_chosen_activity.text = FitnessApp.chosen_activity
         if self.chosen_activity != "Choose an activity":
@@ -116,6 +118,7 @@ class FitnessApp(MDApp):
         date_dialog.bind(on_save=self.on_save, on_cancel=self.on_cancel)
         date_dialog.open()
 
+    # saves the chosen date of date picker
     def on_save(self, instance, value, date_range):
         self.root.ids.logger_date.text = str(value)
         self.logger_capsule["date"] = str(value)
@@ -139,6 +142,7 @@ class FitnessApp(MDApp):
         else:
             return True
 
+    # error message, if trying to log without an activity
     def error_activity_dialog(self):
         if not self.dialogError:
             self.dialogError = MDDialog(
