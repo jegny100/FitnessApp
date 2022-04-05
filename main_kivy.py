@@ -65,9 +65,7 @@ MDScreen:
                 MDLabel:
                     text: "Activity Collection"
                     halign: "center"
-                
-                
-                    
+        
                 MDIconButton:
                     icon: 'plus'
                     spacing: '10dp'

@@ -64,7 +64,9 @@ class FitnessApp(MDApp):
         else:
             activity_collection_df = pd.DataFrame(columns=["activity", "buddy", "duration", "repetition", "weight"])
             activity_collection_df.to_csv('activity_collection.csv')
-            print(activity_collection_df)
+        #print(activity_collection_df)
+        #print(activity_collection_df["activity"].to_list())
+        self.get_activity_collection()
 
         return Builder.load_string(main_kivy.KV)
 
@@ -73,15 +75,15 @@ class FitnessApp(MDApp):
     # ACTIVITY COLLECTION FUNCTIONS
 
     def get_activity_collection(self):
-        print(self.activity_collection_df[1])
-
+        activity_collection_df = pd.read_csv('activity_collection.csv', index_col="Unnamed: 0")
+        print(activity_collection_df)
+        return activity_collection_df
 
     # ACTIVITY LOGGER FUNCTIONS
     def show_activities_dialog(self):
         if not self.dialogActivity:
-            self.items = [ItemConfirm(text="Spazieren"),
-                          ItemConfirm(text="Joggen"),
-                          ItemConfirm(text="Liegestütze")]
+            activity_collection_df = self.get_activity_collection()
+            self.items = [ItemConfirm(text=X) for X in activity_collection_df["activity"].to_list()]
             self.dialogActivity = MDDialog(
                 title="Choose activity",
                 type="confirmation",
