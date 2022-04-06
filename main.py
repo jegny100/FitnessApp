@@ -49,11 +49,7 @@ class FitnessApp(MDApp):
     dialogError = None
     date = datetime.today().strftime('%Y-%m-%d')
     chosen_activity = "Choose an activity"
-    logger_capsule = {"activity": None,
-                      "date": date,
-                      "duration": None,
-                      "repetition": None,
-                      "weight": None}
+    logger_capsule = {"activity": None, "date": date, "duration": None, "repetition": None, "weight": None}
 
     def build(self):
         self.theme_cls.primary_palette = "Teal"
@@ -77,6 +73,13 @@ class FitnessApp(MDApp):
         activity_collection_df = pd.read_csv('activity_collection.csv', index_col="Unnamed: 0")
         print(activity_collection_df)
         return activity_collection_df
+
+    def check_collection_required(self):
+        # check which activity was chosen
+        if not self.chosen_activity_check(self):
+            return False
+        self.logger_capsule["duration"] = duration
+
 
     # ACTIVITY LOGGER FUNCTIONS
 

@@ -1,58 +1,16 @@
-from kivy.metrics import dp
-from kivy.uix.anchorlayout import AnchorLayout
+import pandas as pd
+import numpy as np
 
-from kivymd.app import MDApp
-from kivymd.uix.datatables import MDDataTable
-
-
-class Example(MDApp):
-    def build(self):
-        layout = AnchorLayout()
-        data_tables = MDDataTable(
-            check=True,
-            size_hint=(0.9, 0.6),
-            column_data=[
-                ("ID", dp(20)),
-                ("Column 2", dp(30)),
-                ("Column 3", dp(50), self.sort_on_col_3)
-            ],
-            row_data=[
-                # The number of elements must match the length
-                # of the `column_data` list.
-                (
-                    "1",
-                    ("alert", [255 / 256, 165 / 256, 0, 1], "No Signal"),
-                    "Astrid: NE shared managed"
-                ),
-                (
-                    "2",
-                    ("alert-circle", [1, 0, 0, 1], "Offline"),
-                    "Cosmo: prod shared ares"
-                )
-            ],
-        )
-        data_tables.bind(on_check_press=self.on_check_press)
-        layout.add_widget(data_tables)
-        return layout
-
-    def on_check_press(self, instance_table, current_row):
-        print("CHECKED ROW!")
-        '''Called when the check box in the table row is checked.'''
-
-    def sort_on_col_3(self, data):
-        return zip(
-            *sorted(
-                enumerate(data),
-                key=lambda l: l[1][3]
-            )
-        )
-
-    def sort_on_col_2(self, data):
-        return zip(
-            *sorted(
-                enumerate(data),
-                key=lambda l: l[1][-1]
-            )
-        )
-
-Example().run()
+activity_collection_df = pd.read_csv('activity_collection_backup.csv', index_col="Unnamed: 0")
+print(activity_collection_df)
+row = activity_collection_df.loc[activity_collection_df['activity'] == "Glute Bridge"].columns[np.where(row.values[0])[-1][-1]]
+print(row, "\n")
+#print(row.columns[np.where(row.values[0])[-1][-1]])
+#print(row.columns)
+#print(activity_collection_df.columns[row[0]])
+#print(row[row == 1].index)
+#print(row.iloc[])
+activity_collection_df_test = activity_collection_df.copy()
+activity_collection_df_test.set_index('activity', inplace=True)
+activity_collection_df_test = activity_collection_df_test.T
+#print(activity_collection_df_test.loc[activity_collection_df_test['Glute Bridge'] == 1].index)

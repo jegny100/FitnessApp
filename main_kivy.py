@@ -155,13 +155,14 @@ MDScreen:
                         MDLabel:
                             text: "Repetitions"
                             halign: "center"
-                            
-                        MDTextField:
+                        
+                       
+                        MDTextField:  
                             id : logger_repetition
                             mode: "rectangle"
                             size_hint_x: 0.5
                             pos_hint: {"center_x": .5, "center_y": .5}
-                        
+                    
                     MDBoxLayout:
                         orientation: "horizontal"
                         padding: '10dp'
@@ -199,7 +200,7 @@ MDScreen:
                             md_bg_color: app.theme_cls.primary_color
                             on_release: 
                                 screen_manager.transition.direction = 'right'
-                                if app.chosen_activity_check() : app.handle_logger([logger_duration_hour.text,logger_duration_min.text,logger_duration_sec.text],logger_repetition.text, logger_weight.text)
+                                if app.chosen_activity_check() and True : app.handle_logger([logger_duration_hour.text,logger_duration_min.text,logger_duration_sec.text],logger_repetition.text, logger_weight.text)
                                 else: app.error_activity_dialog()
 
                             
