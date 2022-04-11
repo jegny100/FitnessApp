@@ -74,21 +74,25 @@ class FitnessApp(MDApp):
         activity_collection_df = pd.read_csv('activity_collection.csv', index_col="Unnamed: 0")
         return activity_collection_df
 
+    # checks the requirement of the chosen activity
     def check_collection_required(self):
         if self.chosen_activity_check():
             # check which activity was chosen
             activity_collection_df = pd.read_csv('activity_collection_backup.csv', index_col="Unnamed: 0")
             activity_collection_df.set_index('activity', inplace=True)
             activity_collection_df = activity_collection_df.T
-            test = activity_collection_df[FitnessApp.chosen_activity] == 1
-            required = activity_collection_df.loc[test].index[0]
-            print("required ", required)
-            print("self logger :", self.logger_capsule[required])
+            tmp = activity_collection_df[FitnessApp.chosen_activity] == 1
+            required = activity_collection_df.loc[tmp].index[0]
+            # specific case of duration measurement
+            if required == "duration":
+                for i in self.logger_capsule[required]:
+                    if i != "" or None:
+                        return True
+                return False
+            # any simple unit of measurement
             if self.logger_capsule[required] == "":
-                print("False")
                 return False
             else:
-                print("True")
                 return True
 
     # error message, if required input is missing
@@ -106,7 +110,6 @@ class FitnessApp(MDApp):
 
     def confirm_error_required_dialog(self, obj):
         self.dialogErrorRequired.dismiss()
-
 
     # ACTIVITY LOGGER FUNCTIONS
 
@@ -158,7 +161,6 @@ class FitnessApp(MDApp):
 
     # GET INPUT
     def get_logger(self, duration, repetition, weight):
-
         self.logger_capsule["duration"] = duration
         self.logger_capsule["repetition"] = repetition
         self.logger_capsule["weight"] = weight
