@@ -62,16 +62,27 @@ MDScreen:
                         
             MDScreen:
                 name: "activity_collection"
-                MDLabel:
-                    text: "Activity Collection"
-                    halign: "center"
-        
-                MDIconButton:
-                    icon: 'plus'
-                    spacing: '10dp'
-                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                    md_bg_color : (154 / 255.0, 212 / 255.0, 194 / 255.0, 1)
-                    on_release: 
+                
+                MDBoxLayout:
+                    orientation: "vertical"
+                    padding: "32dp"
+                
+                    MDLabel:
+                        text: "Activity Collection"
+                        halign : 'center'
+                        
+                    Image:
+                        source: "images/red_panda.jpg"
+                        size_hint: 0.5, 0.5
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+            
+                    MDIconButton:
+                        icon: 'plus'
+                        spacing: '10dp'
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                        halign: "bottom"
+                        md_bg_color : (154 / 255.0, 212 / 255.0, 194 / 255.0, 1)
+                        on_release: 
                     
             MDScreen:
                 name: "logging"
