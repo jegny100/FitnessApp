@@ -6,7 +6,7 @@ from kivy.metrics import dp
 from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.datatables import MDDataTable
-from kivymd.uix.button import MDFlatButton
+from kivymd.uix.button import MDFlatButton, MDFloatingActionButton
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.list import OneLineAvatarIconListItem
 from kivymd.uix.picker import MDDatePicker
@@ -43,12 +43,33 @@ class ItemConfirm(OneLineAvatarIconListItem):
             FitnessApp.chosen_activity = "Choose an activity"
         FitnessApp.check_list = check_list
 
+# Dialog Choice Confirmation (Single Choice) specific for buddy system
+class BuddyConfirm(OneLineAvatarIconListItem):
+    divider = None
+
+    # checks an item in a list with a check icon
+    def set_buddy(self, instance_check):
+        instance_check.active = not instance_check.active
+        check_list = instance_check.get_widgets(instance_check.group)
+        self.check_list = check_list
+        # ensures single choice
+        for check in check_list:
+            if check != instance_check:
+                check.active = False
+        if instance_check.active:
+            FitnessApp.chosen_buddy = self.text
+            print("CHOSEN BUDDY ", FitnessApp.chosen_buddy)
+        else:
+            FitnessApp.chosen_buddy = "plus"
+        FitnessApp.check_list = check_list
 
 class FitnessApp(MDApp):
+    dialogBuddy = None
     dialogActivity = None
     dialogError = None
     dialogErrorRequired = None
     date = datetime.today().strftime('%Y-%m-%d')
+    chosen_buddy = 'plus'
     chosen_activity = "Choose an activity"
     logger_capsule = {"activity": None, "date": date, "duration": None, "repetition": None, "weight": None}
 
@@ -65,14 +86,56 @@ class FitnessApp(MDApp):
 
         return Builder.load_string(main_kivy.KV)
 
-    """ LOGGER FUNCTIONS  """
-
     # ACTIVITY COLLECTION FUNCTIONS
+
+    # TODO
+    def add_activity_to_collection(self, activity_name,  duration, repetition, weight):
+
+        row = {'activity': activity_name, 'buddy': FitnessApp.chosen_buddy, 'duration': duration,
+               'repetition': repetition, 'weight': weight}
+        print("ROWWWWW ", row)
+        self.root.ids.activity_name.text = ""
 
     # get the most current activity collection
     def get_activity_collection(self):
         activity_collection_df = pd.read_csv('activity_collection.csv', index_col="Unnamed: 0")
         return activity_collection_df
+
+    # get the list of buddies/buddys
+    def get_buddys(self):
+        buddys_df = pd.read_csv('buddys.csv', index_col="Unnamed: 0")
+        return buddys_df
+
+    # show Buddy list as dialog window
+    def show_buddy_dialog(self):
+        if not self.dialogBuddy:
+            buddys_df = self.get_buddys()
+            self.items = [BuddyConfirm(text=X) for X in buddys_df["buddy"].to_list()]
+            self.dialogBuddy = MDDialog(
+                title="Choose your buddy",
+                type="confirmation",
+                items=self.items,
+                buttons=[MDFlatButton(text="CANCEL",
+                                      text_color=self.theme_cls.primary_color,
+                                      on_release=self.cancel_buddy_dialog),
+                         MDFlatButton(text="OK",
+                                      text_color=self.theme_cls.primary_color,
+                                      on_release=self.confirm_buddy_dialog)
+                         ],
+            )
+        self.dialogBuddy.open()
+
+    def cancel_buddy_dialog(self, obj):
+        self.dialogBuddy.dismiss()
+
+    def confirm_buddy_dialog(self, obj):
+        buddy_df = self.get_buddys()
+        row = buddy_df.loc[buddy_df['buddy'] == FitnessApp.chosen_buddy]
+        source = "images/" + str(row["source"][0])
+        print(source)
+        print("buddy?? ", FitnessApp.chosen_buddy)
+        self.root.ids.buddy.icon = source
+        self.dialogBuddy.dismiss()
 
     # checks the requirement of the chosen activity
     def check_collection_required(self):

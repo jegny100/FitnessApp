@@ -5,6 +5,13 @@ KV = '''
     CheckboxLeftWidget:
         id: check
         group: "check"
+        
+<BuddyConfirm>
+    on_release: root.set_buddy(check)
+    
+    CheckboxLeftWidget:
+        id: check
+        group: "check"
 
 <ContentNavigationDrawer>:
     ScrollView:
@@ -64,25 +71,142 @@ MDScreen:
                 name: "activity_collection"
                 
                 MDBoxLayout:
-                    orientation: "vertical"
+                    orientation: 'vertical'
                     padding: "32dp"
-                
+                       
                     MDLabel:
                         text: "Activity Collection"
-                        halign : 'center'
-                        
-                    Image:
-                        source: "images/red_panda.jpg"
-                        size_hint: 0.5, 0.5
-                        pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+                        halign: "center"
+                    
+                    MDBoxLayout:
+                        Image:
+                            source: "images/RedPanda.jpg" 
+                                
+                    MDBoxLayout  
+                        MDLabel:
+                            text: "test"
+                            halign: "center"
+                             
+                        MDIconButton:
+                            id : add_activity_plus
+                            icon: 'plus'
+                            spacing: '10dp'
+                            md_bg_color : (154 / 255.0, 212 / 255.0, 194 / 255.0, 1)
+                            on_release: 
+                                screen_manager.current = "add_activity"
+                                screen_manager.transition.direction = 'left'
             
-                    MDIconButton:
-                        icon: 'plus'
-                        spacing: '10dp'
-                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                        halign: "bottom"
-                        md_bg_color : (154 / 255.0, 212 / 255.0, 194 / 255.0, 1)
-                        on_release: 
+                                
+            MDScreen:
+                name: "add_activity"
+                
+                MDBoxLayout:
+                    orientation: "vertical"
+                    spacing : '15dp'
+                    padding : '12dp'
+                    
+                    MDLabel:
+                        text: "Add an Activity to your collection"
+                        halign: "center"                        
+                        valign: "top"
+                        font_style : 'Subtitle1' 
+                        theme_text_color : 'Secondary'
+                    
+                    MDLabel:
+                        
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        MDLabel:
+                        
+                        MDIconButton:
+                            id: buddy
+                            icon: app.chosen_buddy
+                            #icon: 'images/RedPanda.jpg'
+                            user_font_size: "100sp"
+                            size: self.parent.size
+                            on_release:
+                                app.show_buddy_dialog()
+                            
+                        MDLabel:
+
+                        
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        padding: '10dp'                        
+                                  
+                        MDLabel:
+                            text: "Activity Name"
+                            halign: "left"
+                            valign: "center"
+                            
+                        MDTextField:  
+                            id : activity_name
+                            mode: "rectangle"
+                            size_hint_x: 0.5
+                            pos_hint: {"center_x": .5, "center_y": .5}
+                            
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        padding: '10dp'                        
+                                  
+                        MDLabel:
+                            text: "Duration Required"
+                            halign: "left"
+                            valign: "center"
+                            
+                        MDSwitch:  
+                            id : duration_switch
+                            pos_hint: {"center_x": .9, "center_y": .5}
+                    
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        padding: '10dp'                        
+                                  
+                        MDLabel:
+                            text: "Repetitions Required"
+                            halign: "left"
+                            valign: "center"
+                            
+                        MDSwitch:  
+                            id : repetition_switch
+                            pos_hint: {"center_x": .9, "center_y": .5}
+
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        padding: '10dp'                        
+                                  
+                        MDLabel:
+                            text: "Weight Required"
+                            halign: "left"
+                            valign: "center"
+                            
+                        MDSwitch:  
+                            id : weight_switch
+                            pos_hint: {"center_x": .9, "center_y": .5}
+                            
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        padding: '10dp'
+                    
+                        MDIconButton:
+                            id: activity_cancel
+                            icon: 'close'
+                            md_bg_color: app.theme_cls.primary_color      
+                            on_release:
+                                screen_manager.transition.direction = 'right'
+                                screen_manager.current = "activity_collection"
+                            
+                        MDLabel:              
+                        
+                        MDIconButton:
+                            id: activity_confirm
+                            icon: 'check'
+                            text: 'CONFIRM'
+                            md_bg_color: app.theme_cls.primary_color
+                            on_release: 
+                                screen_manager.transition.direction = 'right'
+                                screen_manager.current = "activity_collection"
+                                app.add_activity_to_collection(activity_name.text, duration_switch.active, repetition_switch.active, weight_switch.active)
                     
             MDScreen:
                 name: "logging"
