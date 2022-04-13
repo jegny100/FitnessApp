@@ -14,6 +14,7 @@ from datetime import datetime
 import os
 import pandas as pd
 import main_kivy
+import helper_functions
 
 Window.size = (350, 600)
 
@@ -43,6 +44,7 @@ class ItemConfirm(OneLineAvatarIconListItem):
             FitnessApp.chosen_activity = "Choose an activity"
         FitnessApp.check_list = check_list
 
+
 # Dialog Choice Confirmation (Single Choice) specific for buddy system
 class BuddyConfirm(OneLineAvatarIconListItem):
     divider = None
@@ -58,10 +60,11 @@ class BuddyConfirm(OneLineAvatarIconListItem):
                 check.active = False
         if instance_check.active:
             FitnessApp.chosen_buddy = self.text
-            print("CHOSEN BUDDY ", FitnessApp.chosen_buddy)
         else:
             FitnessApp.chosen_buddy = "plus"
+        print("CHOSEN BUDDY :", FitnessApp.chosen_buddy)
         FitnessApp.check_list = check_list
+
 
 class FitnessApp(MDApp):
     dialogBuddy = None
@@ -82,34 +85,24 @@ class FitnessApp(MDApp):
             activity_row = {'activity': 'Liegestütze', 'buddy': "", 'duration': 0, 'repetition': 1, 'weight': 0}
             activity_collection_df = activity_collection_df.append(activity_row, ignore_index=True)
             activity_collection_df.to_csv('activity_collection.csv')
-        self.get_activity_collection()
+        helper_functions.get_activity_collection()
 
         return Builder.load_string(main_kivy.KV)
 
-    # ACTIVITY COLLECTION FUNCTIONS
+    ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-    # TODO
-    def add_activity_to_collection(self, activity_name,  duration, repetition, weight):
+    ''' ACTIVITY COLLECTION FUNCTIONS '''
 
+    # TODO save to csv
+    def add_activity_to_collection(self, activity_name, duration, repetition, weight):
         row = {'activity': activity_name, 'buddy': FitnessApp.chosen_buddy, 'duration': duration,
                'repetition': repetition, 'weight': weight}
-        print("ROWWWWW ", row)
-        self.root.ids.activity_name.text = ""
-
-    # get the most current activity collection
-    def get_activity_collection(self):
-        activity_collection_df = pd.read_csv('activity_collection.csv', index_col="Unnamed: 0")
-        return activity_collection_df
-
-    # get the list of buddies/buddys
-    def get_buddys(self):
-        buddys_df = pd.read_csv('buddys.csv', index_col="Unnamed: 0")
-        return buddys_df
+        print("ROW ", row)
 
     # show Buddy list as dialog window
     def show_buddy_dialog(self):
         if not self.dialogBuddy:
-            buddys_df = self.get_buddys()
+            buddys_df = helper_functions.get_buddys()
             self.items = [BuddyConfirm(text=X) for X in buddys_df["buddy"].to_list()]
             self.dialogBuddy = MDDialog(
                 title="Choose your buddy",
@@ -129,19 +122,18 @@ class FitnessApp(MDApp):
         self.dialogBuddy.dismiss()
 
     def confirm_buddy_dialog(self, obj):
-        buddy_df = self.get_buddys()
-        row = buddy_df.loc[buddy_df['buddy'] == FitnessApp.chosen_buddy]
-        source = "images/" + str(row["source"][0])
-        print(source)
-        print("buddy?? ", FitnessApp.chosen_buddy)
-        self.root.ids.buddy.icon = source
-        self.dialogBuddy.dismiss()
+        if FitnessApp.chosen_buddy != "plus":
+            buddy_df = helper_functions.get_buddys()
+            row = buddy_df.loc[buddy_df['buddy'] == FitnessApp.chosen_buddy]
+            source = "images/" + str(row["source"][0])
+            self.root.ids.buddy.icon = source
+            self.dialogBuddy.dismiss()
 
     # checks the requirement of the chosen activity
     def check_collection_required(self):
         if self.chosen_activity_check():
             # check which activity was chosen
-            activity_collection_df = pd.read_csv('activity_collection_backup.csv', index_col="Unnamed: 0")
+            activity_collection_df = pd.read_csv('activity_collection.csv', index_col="Unnamed: 0")
             activity_collection_df.set_index('activity', inplace=True)
             activity_collection_df = activity_collection_df.T
             tmp = activity_collection_df[FitnessApp.chosen_activity] == 1
@@ -174,12 +166,14 @@ class FitnessApp(MDApp):
     def confirm_error_required_dialog(self, obj):
         self.dialogErrorRequired.dismiss()
 
-    # ACTIVITY LOGGER FUNCTIONS
+    ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+    ''' ACTIVITY LOGGER FUNCTIONS '''
 
     # creates choose-an-activity-dialog
     def show_activities_dialog(self):
         if not self.dialogActivity:
-            activity_collection_df = self.get_activity_collection()
+            activity_collection_df = helper_functions.get_activity_collection()
             self.items = [ItemConfirm(text=X) for X in activity_collection_df["activity"].to_list()]
             self.dialogActivity = MDDialog(
                 title="Choose activity",
@@ -215,14 +209,14 @@ class FitnessApp(MDApp):
         date_dialog.open()
 
     # saves the chosen date of date picker
-    def on_save(self, instance, value, date_range):
+    def on_save(self, _instance, value, _date_range):
         self.root.ids.logger_date.text = str(value)
         self.logger_capsule["date"] = str(value)
 
     def on_cancel(self, instance, value):
         """Events called when the "CANCEL" dialogActivity box button is clicked."""
 
-    # GET INPUT
+    # GET INPUT FROM LOGGER
     def get_logger(self, duration, repetition, weight):
         self.logger_capsule["duration"] = duration
         self.logger_capsule["repetition"] = repetition
@@ -267,6 +261,7 @@ class FitnessApp(MDApp):
         logged_activities_df.to_csv('logged_activities.csv')
         print(logged_activities_df, "\n")
 
+    # RESET LOGGER
     # reset all variables of the logger
     def empty_logger(self):
         self.root.ids.logger_chosen_activity.text = "Choose an activity"
