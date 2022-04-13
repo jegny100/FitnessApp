@@ -17,7 +17,6 @@ import pandas as pd
 import main_kivy
 import helper_functions
 
-
 Window.size = (350, 600)
 
 
@@ -102,24 +101,26 @@ class FitnessApp(MDApp):
         empty_name = re.search("\w", activity_name)
         # check whether the returned activity_name is not empty and unique in activity_collection.csv
         if empty_name is not None:
-            if activity_name not in helper_functions.get_activity_collection()["activity"].unique():
-                print("df ",helper_functions.get_activity_collection()["activity"])
-                print(activity_name)
+            activity_collection_df = helper_functions.get_activity_collection()
+            if activity_name not in activity_collection_df["activity"].unique():
                 id_name = True
             else:
                 id_name = False
         else:
             id_name = False
-        print("id_name ", id_name)
+
+        # check for correct data
         if ((duration + repetition + weight) == 1) & (FitnessApp.chosen_buddy != "plus") & id_name:
             self.root.ids.screen_manager.transition.direction = 'right'
             self.root.ids.screen_manager.current = "activity_collection"
             row = {'activity': activity_name, 'buddy': FitnessApp.chosen_buddy, 'duration': duration,
                    'repetition': repetition, 'weight': weight}
+            # update to csv
+            activity_collection_df = activity_collection_df.append(row, ignore_index=True)
+            activity_collection_df.to_csv('activity_collection.csv')
+            print(activity_collection_df, "\n")
         else:
             self.error_new_activity()
-        # TODO check for distinct names in csv collection as primary key
-        # TODO save to csv
 
     # check for name, buddy & exactly one measurement
     def check_new_activity(self):
@@ -334,6 +335,5 @@ class FitnessApp(MDApp):
 
 
 FitnessApp().run()
-
 
 # NOTE: we know it's "buddies" not "buddys"
