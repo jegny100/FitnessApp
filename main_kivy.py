@@ -204,8 +204,6 @@ MDScreen:
                             text: 'CONFIRM'
                             md_bg_color: app.theme_cls.primary_color
                             on_release: 
-                                screen_manager.transition.direction = 'right'
-                                screen_manager.current = "activity_collection"
                                 app.add_activity_to_collection(activity_name.text, duration_switch.active, repetition_switch.active, weight_switch.active)
                     
             MDScreen:

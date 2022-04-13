@@ -12,9 +12,11 @@ from kivymd.uix.list import OneLineAvatarIconListItem
 from kivymd.uix.picker import MDDatePicker
 from datetime import datetime
 import os
+import re
 import pandas as pd
 import main_kivy
 import helper_functions
+
 
 Window.size = (350, 600)
 
@@ -71,6 +73,7 @@ class FitnessApp(MDApp):
     dialogActivity = None
     dialogError = None
     dialogErrorRequired = None
+    dialogErrorNewActivity = None
     date = datetime.today().strftime('%Y-%m-%d')
     chosen_buddy = 'plus'
     chosen_activity = "Choose an activity"
@@ -93,11 +96,41 @@ class FitnessApp(MDApp):
 
     ''' ACTIVITY COLLECTION FUNCTIONS '''
 
-    # TODO save to csv
+    # handle new activity
+    # by switching screens and saving new data to activity_collection.csv
     def add_activity_to_collection(self, activity_name, duration, repetition, weight):
-        row = {'activity': activity_name, 'buddy': FitnessApp.chosen_buddy, 'duration': duration,
-               'repetition': repetition, 'weight': weight}
-        print("ROW ", row)
+        # TODO screen_manager.transition.direction = 'right'
+        # TODO screen_manager.current = "activity_collection"
+        empty_name = re.search("\w", activity_name)
+        print(empty_name)
+        if ((duration + repetition + weight) == 1) & (FitnessApp.chosen_buddy != "plus") & (empty_name is not None):
+            row = {'activity': activity_name, 'buddy': FitnessApp.chosen_buddy, 'duration': duration,
+                   'repetition': repetition, 'weight': weight}
+            print("ROW ", row)
+        else:
+            self.error_new_activity()
+
+        # TODO save to csv
+
+    # check for name, buddy & exactly one measurement
+    def check_new_activity(self):
+        pass
+
+    # error message if data is missing
+    def error_new_activity(self):
+        if not self.dialogErrorNewActivity:
+            self.dialogErrorNewActivity = MDDialog(
+                title="Missing Required Info",
+                text="Please choose a buddy, a name and exactly one required measurement",
+                buttons=[MDFlatButton(text="OK",
+                                      text_color=self.theme_cls.primary_color,
+                                      on_release=self.confirm_error_new_activity)
+                         ],
+            )
+        self.dialogErrorNewActivity.open()
+
+    def confirm_error_new_activity(self, obj):
+        self.dialogErrorNewActivity.dismiss()
 
     # show Buddy list as dialog window
     def show_buddy_dialog(self):
@@ -119,14 +152,21 @@ class FitnessApp(MDApp):
         self.dialogBuddy.open()
 
     def cancel_buddy_dialog(self, obj):
+        FitnessApp.chosen_buddy = "plus"
+        self.root.ids.buddy.icon = "plus"
+        self.empty_checkbox()
         self.dialogBuddy.dismiss()
 
+    # confirm dialog and show picture of the chosen buddy
     def confirm_buddy_dialog(self, obj):
         if FitnessApp.chosen_buddy != "plus":
             buddy_df = helper_functions.get_buddys()
             row = buddy_df.loc[buddy_df['buddy'] == FitnessApp.chosen_buddy]
             source = "images/" + str(row["source"][0])
             self.root.ids.buddy.icon = source
+            self.dialogBuddy.dismiss()
+        else:
+            self.root.ids.buddy.icon = "plus"
             self.dialogBuddy.dismiss()
 
     # checks the requirement of the chosen activity
