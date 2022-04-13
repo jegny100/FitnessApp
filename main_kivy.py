@@ -33,7 +33,7 @@ KV = '''
                     root.nav_drawer.set_state("close")
                     root.screen_manager.current = "activity_collection"
                     root.screen_manager.transition.direction = 'left'
-                    app.load_activity_collection_list()
+                    #app.load_activity_collection_list()
                     
 MDScreen:
     MDToolbar:
@@ -78,27 +78,28 @@ MDScreen:
                 MDBoxLayout:
                     orientation: 'vertical'
                     padding: "32dp"
+                    spacing: '10dp'
                        
                     MDLabel:
+                        size_hint_y : 0.1
                         text: "Activity Collection"
+                        font_style : 'Subtitle1'
                         halign: "center"
                     
                     ScrollView:
                         MDList:
                             id: container
-                                
-                    MDBoxLayout:    
-                        MDIconButton:
-                            id : add_activity_plus
-                            icon: 'plus'
-                            spacing: '10dp'
-                            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                            md_bg_color : (154 / 255.0, 212 / 255.0, 194 / 255.0, 1)
-                            on_release: 
-                                screen_manager.current = "add_activity"
-                                screen_manager.transition.direction = 'left'
-            
-                                
+                     
+                    MDIconButton:
+                        id : add_activity_plus
+                        icon: 'plus'
+                        spacing: '20dp'
+                        pos_hint: {"center_x": .5, "center_y": .5}
+                        md_bg_color : (154 / 255.0, 212 / 255.0, 194 / 255.0, 1)
+                        on_release: 
+                            screen_manager.current = "add_activity"
+                            screen_manager.transition.direction = 'left'
+
             MDScreen:
                 name: "add_activity"
                 

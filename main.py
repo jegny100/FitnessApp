@@ -86,6 +86,7 @@ class FitnessApp(MDApp):
     def build(self):
         self.theme_cls.primary_palette = "Teal"
 
+
         # generate basic activity collection if not existent
         if not os.path.isfile('./activity_collection.csv'):
             activity_collection_df = pd.DataFrame(columns=["activity", "buddy", "duration", "repetition", "weight"])
@@ -95,6 +96,9 @@ class FitnessApp(MDApp):
         helper_functions.get_activity_collection()
 
         return Builder.load_string(main_kivy.KV)
+
+    def on_start(self):
+        self.load_activity_collection_list()
 
     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
