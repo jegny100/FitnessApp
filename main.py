@@ -334,3 +334,6 @@ class FitnessApp(MDApp):
 
 
 FitnessApp().run()
+
+
+# NOTE: we know it's "buddies" not "buddys"
