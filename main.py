@@ -1,6 +1,6 @@
 from kivy.core.window import Window
 from kivy.lang import Builder
-from kivy.properties import ObjectProperty
+from kivy.properties import ObjectProperty, StringProperty
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.metrics import dp
 from kivymd.app import MDApp
@@ -8,7 +8,7 @@ from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.datatables import MDDataTable
 from kivymd.uix.button import MDFlatButton, MDFloatingActionButton
 from kivymd.uix.dialog import MDDialog
-from kivymd.uix.list import OneLineAvatarIconListItem
+from kivymd.uix.list import OneLineAvatarIconListItem, OneLineListItem, OneLineIconListItem
 from kivymd.uix.picker import MDDatePicker
 from datetime import datetime
 import os
@@ -67,6 +67,11 @@ class BuddyConfirm(OneLineAvatarIconListItem):
         FitnessApp.check_list = check_list
 
 
+class ListItem(OneLineAvatarIconListItem):
+    '''Custom list item.'''
+    icon = StringProperty()
+
+
 class FitnessApp(MDApp):
     dialogBuddy = None
     dialogActivity = None
@@ -95,6 +100,14 @@ class FitnessApp(MDApp):
 
     ''' ACTIVITY COLLECTION FUNCTIONS '''
 
+    def load_activity_collection_list(self):
+        for activity, buddy in helper_functions.get_activity_collection()[["activity", "buddy"]].values:
+            try:
+                source = self.get_buddy_path(buddy)
+            except KeyError:
+                source = "alert"
+            self.root.ids.container.add_widget(ListItem(text=activity, icon=source))
+
     # handle new activity
     # by switching screens and saving new data to activity_collection.csv
     def add_activity_to_collection(self, activity_name, duration, repetition, weight):
@@ -116,15 +129,11 @@ class FitnessApp(MDApp):
             row = {'activity': activity_name, 'buddy': FitnessApp.chosen_buddy, 'duration': duration,
                    'repetition': repetition, 'weight': weight}
             # update to csv
-            activity_collection_df = activity_collection_df.append(row, ignore_index=True)
+            activity_collection_df = helper_functions.get_activity_collection().append(row, ignore_index=True)
             activity_collection_df.to_csv('activity_collection.csv')
             print(activity_collection_df, "\n")
         else:
             self.error_new_activity()
-
-    # check for name, buddy & exactly one measurement
-    def check_new_activity(self):
-        pass
 
     # error message if data is missing
     def error_new_activity(self):
@@ -167,13 +176,15 @@ class FitnessApp(MDApp):
         self.empty_checkbox()
         self.dialogBuddy.dismiss()
 
+    def get_buddy_path(self, buddy):
+        buddy_df = helper_functions.get_buddys()
+        source = "images/" + str(buddy_df.loc[buddy_df['buddy'] == buddy]["source"][0])
+        return source
+
     # confirm dialog and show picture of the chosen buddy
     def confirm_buddy_dialog(self, obj):
         if FitnessApp.chosen_buddy != "plus":
-            buddy_df = helper_functions.get_buddys()
-            row = buddy_df.loc[buddy_df['buddy'] == FitnessApp.chosen_buddy]
-            source = "images/" + str(row["source"][0])
-            self.root.ids.buddy.icon = source
+            self.root.ids.buddy.icon = self.get_buddy_path(FitnessApp.chosen_buddy)
             self.dialogBuddy.dismiss()
         else:
             self.root.ids.buddy.icon = "plus"

@@ -1,4 +1,8 @@
 KV = '''
+<ListItem>:
+    IconRightWidget:
+        icon: root.icon
+
 <ItemConfirm>
     on_release: root.set_icon(check)
     
@@ -29,6 +33,7 @@ KV = '''
                     root.nav_drawer.set_state("close")
                     root.screen_manager.current = "activity_collection"
                     root.screen_manager.transition.direction = 'left'
+                    app.load_activity_collection_list()
                     
 MDScreen:
     MDToolbar:
@@ -78,19 +83,16 @@ MDScreen:
                         text: "Activity Collection"
                         halign: "center"
                     
-                    MDBoxLayout:
-                        Image:
-                            source: "images/RedPanda.jpg" 
+                    ScrollView:
+                        MDList:
+                            id: container
                                 
-                    MDBoxLayout  
-                        MDLabel:
-                            text: "test"
-                            halign: "center"
-                             
+                    MDBoxLayout:    
                         MDIconButton:
                             id : add_activity_plus
                             icon: 'plus'
                             spacing: '10dp'
+                            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
                             md_bg_color : (154 / 255.0, 212 / 255.0, 194 / 255.0, 1)
                             on_release: 
                                 screen_manager.current = "add_activity"
@@ -205,7 +207,7 @@ MDScreen:
                             md_bg_color: app.theme_cls.primary_color
                             on_release: 
                                 app.add_activity_to_collection(activity_name.text, duration_switch.active, repetition_switch.active, weight_switch.active)
-                    
+                                app.load_activity_collection_list()          
             MDScreen:
                 name: "logging"
                 
