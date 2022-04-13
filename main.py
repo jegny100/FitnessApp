@@ -99,17 +99,26 @@ class FitnessApp(MDApp):
     # handle new activity
     # by switching screens and saving new data to activity_collection.csv
     def add_activity_to_collection(self, activity_name, duration, repetition, weight):
-        # TODO screen_manager.transition.direction = 'right'
-        # TODO screen_manager.current = "activity_collection"
         empty_name = re.search("\w", activity_name)
-        print(empty_name)
-        if ((duration + repetition + weight) == 1) & (FitnessApp.chosen_buddy != "plus") & (empty_name is not None):
+        # check whether the returned activity_name is not empty and unique in activity_collection.csv
+        if empty_name is not None:
+            if activity_name not in helper_functions.get_activity_collection()["activity"].unique():
+                print("df ",helper_functions.get_activity_collection()["activity"])
+                print(activity_name)
+                id_name = True
+            else:
+                id_name = False
+        else:
+            id_name = False
+        print("id_name ", id_name)
+        if ((duration + repetition + weight) == 1) & (FitnessApp.chosen_buddy != "plus") & id_name:
+            self.root.ids.screen_manager.transition.direction = 'right'
+            self.root.ids.screen_manager.current = "activity_collection"
             row = {'activity': activity_name, 'buddy': FitnessApp.chosen_buddy, 'duration': duration,
                    'repetition': repetition, 'weight': weight}
-            print("ROW ", row)
         else:
             self.error_new_activity()
-
+        # TODO check for distinct names in csv collection as primary key
         # TODO save to csv
 
     # check for name, buddy & exactly one measurement
@@ -120,8 +129,8 @@ class FitnessApp(MDApp):
     def error_new_activity(self):
         if not self.dialogErrorNewActivity:
             self.dialogErrorNewActivity = MDDialog(
-                title="Missing Required Info",
-                text="Please choose a buddy, a name and exactly one required measurement",
+                title="Incorrect Data",
+                text="Please choose a buddy, a unique name and exactly one required measurement",
                 buttons=[MDFlatButton(text="OK",
                                       text_color=self.theme_cls.primary_color,
                                       on_release=self.confirm_error_new_activity)
