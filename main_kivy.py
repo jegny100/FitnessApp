@@ -33,7 +33,14 @@ KV = '''
                     root.nav_drawer.set_state("close")
                     root.screen_manager.current = "activity_collection"
                     root.screen_manager.transition.direction = 'left'
-                    #app.load_activity_collection_list()
+                    
+            OneLineListItem:
+                text: "Buddys"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "buddys"
+                    root.screen_manager.transition.direction = 'left'
+                    
                     
 MDScreen:
     MDToolbar:
@@ -85,6 +92,7 @@ MDScreen:
                         text: "Activity Collection"
                         font_style : 'Subtitle1'
                         halign: "center"
+                        theme_text_color : 'Secondary'
                     
                     ScrollView:
                         MDList:
@@ -141,6 +149,7 @@ MDScreen:
                             text: "Activity Name"
                             halign: "left"
                             valign: "center"
+                            theme_text_color : 'Secondary'
                             
                         MDTextField:  
                             id : activity_name
@@ -209,6 +218,23 @@ MDScreen:
                             on_release: 
                                 app.add_activity_to_collection(activity_name.text, duration_switch.active, repetition_switch.active, weight_switch.active)
                                 app.load_activity_collection_list()          
+            
+            MDScreen:
+                name: "buddys"
+                
+                MDBoxLayout:
+                    orientation: "vertical"
+                    spacing : '15dp'
+                    padding : '12dp'
+                    
+                    MDLabel:
+                        text: "Buddys"
+                        halign: "center"                        
+                        valign: "bottom"
+                        font_style : 'H5' 
+                        theme_text_color : 'Secondary'
+                    
+            
             MDScreen:
                 name: "logging"
                 
