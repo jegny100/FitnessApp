@@ -1,49 +1,38 @@
-from kivy.lang.builder import Builder
+from kivy.uix.modalview import ModalView
+from kivy.lang import Builder
+
+from kivymd import images_path
 from kivymd.app import MDApp
-kv = '''
-<MagicButton@MagicBehavior+MDIconButton>
+from kivymd.uix.card import MDCard
 
-<MySwiper@MDSwiperItem>
-    RelativeLayout:
-        FitImage:
-            source: "images/RedPanda.jpg"
-            radius: [10,]
+Builder.load_string(
+    '''
+<Card>:
+    elevation: 10
+    radius: [36, ]
 
-        MDBoxLayout:
-            adaptive_height: True
-            spacing: "12dp"
-
-            MagicButton:
-                id: icon
-                icon: "weather-sunny"
-                user_font_size: "56sp"
-                opposite_colors: True
-
-            MDLabel:
-                text: "MDLabel"
-                font_style: "H5"
-                size_hint_y: None
-                height: self.texture_size[1]
-                pos_hint: {"center_y": .5}
-                opposite_colors: True
-                
-MDScreen:
-    MDToolbar:
-        id: toolbar
-        title: "MDSwiper"
-        elevation: 10
+    FitImage:
+        id: bg_image
+        source: "images/RedPanda.jpg"
+        size_hint_y: .65
         pos_hint: {"top": 1}
+        radius: 36, 36, 0, 0
+''')
 
-    MDSwiper:
-        size_hint_y: None
-        height: root.height - toolbar.height - dp(40)
-        y: root.height - self.height - toolbar.height - dp(20)
-        on_swipe: self.get_current_item().ids.icon.shake()
 
-        MySwiper:
-        MySwiper:
-'''
-class Main(MDApp):
+class Card(MDCard):
+    pass
+
+
+class Example(MDApp):
     def build(self):
-        return Builder.load_string(kv)
-Main().run()
+        modal = ModalView(
+            size_hint=(0.4, 0.8),
+            background=f"{images_path}/transparent.png",
+            overlay_color=(0, 0, 0, 0),
+        )
+        modal.add_widget(Card())
+        modal.open()
+
+
+Example().run()

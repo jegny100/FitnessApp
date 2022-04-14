@@ -1,4 +1,4 @@
-,buddy,source
-0,Red Panda,RedPanda.jpg
-1,Penguin,Pengun.jpg
-2,Robin,Robin.jpg
+,buddy,source,description, friendship_level
+0,Red Panda,RedPanda.jpg,"I'm a little red Panda",0
+1,Penguin,Penguin.jpg,"watschel watschel",0
+2,Robin,Robin.jpg,"cute birdy- chirp chirp",0

@@ -126,6 +126,7 @@ class FitnessApp(MDApp):
         empty_name = re.search("\w", activity_name)
         # check whether the returned activity_name is not empty and unique in activity_collection.csv
         if empty_name is not None:
+            print("empty")
             activity_collection_df = helper_functions.get_activity_collection()
             if activity_name not in activity_collection_df["activity"].unique():
                 id_name = True
@@ -190,7 +191,7 @@ class FitnessApp(MDApp):
 
     def get_buddy_path(self, buddy):
         buddy_df = helper_functions.get_buddys()
-        source = "images/" + str(buddy_df.loc[buddy_df['buddy'] == buddy]["source"][0])
+        source = "images/" + str(buddy_df.loc[buddy_df['buddy'] == buddy, 'source'].values[0])
         return source
 
     # confirm dialog and show picture of the chosen buddy
