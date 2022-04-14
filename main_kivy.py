@@ -230,7 +230,7 @@ MDScreen:
                     
                     MDLabel:
                         size_hint_y : 0.1
-                        text: "Buddys"
+                        text: "Your Workout Buddys"
                         halign: "center"                        
                         valign: "bottom"
                         font_style : 'H5' 
@@ -244,9 +244,9 @@ MDScreen:
                                 source: "images/RedPanda.jpg"
                                 radius: [20,]
                                 
-                            MDLabel:
+                            MDRectangleFlatButton:
                                 text: "Red Panda"
-                                halign: 'center'
+                                pos_hint: {"center_x": .5, "center_y": .5}
                                 size_hint_y : 0.1
                                 
                         MDSwiperItem:
@@ -255,9 +255,9 @@ MDScreen:
                                 source: "images/Penguin.jpg"
                                 radius: [20,]
                                 
-                            MDLabel:
+                            MDRectangleFlatButton:
                                 text: "Penguin"
-                                halign: 'center'
+                                pos_hint: {"center_x": .5, "center_y": .5}
                                 size_hint_y : 0.1
                         
                         MDSwiperItem:
@@ -266,10 +266,103 @@ MDScreen:
                                 source: "images/Robin.jpg"
                                 radius: [20,]
                         
-                            MDLabel:
+                            MDRectangleFlatButton:
+                                id: robin_button
                                 text: "Robin"
-                                halign: 'center'
+                                pos_hint: {"center_x": .5, "center_y": .5}
                                 size_hint_y : 0.1
+                                on_press: 
+                                    app.set_convo_infos(robin_button.text)
+                                    
+            MDScreen:
+                name: "buddy_page"
+                
+                MDBoxLayout:
+                    orientation: 'vertical' 
+                
+                    MDBoxLayout:
+                        orientation: 'horizontal'
+                        spacing : '15dp'
+                        padding : '12dp'
+                    
+                        FitImage:
+                            id: buddy_page_image_id
+                            radius: [20,]
+                            source:
+                            
+                        MDBoxLayout:
+                            orientation: 'vertical'
+                            size_hint_y : 0.5
+                            
+                            MDLabel:
+                                id: buddy_name
+                                text: 
+                                halign: "center"                        
+                                valign: "top"
+                                
+                            MDLabel:
+                                id: buddy_description
+                                text: 
+                                halign: "center"                        
+                                valign: "bottom"
+                            MDLabel:    
+                            MDLabel:
+                            
+                    MDBoxLayout: 
+                        orientation: 'vertical'
+                        spacing : '15dp'
+                        padding : '12dp'
+                        
+                        MDLabel:
+                        
+                        MDBoxLayout:
+                            orientation: 'horizontal'
+                            MDLabel:
+                            MDRectangleFlatButton:
+                                text: "How is my workout working out?"
+                                on_press:
+                                    screen_manager.current = "buddy_convo_page"                                    
+                            MDLabel:
+                            
+                        MDBoxLayout:  
+                            orientation: 'horizontal'  
+                            MDLabel: 
+                            MDRectangleFlatButton:
+                                text: "Let's chat a little"
+                            MDLabel:
+                              
+            MDScreen:
+                name: "buddy_convo_page"
+                
+                MDBoxLayout:
+                    orientation: "vertical"
+                    spacing : '15dp'
+                    padding : '12dp'
+                
+                    MDBoxLayout:
+                        orientation: 'horizontal'
+                        
+                        MDLabel:
+                        FitImage:
+                            id: convo_page_image_id
+                            radius: [20,]
+                            source: 
+                        MDLabel:
+                            
+                    MDBoxLayout: 
+                        orientation: "vertical"
+                        MDLabel:
+                            id: convo_window
+                            text: "Hier steht ein lustiger Text"
+
+                        MDBoxLayout:
+                            MDRectangleFlatButton:
+                                text: "Back"
+                                pos_hint: {"center_x": .5, "center_y": .5}
+                            MDRectangleFlatButton:
+                                text: "Continue"
+                                pos_hint: {"center_x": .5, "center_y": .5}
+                
             
             MDScreen:
                 name: "logging"

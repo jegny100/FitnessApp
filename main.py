@@ -73,6 +73,8 @@ class ListItem(OneLineAvatarIconListItem):
 
 
 class FitnessApp(MDApp):
+    current_convo_buddy = ""
+    # buddy_info_capsule = {"name": None, "source": None, }
     dialogBuddy = None
     dialogActivity = None
     dialogError = None
@@ -104,11 +106,19 @@ class FitnessApp(MDApp):
 
     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-    def generate_buddys(self):
-        for i in [1, 2]:
-            label = MDLabel(text=str(i))
-            new = MDSwiperItem()
-            self.root.ids.MDSwiperBuddy.add_widget(label)
+    #
+    def save_buddy_info(self, convo_buddy):
+        FitnessApp.current_convo_buddy = convo_buddy
+        #FitnessApp.buddy_info_list.append(convo_buddy)
+
+    # set infos for convo screen
+    def set_convo_infos(self, convo_buddy):
+        self.root.ids.buddy_page_image_id.source = self.get_buddy_path(convo_buddy)
+        self.root.ids.buddy_description.text = self.get_buddy_description(convo_buddy)
+        self.root.ids.convo_page_image_id.source = self.get_buddy_path(convo_buddy)
+        #print(self.root.ids.convo_image_id.source)
+        self.root.ids.buddy_name.text = convo_buddy
+        self.root.ids.screen_manager.current = "buddy_page"
 
     ''' ACTIVITY COLLECTION FUNCTIONS '''
 
@@ -192,6 +202,11 @@ class FitnessApp(MDApp):
     def get_buddy_path(self, buddy):
         buddy_df = helper_functions.get_buddys()
         source = "images/" + str(buddy_df.loc[buddy_df['buddy'] == buddy, 'source'].values[0])
+        return source
+
+    def get_buddy_description(self, buddy):
+        buddy_df = helper_functions.get_buddys()
+        source = buddy_df.loc[buddy_df['buddy'] == buddy, 'description'].values[0]
         return source
 
     # confirm dialog and show picture of the chosen buddy
