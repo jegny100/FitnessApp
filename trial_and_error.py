@@ -1,15 +1,10 @@
 from kivy.lang.builder import Builder
-
 from kivymd.app import MDApp
-
 kv = '''
 <MagicButton@MagicBehavior+MDIconButton>
 
-
 <MySwiper@MDSwiperItem>
-
     RelativeLayout:
-
         FitImage:
             source: "images/RedPanda.jpg"
             radius: [10,]
@@ -31,10 +26,8 @@ kv = '''
                 height: self.texture_size[1]
                 pos_hint: {"center_y": .5}
                 opposite_colors: True
-
-
+                
 MDScreen:
-
     MDToolbar:
         id: toolbar
         title: "MDSwiper"
@@ -48,15 +41,9 @@ MDScreen:
         on_swipe: self.get_current_item().ids.icon.shake()
 
         MySwiper:
-
         MySwiper:
-
 '''
-
-
 class Main(MDApp):
     def build(self):
         return Builder.load_string(kv)
-
-
 Main().run()

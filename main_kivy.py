@@ -223,17 +223,53 @@ MDScreen:
                 name: "buddys"
                 
                 MDBoxLayout:
+                    id:buddy_box_id
                     orientation: "vertical"
                     spacing : '15dp'
                     padding : '12dp'
                     
                     MDLabel:
+                        size_hint_y : 0.1
                         text: "Buddys"
                         halign: "center"                        
                         valign: "bottom"
                         font_style : 'H5' 
                         theme_text_color : 'Secondary'
-                    
+                        
+                    MDSwiper:
+                        
+                        MDSwiperItem:
+                            orientation: 'vertical'
+                            FitImage:
+                                source: "images/RedPanda.jpg"
+                                radius: [20,]
+                                
+                            MDLabel:
+                                text: "Red Panda"
+                                halign: 'center'
+                                size_hint_y : 0.1
+                                
+                        MDSwiperItem:
+                            orientation: 'vertical'
+                            FitImage:
+                                source: "images/Penguin.jpg"
+                                radius: [20,]
+                                
+                            MDLabel:
+                                text: "Penguin"
+                                halign: 'center'
+                                size_hint_y : 0.1
+                        
+                        MDSwiperItem:
+                            orientation: 'vertical'
+                            FitImage:
+                                source: "images/Robin.jpg"
+                                radius: [20,]
+                        
+                            MDLabel:
+                                text: "Robin"
+                                halign: 'center'
+                                size_hint_y : 0.1
             
             MDScreen:
                 name: "logging"

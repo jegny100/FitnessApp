@@ -1,19 +1,19 @@
 from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty, StringProperty
-from kivy.uix.anchorlayout import AnchorLayout
-from kivy.metrics import dp
 from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.datatables import MDDataTable
-from kivymd.uix.button import MDFlatButton, MDFloatingActionButton
+from kivymd.uix.button import MDFlatButton
 from kivymd.uix.dialog import MDDialog
+from kivymd.uix.label import MDLabel
 from kivymd.uix.list import OneLineAvatarIconListItem, OneLineListItem, OneLineIconListItem
 from kivymd.uix.picker import MDDatePicker
 from datetime import datetime
 import os
 import re
 import pandas as pd
+from kivymd.uix.swiper import MDSwiperItem
+
 import main_kivy
 import helper_functions
 
@@ -81,11 +81,12 @@ class FitnessApp(MDApp):
     date = datetime.today().strftime('%Y-%m-%d')
     chosen_buddy = 'plus'
     chosen_activity = "Choose an activity"
-    logger_capsule = {"activity": None, "date": date, "duration": None, "repetition": None, "weight": None}
+    logger_capsule = {"activity": None, "date": date,
+                      "duration": None, "repetition": None,
+                      "weight": None}
 
     def build(self):
         self.theme_cls.primary_palette = "Teal"
-
 
         # generate basic activity collection if not existent
         if not os.path.isfile('./activity_collection.csv'):
@@ -99,8 +100,15 @@ class FitnessApp(MDApp):
 
     def on_start(self):
         self.load_activity_collection_list()
+        #self.generate_buddys()
 
     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+    def generate_buddys(self):
+        for i in [1, 2]:
+            label = MDLabel(text=str(i))
+            new = MDSwiperItem()
+            self.root.ids.MDSwiperBuddy.add_widget(label)
 
     ''' ACTIVITY COLLECTION FUNCTIONS '''
 
