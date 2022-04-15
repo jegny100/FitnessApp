@@ -1,3 +1,5 @@
+import random
+
 from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.metrics import dp
@@ -108,6 +110,7 @@ class FitnessApp(MDApp):
         # self.generate_buddys()
 
     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
     # menu to select the activity to talk about with a buddy
     def callback_activity_menu(self):
         activity_df = helper_functions.get_activity_collection()
@@ -123,9 +126,22 @@ class FitnessApp(MDApp):
     # handle chosen activity to talk about with a buddy
     def menu_callback(self, text_item):
         FitnessApp.convo_activity = text_item
+        self.workout_chat()
         self.root.ids.screen_manager.transition.direction = "left"
         self.root.ids.screen_manager.current = "convo_page"
         self.menu.dismiss()
+
+    def workout_chat(self):
+        # fill conversation list
+        convo_list = []
+        csv_name = FitnessApp.convo_buddy + "_workout_chat.csv"
+        logger_df = helper_functions.get_logger()
+        activities_df = helper_functions.get_activity_collection()
+        buddy_convo_df = pd.read_csv(csv_name)
+        tag = "Intro"
+        subset_buddy_convo_df = buddy_convo_df.loc[buddy_convo_df["Tag"] == tag]
+        subset_buddy_convo_df.loc[random.choice(subset_buddy_convo_df.index)]
+        convo_list.append()
 
     # set info for buddy & convo screens given the chosen buddy (show name, description and image)
     def set_convo_info(self, convo_buddy):

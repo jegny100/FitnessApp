@@ -1,38 +1,60 @@
-from kivy.uix.modalview import ModalView
-from kivy.lang import Builder
+import helper_functions
+import random
+import pandas as pd
+import numpy as np
+from datetime import datetime, timedelta
 
-from kivymd import images_path
-from kivymd.app import MDApp
-from kivymd.uix.card import MDCard
+logger_df = helper_functions.get_logger()
+activities_df = helper_functions.get_activity_collection()
+all_buddys_df = helper_functions.get_buddys()
+#print(all_buddys_df)
+convo_list = []
 
-Builder.load_string(
-    '''
-<Card>:
-    elevation: 10
-    radius: [36, ]
+convo_buddy, activity = "Red Panda", "Liegestütze"
+#convo_buddy, activity = "Red Panda", "test"
 
-    FitImage:
-        id: bg_image
-        source: "images/RedPanda.jpg"
-        size_hint_y: .65
-        pos_hint: {"top": 1}
-        radius: 36, 36, 0, 0
-''')
+csv_name = convo_buddy + "_workout_chat.csv"
+buddy_convo_df = pd.read_csv(csv_name)
+tag = "Intro"
+
+while tag != 'nan':
+    # filter by tag
+    subset_buddy_convo_df = buddy_convo_df.loc[buddy_convo_df["tag"] == tag]
+
+    # filter by friendship
+    friendship_lvl = all_buddys_df.loc[all_buddys_df["buddy"] == convo_buddy, "friendship_level"].values[0]
+    subset_buddy_convo_df = subset_buddy_convo_df.loc[~(subset_buddy_convo_df["friendship min"] > friendship_lvl)]
+    subset_buddy_convo_df = subset_buddy_convo_df.loc[~(subset_buddy_convo_df["friendship max"] < friendship_lvl)]
+
+    # filter by logged any
+    subset_logger_df = logger_df.loc[logger_df["activity"] == activity]
+    if subset_logger_df.shape[0] > 0:
+        subset_buddy_convo_df = subset_buddy_convo_df.loc[subset_buddy_convo_df["logged any"] != 0]
+    else:
+        subset_buddy_convo_df = subset_buddy_convo_df.loc[subset_buddy_convo_df["logged any"] != 1]
+
+    # filter by logged last week
+    subset_logger_df = logger_df.loc[logger_df["activity"] == activity]
+    subset_logger_df = subset_logger_df.loc[pd.to_datetime(subset_logger_df["date"]) > (datetime.today()-timedelta(days=7))]
+    if subset_logger_df.shape[0] > 0:
+        subset_buddy_convo_df = subset_buddy_convo_df.loc[subset_buddy_convo_df["logged last week"] != 0]
+    else:
+        subset_buddy_convo_df = subset_buddy_convo_df.loc[subset_buddy_convo_df["logged last week"] != 1]
+
+    # filter by change
+    logger_df.loc[logger_df["activity"] == activity]
 
 
-class Card(MDCard):
-    pass
 
+    # buddy_convo_df.loc[buddy_convo_df["logged last week"] == 1]
+    # buddy_convo_df.loc[buddy_convo_df["logged last week"] == 0]
 
-class Example(MDApp):
-    def build(self):
-        modal = ModalView(
-            size_hint=(0.4, 0.8),
-            background=f"{images_path}/transparent.png",
-            overlay_color=(0, 0, 0, 0),
-        )
-        modal.add_widget(Card())
-        modal.open()
+    # randomly select a suitable successor from the remaining lines
+    next_line = subset_buddy_convo_df.loc[random.choice(subset_buddy_convo_df.index)]
+    tag = str(next_line["next tag"])
 
+    convo_list.append(next_line["Text"])
+    print(next_line["Text"])
 
-Example().run()
+# print(convo_list)
+#convo_list.append()

@@ -368,6 +368,7 @@ MDScreen:
                         MDLabel:
                             id: convo_buddy_name
                             text: 
+                            font_style: 'H6'
                             halign: "center"
                             size_hint_y : 0.1
                         
@@ -377,7 +378,7 @@ MDScreen:
                                 size_hint_x : 0.1
                             MDLabel:
                                 id: convo_chat
-                                text: "Hier steht ein lustiger TextHier steht ein lustiger TextHier steht ein lustiger TextHier steht ein lustiger TextHier steht ein lustiger TextHier steht ein lustiger TextHier steht ein lustiger Text Hier steht ein lustiger Text"
+                                text:
                                 halign: "center"
                             MDLabel:
                                 size_hint_x : 0.1
