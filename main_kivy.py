@@ -245,9 +245,12 @@ MDScreen:
                                 radius: [20,]
                                 
                             MDRectangleFlatButton:
+                                id: redpanda_button
                                 text: "Red Panda"
                                 pos_hint: {"center_x": .5, "center_y": .5}
                                 size_hint_y : 0.1
+                                on_press: 
+                                    app.set_convo_info(redpanda_button.text)
                                 
                         MDSwiperItem:
                             orientation: 'vertical'
@@ -256,9 +259,12 @@ MDScreen:
                                 radius: [20,]
                                 
                             MDRectangleFlatButton:
+                                id: penguin_button
                                 text: "Penguin"
                                 pos_hint: {"center_x": .5, "center_y": .5}
                                 size_hint_y : 0.1
+                                on_press: 
+                                    app.set_convo_info(penguin_button.text)
                         
                         MDSwiperItem:
                             orientation: 'vertical'
@@ -272,7 +278,7 @@ MDScreen:
                                 pos_hint: {"center_x": .5, "center_y": .5}
                                 size_hint_y : 0.1
                                 on_press: 
-                                    app.set_convo_infos(robin_button.text)
+                                    app.set_convo_info(robin_button.text)
                                     
             MDScreen:
                 name: "buddy_page"
@@ -292,19 +298,19 @@ MDScreen:
                             
                         MDBoxLayout:
                             orientation: 'vertical'
-                            size_hint_y : 0.5
                             
                             MDLabel:
                                 id: buddy_name
                                 text: 
                                 halign: "center"                        
-                                valign: "top"
+                                valign: "center"
+                                size_hint_y : 0.5
                                 
                             MDLabel:
                                 id: buddy_description
                                 text: 
                                 halign: "center"                        
-                                valign: "bottom"
+                                valign: "center"
                             MDLabel:    
                             MDLabel:
                             
@@ -314,6 +320,7 @@ MDScreen:
                         padding : '12dp'
                         
                         MDLabel:
+                            size_hint_y : 0.2
                         
                         MDBoxLayout:
                             orientation: 'horizontal'
@@ -323,15 +330,17 @@ MDScreen:
                                 text: "How is my workout working out?"
                                 on_press:
                                     app.callback_activity_menu()
-                                                                      
                             MDLabel:
                             
                         MDBoxLayout:  
                             orientation: 'horizontal'  
                             MDLabel: 
                             MDRectangleFlatButton:
-                                text: "Let's chat a little"
+                                text: "                  Let's chat a little                 "
                             MDLabel:
+                            
+                        MDLabel:
+                            size_hint_y : 0.2
                               
             MDScreen:
                 name: "convo_page"
@@ -345,19 +354,39 @@ MDScreen:
                         orientation: 'horizontal'
                         
                         MDLabel:
+                            size_hint_x : 0.25
                         FitImage:
                             id: convo_image_id
                             radius: [20,]
                             source: 
                         MDLabel:
+                            size_hint_x : 0.25
                             
                     MDBoxLayout: 
                         orientation: "vertical"
+                        
                         MDLabel:
-                            id: convo_chat
-                            text: "Hier steht ein lustiger Text"
-
+                            id: convo_buddy_name
+                            text: 
+                            halign: "center"
+                            size_hint_y : 0.1
+                        
+                        MDBoxLayout: 
+                            orientation: "horizontal"
+                            MDLabel:
+                                size_hint_x : 0.1
+                            MDLabel:
+                                id: convo_chat
+                                text: "Hier steht ein lustiger TextHier steht ein lustiger TextHier steht ein lustiger TextHier steht ein lustiger TextHier steht ein lustiger TextHier steht ein lustiger TextHier steht ein lustiger Text Hier steht ein lustiger Text"
+                                halign: "center"
+                            MDLabel:
+                                size_hint_x : 0.1
+                            
                         MDBoxLayout:
+                            size_hint_y : 0.3
+                            orientation: "horizontal"
+                            MDLabel:
+                                size_hint_x : 0.1
                             MDRectangleFlatButton:
                                 text: "Back"
                                 pos_hint: {"center_x": .5, "center_y": .5}
@@ -368,6 +397,8 @@ MDScreen:
                             MDRectangleFlatButton:
                                 text: "Continue"
                                 pos_hint: {"center_x": .5, "center_y": .5}
+                            MDLabel:
+                                size_hint_x : 0.1
                 
             
             MDScreen:

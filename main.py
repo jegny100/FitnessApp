@@ -108,7 +108,7 @@ class FitnessApp(MDApp):
         # self.generate_buddys()
 
     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-
+    # menu to select the activity to talk about with a buddy
     def callback_activity_menu(self):
         activity_df = helper_functions.get_activity_collection()
         activity_df_filtered = activity_df.loc[activity_df["buddy"] == FitnessApp.convo_buddy, "activity"].values
@@ -120,21 +120,26 @@ class FitnessApp(MDApp):
                                    items=menu_items, width_mult=4)
         self.menu.open()
 
+    # handle chosen activity to talk about with a buddy
     def menu_callback(self, text_item):
         FitnessApp.convo_activity = text_item
         self.root.ids.screen_manager.transition.direction = "left"
         self.root.ids.screen_manager.current = "convo_page"
         self.menu.dismiss()
-        print(text_item)
 
-    # set infos for convo screen given the chosen buddy
-    def set_convo_infos(self, convo_buddy):
+    # set info for buddy & convo screens given the chosen buddy (show name, description and image)
+    def set_convo_info(self, convo_buddy):
         FitnessApp.convo_buddy = convo_buddy
+        # set up for detailed buddy page
         self.root.ids.buddy_page_image_id.source = self.get_buddy_path(convo_buddy)
-        self.root.ids.buddy_description.text = self.get_buddy_description(convo_buddy)
-        self.root.ids.convo_image_id.source = self.get_buddy_path(convo_buddy)
         self.root.ids.buddy_name.text = convo_buddy
+        self.root.ids.buddy_description.text = self.get_buddy_description(convo_buddy)
 
+        # set up for conversation page with buddy
+        self.root.ids.convo_buddy_name.text = convo_buddy
+        self.root.ids.convo_image_id.source = self.get_buddy_path(convo_buddy)
+
+        # continue in ui
         self.root.ids.screen_manager.current = "buddy_page"
 
     ''' ACTIVITY COLLECTION FUNCTIONS '''
