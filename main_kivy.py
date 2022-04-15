@@ -319,9 +319,11 @@ MDScreen:
                             orientation: 'horizontal'
                             MDLabel:
                             MDRectangleFlatButton:
+                                id: workout_convo_btn
                                 text: "How is my workout working out?"
                                 on_press:
-                                    screen_manager.current = "buddy_convo_page"                                    
+                                    app.callback_activity_menu()
+                                                                      
                             MDLabel:
                             
                         MDBoxLayout:  
@@ -332,7 +334,7 @@ MDScreen:
                             MDLabel:
                               
             MDScreen:
-                name: "buddy_convo_page"
+                name: "convo_page"
                 
                 MDBoxLayout:
                     orientation: "vertical"
@@ -344,7 +346,7 @@ MDScreen:
                         
                         MDLabel:
                         FitImage:
-                            id: convo_page_image_id
+                            id: convo_image_id
                             radius: [20,]
                             source: 
                         MDLabel:
@@ -352,13 +354,17 @@ MDScreen:
                     MDBoxLayout: 
                         orientation: "vertical"
                         MDLabel:
-                            id: convo_window
+                            id: convo_chat
                             text: "Hier steht ein lustiger Text"
 
                         MDBoxLayout:
                             MDRectangleFlatButton:
                                 text: "Back"
                                 pos_hint: {"center_x": .5, "center_y": .5}
+                                on_press:
+                                    screen_manager.transition.direction = "right"
+                                    screen_manager.current = "buddy_page"
+                                    
                             MDRectangleFlatButton:
                                 text: "Continue"
                                 pos_hint: {"center_x": .5, "center_y": .5}

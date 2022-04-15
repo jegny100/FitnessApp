@@ -1,5 +1,6 @@
 from kivy.core.window import Window
 from kivy.lang import Builder
+from kivy.metrics import dp
 from kivy.properties import ObjectProperty, StringProperty
 from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
@@ -7,6 +8,7 @@ from kivymd.uix.button import MDFlatButton
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.label import MDLabel
 from kivymd.uix.list import OneLineAvatarIconListItem, OneLineListItem, OneLineIconListItem
+from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.picker import MDDatePicker
 from datetime import datetime
 import os
@@ -73,7 +75,8 @@ class ListItem(OneLineAvatarIconListItem):
 
 
 class FitnessApp(MDApp):
-    current_convo_buddy = ""
+    convo_buddy = ""
+    convo_activity = ""
     # buddy_info_capsule = {"name": None, "source": None, }
     dialogBuddy = None
     dialogActivity = None
@@ -102,26 +105,41 @@ class FitnessApp(MDApp):
 
     def on_start(self):
         self.load_activity_collection_list()
-        #self.generate_buddys()
+        # self.generate_buddys()
 
     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-    #
-    def save_buddy_info(self, convo_buddy):
-        FitnessApp.current_convo_buddy = convo_buddy
-        #FitnessApp.buddy_info_list.append(convo_buddy)
+    def callback_activity_menu(self):
+        activity_df = helper_functions.get_activity_collection()
+        activity_df_filtered = activity_df.loc[activity_df["buddy"] == FitnessApp.convo_buddy, "activity"].values
+        menu_items = [{"viewclass": "OneLineListItem", "text": f"{activity}",
+                       "height": dp(56),
+                       "on_release": lambda x=f"{activity}": self.menu_callback(x)}
+                      for activity in activity_df_filtered]
+        self.menu = MDDropdownMenu(caller=self.root.ids.workout_convo_btn,
+                                   items=menu_items, width_mult=4)
+        self.menu.open()
 
-    # set infos for convo screen
+    def menu_callback(self, text_item):
+        FitnessApp.convo_activity = text_item
+        self.root.ids.screen_manager.transition.direction = "left"
+        self.root.ids.screen_manager.current = "convo_page"
+        self.menu.dismiss()
+        print(text_item)
+
+    # set infos for convo screen given the chosen buddy
     def set_convo_infos(self, convo_buddy):
+        FitnessApp.convo_buddy = convo_buddy
         self.root.ids.buddy_page_image_id.source = self.get_buddy_path(convo_buddy)
         self.root.ids.buddy_description.text = self.get_buddy_description(convo_buddy)
-        self.root.ids.convo_page_image_id.source = self.get_buddy_path(convo_buddy)
-        #print(self.root.ids.convo_image_id.source)
+        self.root.ids.convo_image_id.source = self.get_buddy_path(convo_buddy)
         self.root.ids.buddy_name.text = convo_buddy
+
         self.root.ids.screen_manager.current = "buddy_page"
 
     ''' ACTIVITY COLLECTION FUNCTIONS '''
 
+    # fills the container with activities with pictures in the collection of activities
     def load_activity_collection_list(self):
         for activity, buddy in helper_functions.get_activity_collection()[["activity", "buddy"]].values:
             try:
