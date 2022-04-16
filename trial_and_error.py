@@ -1,3 +1,5 @@
+import ast
+
 import helper_functions
 import random
 import pandas as pd
@@ -11,27 +13,62 @@ all_buddys_df = helper_functions.get_buddys()
 convo_list = []
 
 convo_buddy, activity = "Red Panda", "Liegestütze"
+# convo_buddy, activity = "Red Panda", "Joggen"
 # convo_buddy, activity = "Red Panda", "test"
 
 csv_name = convo_buddy + "_workout_chat.csv"
 buddy_convo_df = pd.read_csv(csv_name)
 tag = "Intro"
 
+chat_variables_dict = {}
+
 
 def get_dict_chat_variables():
+    # [difference]
+    # [total_logged_instances]
     logger_df = helper_functions.get_logger()
+    logger_df = logger_df.loc[logger_df["activity"] == activity]
     activities_df = helper_functions.get_activity_collection()
     all_buddys_df = helper_functions.get_buddys()
 
+    # [workout_name]
+    chat_variables_dict["[workout_name]"] = activity
 
+    # [date_last_logged]
+    date_last_logged = logger_df["date"].max()
+    chat_variables_dict["[date_last_logged]"] = date_last_logged
+
+    # [logged_measurement]
+    # get relevant measurement
+    sub_activities_df = activities_df.set_index('activity').T
+    measurement = sub_activities_df.loc[sub_activities_df[activity] == 1].index[0]
+    # get measurement for latest activity
+    sub_logger_df = logger_df.loc[logger_df["date"] == date_last_logged]
+    measurement_value = sub_logger_df[measurement].values[0]
+    # special case duration
+    if measurement == 'duration':
+        measurement_value = ast.literal_eval(measurement_value)
+        logged_measurement = ""
+        time = ["h", "min", "sec"]
+        for i, x in enumerate(measurement_value):
+            if x != "":
+                logged_measurement = logged_measurement + x + time[i] + " "
+        chat_variables_dict["[logged_measurement]"] = logged_measurement
+    else:
+        chat_variables_dict["[logged_measurement]"] = str(measurement_value) + " " + measurement
+
+    # [instances_last_week]
+    instances_last_week = logger_df.loc[pd.to_datetime(logger_df["date"]) > (datetime.today() - timedelta(days=7))].shape[0]
+    chat_variables_dict["[instances_last_week]"] = str(instances_last_week)
+
+get_dict_chat_variables()
+
+
+# replaces variables in chat texts with actual info from chat_variables_dict
 def get_string_variable(text_string):
-    # strip string
-    # ersetzte [] durch entsprechende variable
-    ## if [] ==[] -> [] = variablestring
-    ## if [] ==[] -> [] = variablestring
-    ## if [] ==[] -> [] = variablestring
-    # ...
-    # baues string wieder zusammen
+    for key in chat_variables_dict:
+        text_string = text_string.replace(key, chat_variables_dict[key])
+    print(text_string)
     return text_string
 
 
@@ -71,12 +108,15 @@ while tag != 'nan':
         pd.to_datetime(subset_logger_df["date"]) > (datetime.today() - timedelta(days=14))]
 
     if one_week_subset_logger_df.shape[0] > two_weeks_subset_logger_df.shape[0]:
-        subset_buddy_convo_df = subset_buddy_convo_df.loc[(subset_buddy_convo_df["change"] == 1) | (subset_buddy_convo_df["change"].isnull())]
+        subset_buddy_convo_df = subset_buddy_convo_df.loc[
+            (subset_buddy_convo_df["change"] == 1) | (subset_buddy_convo_df["change"].isnull())]
     if one_week_subset_logger_df.shape[0] == two_weeks_subset_logger_df.shape[0]:
-        subset_buddy_convo_df = subset_buddy_convo_df.loc[(subset_buddy_convo_df["change"] == 2) | (subset_buddy_convo_df["change"].isnull())]
+        subset_buddy_convo_df = subset_buddy_convo_df.loc[
+            (subset_buddy_convo_df["change"] == 2) | (subset_buddy_convo_df["change"].isnull())]
 
     if one_week_subset_logger_df.shape[0] < two_weeks_subset_logger_df.shape[0]:
-        subset_buddy_convo_df = subset_buddy_convo_df.loc[(subset_buddy_convo_df["change"] == 3) | (subset_buddy_convo_df["change"].isnull())]
+        subset_buddy_convo_df = subset_buddy_convo_df.loc[
+            (subset_buddy_convo_df["change"] == 3) | (subset_buddy_convo_df["change"].isnull())]
 
     # randomly select a suitable successor from the remaining lines
     next_line = subset_buddy_convo_df.loc[random.choice(subset_buddy_convo_df.index)]
@@ -84,7 +124,6 @@ while tag != 'nan':
     # variablen in string einfügen
     new_chat_line = get_string_variable(next_line["Text"])
     convo_list.append(new_chat_line)
-    print(next_line["Text"])
 
 # print(convo_list)
 # convo_list.append()
