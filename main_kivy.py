@@ -391,13 +391,15 @@ MDScreen:
                             MDRectangleFlatButton:
                                 text: "Back"
                                 pos_hint: {"center_x": .5, "center_y": .5}
-                                on_press:
-                                    screen_manager.transition.direction = "right"
-                                    screen_manager.current = "buddy_page"
+                                on_press: 
+                                    app.last_message()
+
                                     
                             MDRectangleFlatButton:
                                 text: "Continue"
                                 pos_hint: {"center_x": .5, "center_y": .5}
+                                on_press:
+                                    app.next_message()
                             MDLabel:
                                 size_hint_x : 0.1
                 

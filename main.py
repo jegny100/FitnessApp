@@ -1,3 +1,4 @@
+import ast
 import random
 
 from kivy.core.window import Window
@@ -12,7 +13,7 @@ from kivymd.uix.label import MDLabel
 from kivymd.uix.list import OneLineAvatarIconListItem, OneLineListItem, OneLineIconListItem
 from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.picker import MDDatePicker
-from datetime import datetime
+from datetime import datetime, timedelta
 import os
 import re
 import pandas as pd
@@ -67,7 +68,6 @@ class BuddyConfirm(OneLineAvatarIconListItem):
             FitnessApp.chosen_buddy = self.text
         else:
             FitnessApp.chosen_buddy = "plus"
-        print("CHOSEN BUDDY :", FitnessApp.chosen_buddy)
         FitnessApp.check_list = check_list
 
 
@@ -79,7 +79,9 @@ class ListItem(OneLineAvatarIconListItem):
 class FitnessApp(MDApp):
     convo_buddy = ""
     convo_activity = ""
-    # buddy_info_capsule = {"name": None, "source": None, }
+    chat_variables_dict ={}
+    convo_id = 0
+    convo_list = None
     dialogBuddy = None
     dialogActivity = None
     dialogError = None
@@ -126,22 +128,164 @@ class FitnessApp(MDApp):
     # handle chosen activity to talk about with a buddy
     def menu_callback(self, text_item):
         FitnessApp.convo_activity = text_item
-        self.workout_chat()
+        self.get_dict_chat_variables()
+        self.fill_conversation_list()
+        self.convo_id = 0
+        self.next_message()
         self.root.ids.screen_manager.transition.direction = "left"
         self.root.ids.screen_manager.current = "convo_page"
         self.menu.dismiss()
 
-    def workout_chat(self):
-        # fill conversation list
-        convo_list = []
-        csv_name = FitnessApp.convo_buddy + "_workout_chat.csv"
+    # fill dictionary with relevant variables for chat messages
+    def get_dict_chat_variables(self):
+        activity = FitnessApp.convo_activity
+        logger_df = helper_functions.get_logger()
+        logger_df = logger_df.loc[logger_df["activity"] == activity]
+        activities_df = helper_functions.get_activity_collection()
+        #all_buddys_df = helper_functions.get_buddys()
+
+        # [workout_name]
+        FitnessApp.chat_variables_dict["[workout_name]"] = activity
+
+        # [date_last_logged]
+        date_last_logged = logger_df["date"].max()
+        FitnessApp.chat_variables_dict["[date_last_logged]"] = date_last_logged
+
+        # [logged_measurement]
+        # get relevant measurement
+        sub_activities_df = activities_df.set_index('activity').T
+        measurement = sub_activities_df.loc[sub_activities_df[activity] == 1].index[0]
+        # get measurement for latest activity
+        sub_logger_df = logger_df.loc[logger_df["date"] == date_last_logged]
+        measurement_value = sub_logger_df[measurement].values[0]
+        # special case duration
+        if measurement == 'duration':
+            measurement_value = ast.literal_eval(measurement_value)
+            logged_measurement = ""
+            time = ["h", "min", "sec"]
+            for i, x in enumerate(measurement_value):
+                if x != "":
+                    logged_measurement = logged_measurement + x + time[i] + " "
+            FitnessApp.chat_variables_dict["[logged_measurement]"] = logged_measurement
+        else:
+            FitnessApp.chat_variables_dict["[logged_measurement]"] = str(measurement_value) + " " + measurement
+
+        # [instances_last_week]
+        instances_last_week = logger_df.loc[pd.to_datetime(logger_df["date"]) > (datetime.today() - timedelta(days=7))].shape[0]
+        FitnessApp.chat_variables_dict["[instances_last_week]"] = str(instances_last_week)
+
+        # [difference]
+        one_week = logger_df.loc[
+            pd.to_datetime(logger_df["date"]) > (datetime.today() - timedelta(days=7))].shape[0]
+        two_weeks = logger_df.loc[pd.to_datetime(logger_df["date"]).between(
+                datetime.today() - timedelta(days=14), datetime.today() - timedelta(days=7))].shape[0]
+        FitnessApp.chat_variables_dict["[difference]"] = str(one_week - two_weeks)
+
+        # [total_logged_instances]
+        FitnessApp.chat_variables_dict["[total_logged_instances]"] = str(logger_df.shape[0])
+
+    # replaces variables in chat texts with actual info from chat_variables_dict
+    def get_string_variable(self, text_string):
+        for key in FitnessApp.chat_variables_dict:
+            text_string = text_string.replace(key, FitnessApp.chat_variables_dict[key])
+        return text_string
+
+    # fill conversation list
+    def fill_conversation_list(self):
         logger_df = helper_functions.get_logger()
         activities_df = helper_functions.get_activity_collection()
+        all_buddys_df = helper_functions.get_buddys()
+        convo_list = []
+
+        # test variables
+        #convo_buddy, activity = "Red Panda", "Liegestütze"
+        #convo_buddy, activity = "Red Panda", "Joggen"
+        # convo_buddy, activity = "Red Panda", "test"
+
+        # TODO read csv depending on workout / normal conversation
+        csv_name = FitnessApp.convo_buddy + "_workout_chat.csv"
         buddy_convo_df = pd.read_csv(csv_name)
+
         tag = "Intro"
-        subset_buddy_convo_df = buddy_convo_df.loc[buddy_convo_df["Tag"] == tag]
-        subset_buddy_convo_df.loc[random.choice(subset_buddy_convo_df.index)]
-        convo_list.append()
+        group = "nan"
+        convo_buddy = FitnessApp.convo_buddy
+        activity = FitnessApp.convo_activity
+
+        while tag != "nan":
+            # filter by tag
+            subset_buddy_convo_df = buddy_convo_df.loc[buddy_convo_df["tag"] == tag]
+
+            # filter by friendship
+            friendship_lvl = all_buddys_df.loc[all_buddys_df["buddy"] == convo_buddy, "friendship_level"].values[0]
+            subset_buddy_convo_df = subset_buddy_convo_df.loc[~(subset_buddy_convo_df["friendship min"] > friendship_lvl)]
+            subset_buddy_convo_df = subset_buddy_convo_df.loc[~(subset_buddy_convo_df["friendship max"] < friendship_lvl)]
+
+            # filter by logged any
+            subset_logger_df = logger_df.loc[logger_df["activity"] == activity]
+            if subset_logger_df.shape[0] > 0:
+                subset_buddy_convo_df = subset_buddy_convo_df.loc[subset_buddy_convo_df["logged any"] != 0]
+            else:
+                subset_buddy_convo_df = subset_buddy_convo_df.loc[subset_buddy_convo_df["logged any"] != 1]
+
+            # filter by logged last week
+            subset_logger_df = logger_df.loc[logger_df["activity"] == activity]
+            subset_logger_df = subset_logger_df.loc[
+                pd.to_datetime(subset_logger_df["date"]) > (datetime.today() - timedelta(days=7))]
+            if subset_logger_df.shape[0] > 0:
+                subset_buddy_convo_df = subset_buddy_convo_df.loc[subset_buddy_convo_df["logged last week"] != 0]
+            else:
+                subset_buddy_convo_df = subset_buddy_convo_df.loc[subset_buddy_convo_df["logged last week"] != 1]
+
+            # filter by change
+            subset_logger_df = logger_df.loc[logger_df["activity"] == activity]
+            # instances of activities for the week before today and the week 2 weeks before today
+            one_week_subset_logger_df = subset_logger_df.loc[
+                pd.to_datetime(subset_logger_df["date"]) > (datetime.today() - timedelta(days=7))]
+            two_weeks_subset_logger_df = subset_logger_df.loc[
+                pd.to_datetime(subset_logger_df["date"]).between(datetime.today() - timedelta(days=14), datetime.today() - timedelta(days=7))]
+
+            if one_week_subset_logger_df.shape[0] > two_weeks_subset_logger_df.shape[0]:
+                subset_buddy_convo_df = subset_buddy_convo_df.loc[
+                    (subset_buddy_convo_df["change"] == 1) | (subset_buddy_convo_df["change"].isnull())]
+            if one_week_subset_logger_df.shape[0] == two_weeks_subset_logger_df.shape[0]:
+                subset_buddy_convo_df = subset_buddy_convo_df.loc[
+                    (subset_buddy_convo_df["change"] == 2) | (subset_buddy_convo_df["change"].isnull())]
+
+            if one_week_subset_logger_df.shape[0] < two_weeks_subset_logger_df.shape[0]:
+                subset_buddy_convo_df = subset_buddy_convo_df.loc[
+                    (subset_buddy_convo_df["change"] == 3) | (subset_buddy_convo_df["change"].isnull())]
+
+            # filter by group
+            subset_buddy_convo_df = subset_buddy_convo_df.loc[subset_buddy_convo_df["rec group"].astype(str) == group]
+
+            # randomly select a suitable successor from the remaining lines
+            next_line = subset_buddy_convo_df.loc[random.choice(subset_buddy_convo_df.index)]
+            tag = str(next_line["next tag"])
+            # variablen in string einfügen
+            new_chat_line = self.get_string_variable(next_line["Text"])
+            convo_list.append(new_chat_line)
+            group = str(next_line["set group"])
+        FitnessApp.convo_list = convo_list
+
+    # convo: show next message:
+    def next_message(self):
+        if self.convo_id < len(self.convo_list):
+            self.root.ids.convo_chat.text = self.convo_list[self.convo_id]
+            self.convo_id += 1
+            print("next ", self.convo_id)
+
+    def last_message(self):
+        if self.convo_id > 1:
+            print("first last ", self.convo_id)
+            self.convo_id -= 1
+            self.root.ids.convo_chat.text = self.convo_list[self.convo_id-1]
+            print("end last ", self.convo_id)
+        else:
+            self.root.ids.screen_manager.transition.direction = "right"
+            self.root.ids.screen_manager.current = "buddy_page"
+
+
+
 
     # set info for buddy & convo screens given the chosen buddy (show name, description and image)
     def set_convo_info(self, convo_buddy):
@@ -175,7 +319,6 @@ class FitnessApp(MDApp):
         empty_name = re.search("\w", activity_name)
         # check whether the returned activity_name is not empty and unique in activity_collection.csv
         if empty_name is not None:
-            print("empty")
             activity_collection_df = helper_functions.get_activity_collection()
             if activity_name not in activity_collection_df["activity"].unique():
                 id_name = True
@@ -193,7 +336,6 @@ class FitnessApp(MDApp):
             # update to csv
             activity_collection_df = helper_functions.get_activity_collection().append(row, ignore_index=True)
             activity_collection_df.to_csv('activity_collection.csv')
-            print(activity_collection_df, "\n")
         else:
             self.error_new_activity()
 
@@ -387,7 +529,6 @@ class FitnessApp(MDApp):
             logged_activities_df = pd.DataFrame(columns=["activity", "date", "duration", "repetition", "weight"])
         logged_activities_df = logged_activities_df.append(self.logger_capsule, ignore_index=True)
         logged_activities_df.to_csv('logged_activities.csv')
-        print(logged_activities_df, "\n")
 
     # RESET LOGGER
     # reset all variables of the logger

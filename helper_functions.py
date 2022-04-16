@@ -15,3 +15,5 @@ def get_buddys():
 def get_logger():
     logger_df = pd.read_csv('logged_activities.csv', index_col="Unnamed: 0")
     return logger_df
+
+

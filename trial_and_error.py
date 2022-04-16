@@ -1,12 +1,12 @@
 import ast
-
+import numpy as np
 import helper_functions
 import random
 import pandas as pd
 from datetime import datetime, timedelta
 
 logger_df = helper_functions.get_logger()
-activities_df = helper_functions.get_activity_collection()
+#activities_df = helper_functions.get_activity_collection()
 all_buddys_df = helper_functions.get_buddys()
 # print(all_buddys_df)
 convo_list = []
@@ -20,13 +20,14 @@ buddy_convo_df = pd.read_csv(csv_name)
 tag = "Intro"
 
 chat_variables_dict = {}
+group = "nan"
 
 
 def get_dict_chat_variables():
     logger_df = helper_functions.get_logger()
     logger_df = logger_df.loc[logger_df["activity"] == activity]
     activities_df = helper_functions.get_activity_collection()
-    all_buddys_df = helper_functions.get_buddys()
+    #all_buddys_df = helper_functions.get_buddys()
 
     # [workout_name]
     chat_variables_dict["[workout_name]"] = activity
@@ -124,12 +125,16 @@ while tag != 'nan':
         subset_buddy_convo_df = subset_buddy_convo_df.loc[
             (subset_buddy_convo_df["change"] == 3) | (subset_buddy_convo_df["change"].isnull())]
 
+    # filter by group
+    subset_buddy_convo_df = subset_buddy_convo_df.loc[subset_buddy_convo_df["rec group"].astype(str) == group]
+
     # randomly select a suitable successor from the remaining lines
     next_line = subset_buddy_convo_df.loc[random.choice(subset_buddy_convo_df.index)]
     tag = str(next_line["next tag"])
     # variablen in string einfügen
     new_chat_line = get_string_variable(next_line["Text"])
     convo_list.append(new_chat_line)
+    group = str(next_line["set group"])
 
 # print(convo_list)
 # convo_list.append()
