@@ -1,9 +1,9 @@
-Text,tag,next tag,friendship min,friendship max,logged any,logged last week,other rec notes
-"You can work out with me, by adding me as a workout buddy for a new activity. Personally, I'd love that new activity to be 'competitive napping' or ‘movie marathons’, just as a suggestion...",Intro,,0,,0,,if df empty
-"You want to talk about our workouts? Okay, let me see…",Intro,Last Workout,0,,1,,if df not empty
-How about [workout name]? We last went for this at [letzte geloggte Aktivtät]. And for…[geloggte measurement]? No wonder I’m all knackered.,Last Workout,Seven Days,0,,,,
-In the last seven days you logged a total of [Letzte sieben Tage Anzahl geloggt]. Look at us go!,Seven Days,Change,0,,,1,>= 1 instances logged in last seven days
-That’s actually [Differenz] more than the week before! I wouldn’t have thought it possible. Is it okay for me to say that I’m kind of proud?,Change,Outro,0,,,,(# instances between today and (today - 7)) > (# instances between (today - 8) and (today - 14))
-That’s the same as the week before. Seems like we got a really nice routine going on here!,Change,Outro,0,,,,(# instances between today and (today - 7)) = (# instances between (today - 8) and (today - 14))
-"Even though that’s less than the week before, I think we’re still doing pretty great. We don’t need to push ourselves every single week.",Change,Outro,0,,,,(# instances between today and (today - 7)) < (# instances between (today - 8) and (today - 14))
-"All in all we’re already at [Totale Anzahl geloggt]. Whew, that’s a bunch! Don’t forget to take a rest every once in a while. (Rests are the best…s.)",Outro,,0,,,,
+Text,tag,next tag,friendship min,friendship max,logged any,logged last week,change,other rec notes
+"You can work out with me, by adding me as a workout buddy for a new activity. Personally, I'd love that new activity to be 'competitive napping' or ‘movie marathons’, just as a suggestion...",Intro,,0,,0,,,if df empty
+"You want to talk about our workouts? Okay, let me see…",Intro,Last Workout,0,,1,,,if df not empty
+How about [workout_name]? We last went for this at [letzte geloggte Aktivtät]. And for…[geloggte measurement]? No wonder I’m all knackered.,Last Workout,Seven Days,0,,,,,
+In the last seven days you logged a total of [Letzte sieben Tage Anzahl geloggt]. Look at us go!,Seven Days,Change,0,,,1,,>= 1 instances logged in last seven days
+That’s actually [Differenz] more than the week before! I wouldn’t have thought it possible. Is it okay for me to say that I’m kind of proud?,Change,Outro,0,,,,1,(# instances between today and (today - 7)) > (# instances between (today - 8) and (today - 14))
+That’s the same as the week before. Seems like we got a really nice routine going on here!,Change,Outro,0,,,,2,(# instances between today and (today - 7)) = (# instances between (today - 8) and (today - 14))
+"Even though that’s less than the week before, I think we’re still doing pretty great. We don’t need to push ourselves every single week.",Change,Outro,0,,,,3,(# instances between today and (today - 7)) < (# instances between (today - 8) and (today - 14))
+"All in all we’re already at [Totale Anzahl geloggt]. Whew, that’s a bunch! Don’t forget to take a rest every once in a while. (Rests are the best…s.)",Outro,,0,,,,,
