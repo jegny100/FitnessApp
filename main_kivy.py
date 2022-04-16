@@ -336,7 +336,10 @@ MDScreen:
                             orientation: 'horizontal'  
                             MDLabel: 
                             MDRectangleFlatButton:
+                                id: chat
                                 text: "                  Let's chat a little                 "
+                                on_press: 
+                                    app.start_convo("chat")
                             MDLabel:
                             
                         MDLabel:

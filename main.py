@@ -79,7 +79,7 @@ class ListItem(OneLineAvatarIconListItem):
 class FitnessApp(MDApp):
     convo_buddy = ""
     convo_activity = ""
-    chat_variables_dict ={}
+    chat_variables_dict = {}
     convo_id = 0
     convo_list = None
     dialogBuddy = None
@@ -128,21 +128,28 @@ class FitnessApp(MDApp):
     # handle chosen activity to talk about with a buddy
     def menu_callback(self, text_item):
         FitnessApp.convo_activity = text_item
+        self.start_convo("workout")
+        self.menu.dismiss()
+
+    def start_convo(self, chattype):
         self.get_dict_chat_variables()
-        self.fill_conversation_list()
+        self.fill_conversation_list(chattype)
         self.convo_id = 0
         self.next_message()
         self.root.ids.screen_manager.transition.direction = "left"
         self.root.ids.screen_manager.current = "convo_page"
-        self.menu.dismiss()
 
     # fill dictionary with relevant variables for chat messages
     def get_dict_chat_variables(self):
         activity = FitnessApp.convo_activity
         logger_df = helper_functions.get_logger()
         logger_df = logger_df.loc[logger_df["activity"] == activity]
+
+        # if no activity was logged, don't fill the dict
+        if logger_df.shape[0] == 0:
+            return
         activities_df = helper_functions.get_activity_collection()
-        #all_buddys_df = helper_functions.get_buddys()
+        # all_buddys_df = helper_functions.get_buddys()
 
         # [workout_name]
         FitnessApp.chat_variables_dict["[workout_name]"] = activity
@@ -171,14 +178,15 @@ class FitnessApp(MDApp):
             FitnessApp.chat_variables_dict["[logged_measurement]"] = str(measurement_value) + " " + measurement
 
         # [instances_last_week]
-        instances_last_week = logger_df.loc[pd.to_datetime(logger_df["date"]) > (datetime.today() - timedelta(days=7))].shape[0]
+        instances_last_week = \
+        logger_df.loc[pd.to_datetime(logger_df["date"]) > (datetime.today() - timedelta(days=7))].shape[0]
         FitnessApp.chat_variables_dict["[instances_last_week]"] = str(instances_last_week)
 
         # [difference]
         one_week = logger_df.loc[
             pd.to_datetime(logger_df["date"]) > (datetime.today() - timedelta(days=7))].shape[0]
         two_weeks = logger_df.loc[pd.to_datetime(logger_df["date"]).between(
-                datetime.today() - timedelta(days=14), datetime.today() - timedelta(days=7))].shape[0]
+            datetime.today() - timedelta(days=14), datetime.today() - timedelta(days=7))].shape[0]
         FitnessApp.chat_variables_dict["[difference]"] = str(one_week - two_weeks)
 
         # [total_logged_instances]
@@ -191,19 +199,19 @@ class FitnessApp(MDApp):
         return text_string
 
     # fill conversation list
-    def fill_conversation_list(self):
+    def fill_conversation_list(self, chat_type):
         logger_df = helper_functions.get_logger()
         activities_df = helper_functions.get_activity_collection()
         all_buddys_df = helper_functions.get_buddys()
         convo_list = []
 
-        # test variables
-        #convo_buddy, activity = "Red Panda", "Liegestütze"
-        #convo_buddy, activity = "Red Panda", "Joggen"
-        # convo_buddy, activity = "Red Panda", "test"
-
-        # TODO read csv depending on workout / normal conversation
-        csv_name = FitnessApp.convo_buddy + "_workout_chat.csv"
+        # choose correct csv file for convo
+        if chat_type == "workout":
+            csv_name = FitnessApp.convo_buddy + "_workout_chat.csv"
+        elif chat_type == "chat":
+            csv_name = FitnessApp.convo_buddy + "_chat.csv"
+        else:
+            print("HELPP")
         buddy_convo_df = pd.read_csv(csv_name)
 
         tag = "Intro"
@@ -217,8 +225,10 @@ class FitnessApp(MDApp):
 
             # filter by friendship
             friendship_lvl = all_buddys_df.loc[all_buddys_df["buddy"] == convo_buddy, "friendship_level"].values[0]
-            subset_buddy_convo_df = subset_buddy_convo_df.loc[~(subset_buddy_convo_df["friendship min"] > friendship_lvl)]
-            subset_buddy_convo_df = subset_buddy_convo_df.loc[~(subset_buddy_convo_df["friendship max"] < friendship_lvl)]
+            subset_buddy_convo_df = subset_buddy_convo_df.loc[
+                ~(subset_buddy_convo_df["friendship min"] > friendship_lvl)]
+            subset_buddy_convo_df = subset_buddy_convo_df.loc[
+                ~(subset_buddy_convo_df["friendship max"] < friendship_lvl)]
 
             # filter by logged any
             subset_logger_df = logger_df.loc[logger_df["activity"] == activity]
@@ -242,7 +252,8 @@ class FitnessApp(MDApp):
             one_week_subset_logger_df = subset_logger_df.loc[
                 pd.to_datetime(subset_logger_df["date"]) > (datetime.today() - timedelta(days=7))]
             two_weeks_subset_logger_df = subset_logger_df.loc[
-                pd.to_datetime(subset_logger_df["date"]).between(datetime.today() - timedelta(days=14), datetime.today() - timedelta(days=7))]
+                pd.to_datetime(subset_logger_df["date"]).between(datetime.today() - timedelta(days=14),
+                                                                 datetime.today() - timedelta(days=7))]
 
             if one_week_subset_logger_df.shape[0] > two_weeks_subset_logger_df.shape[0]:
                 subset_buddy_convo_df = subset_buddy_convo_df.loc[
@@ -272,20 +283,14 @@ class FitnessApp(MDApp):
         if self.convo_id < len(self.convo_list):
             self.root.ids.convo_chat.text = self.convo_list[self.convo_id]
             self.convo_id += 1
-            print("next ", self.convo_id)
 
     def last_message(self):
         if self.convo_id > 1:
-            print("first last ", self.convo_id)
             self.convo_id -= 1
-            self.root.ids.convo_chat.text = self.convo_list[self.convo_id-1]
-            print("end last ", self.convo_id)
+            self.root.ids.convo_chat.text = self.convo_list[self.convo_id - 1]
         else:
             self.root.ids.screen_manager.transition.direction = "right"
             self.root.ids.screen_manager.current = "buddy_page"
-
-
-
 
     # set info for buddy & convo screens given the chosen buddy (show name, description and image)
     def set_convo_info(self, convo_buddy):
