@@ -3,7 +3,6 @@ import ast
 import helper_functions
 import random
 import pandas as pd
-import numpy as np
 from datetime import datetime, timedelta
 
 logger_df = helper_functions.get_logger()
@@ -12,8 +11,8 @@ all_buddys_df = helper_functions.get_buddys()
 # print(all_buddys_df)
 convo_list = []
 
-convo_buddy, activity = "Red Panda", "Liegestütze"
-# convo_buddy, activity = "Red Panda", "Joggen"
+#convo_buddy, activity = "Red Panda", "Liegestütze"
+convo_buddy, activity = "Red Panda", "Joggen"
 # convo_buddy, activity = "Red Panda", "test"
 
 csv_name = convo_buddy + "_workout_chat.csv"
@@ -24,8 +23,6 @@ chat_variables_dict = {}
 
 
 def get_dict_chat_variables():
-    # [difference]
-    # [total_logged_instances]
     logger_df = helper_functions.get_logger()
     logger_df = logger_df.loc[logger_df["activity"] == activity]
     activities_df = helper_functions.get_activity_collection()
@@ -60,6 +57,17 @@ def get_dict_chat_variables():
     # [instances_last_week]
     instances_last_week = logger_df.loc[pd.to_datetime(logger_df["date"]) > (datetime.today() - timedelta(days=7))].shape[0]
     chat_variables_dict["[instances_last_week]"] = str(instances_last_week)
+
+    # [difference]
+    one_week = logger_df.loc[
+        pd.to_datetime(logger_df["date"]) > (datetime.today() - timedelta(days=7))].shape[0]
+    two_weeks = logger_df.loc[pd.to_datetime(logger_df["date"]).between(
+            datetime.today() - timedelta(days=14), datetime.today() - timedelta(days=7))].shape[0]
+    chat_variables_dict["[difference]"] = str(one_week - two_weeks)
+
+    # [total_logged_instances]
+    chat_variables_dict["[total_logged_instances]"] = str(logger_df.shape[0])
+
 
 get_dict_chat_variables()
 
@@ -103,9 +111,7 @@ while tag != 'nan':
     one_week_subset_logger_df = subset_logger_df.loc[
         pd.to_datetime(subset_logger_df["date"]) > (datetime.today() - timedelta(days=7))]
     two_weeks_subset_logger_df = subset_logger_df.loc[
-        pd.to_datetime(subset_logger_df["date"]) <= (datetime.today() - timedelta(days=7))]
-    two_weeks_subset_logger_df = subset_logger_df.loc[
-        pd.to_datetime(subset_logger_df["date"]) > (datetime.today() - timedelta(days=14))]
+        pd.to_datetime(subset_logger_df["date"]).between(datetime.today() - timedelta(days=14), datetime.today() - timedelta(days=7))]
 
     if one_week_subset_logger_df.shape[0] > two_weeks_subset_logger_df.shape[0]:
         subset_buddy_convo_df = subset_buddy_convo_df.loc[
