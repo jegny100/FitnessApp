@@ -316,6 +316,7 @@ class FitnessApp(MDApp):
                 source = self.get_buddy_path(buddy)
             except KeyError:
                 source = "alert"
+            # TODO Bug of adding already added widgets
             self.root.ids.container.add_widget(ListItem(text=activity, icon=source))
 
     # handle new activity
@@ -534,6 +535,15 @@ class FitnessApp(MDApp):
             logged_activities_df = pd.DataFrame(columns=["activity", "date", "duration", "repetition", "weight"])
         logged_activities_df = logged_activities_df.append(self.logger_capsule, ignore_index=True)
         logged_activities_df.to_csv('logged_activities.csv')
+        self.increase_friendship_lvl()
+
+    def increase_friendship_lvl(self):
+        activity = self.logger_capsule["activity"]
+        activity_collection_df = helper_functions.get_activity_collection()
+        buddys_df = helper_functions.get_buddys()
+        buddy = activity_collection_df.loc[activity_collection_df["activity"] == activity, "buddy"].values[0]
+        buddys_df.loc[buddys_df["buddy"] == buddy, "friendship_level"] += 1
+        buddys_df.to_csv("buddys.csv")
 
     # RESET LOGGER
     # reset all variables of the logger

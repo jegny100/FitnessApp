@@ -1,5 +1,5 @@
 Text,tag,next tag,friendship min,friendship max,set group,rec group,logged any,logged last week,change
-"Oh, hey, I'm Bo! I'd rather spend my whole day on the couch, but I'm totally going to give my best to be a good workout buddy.",Intro,,0,,,,,,
+"Oh, hey, I'm Bo! I'd rather spend my whole day on the couch, but I'm totally going to give my best to be a good workout buddy.",Intro,,0,0,,,,,
 "Mh, what happened today...",Intro,Talk,1,,,,,,
 "Oh man, I'm really not any good at this small talk thing.",Intro,Talk,1,5,,,,,
 "Oh, here's something I wanted to tell you about:",Intro,Talk,5,,,,,,
