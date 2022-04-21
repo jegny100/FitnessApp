@@ -480,7 +480,7 @@ MDScreen:
                             halign: "center"
                             valign: "center"
                             
-                        MDFlatButton:
+                        MDRectangleFlatButton:
                             id: logger_chosen_activity
                             text: app.chosen_activity
                             on_release: app.show_activities_dialog()
@@ -495,7 +495,7 @@ MDScreen:
                             text: "Date"
                             halign: "center"
                             
-                        MDFlatButton:
+                        MDRectangleFlatButton:
                             id: logger_date
                             text: app.date
                             on_release: app.show_date_picker()
