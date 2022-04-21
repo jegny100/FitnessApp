@@ -17,6 +17,7 @@ from datetime import datetime, timedelta
 import os
 import re
 import pandas as pd
+from kivymd.uix.snackbar import Snackbar
 from kivymd.uix.swiper import MDSwiperItem
 
 import main_kivy
@@ -131,15 +132,22 @@ class FitnessApp(MDApp):
         self.start_convo("workout")
         self.menu.dismiss()
 
+    # start preparations for a conversation based on the type of chat
     def start_convo(self, chattype):
-        self.get_dict_chat_variables()
-        self.fill_conversation_list(chattype)
-        self.convo_id = 0
-        self.next_message()
-        self.root.ids.screen_manager.transition.direction = "left"
-        self.root.ids.screen_manager.current = "convo_page"
+        chat_df = self.get_convo_csv(chattype)
+        print("chat_dict : ", len(chat_df))
 
-    # fill dictionary with relevant variables for chat messages
+        if len(chat_df):
+            self.get_dict_chat_variables()
+            self.fill_conversation_list(chat_df)
+            self.convo_id = 0
+            self.next_message()
+            self.root.ids.screen_manager.transition.direction = "left"
+            self.root.ids.screen_manager.current = "convo_page"
+        else:
+            Snackbar(text="I'm sorry, but I don't know what to say to you yet").open()
+
+    # fill dictionary with relevant variables for blanks in chat messages
     def get_dict_chat_variables(self):
         activity = FitnessApp.convo_activity
         logger_df = helper_functions.get_logger()
@@ -149,7 +157,6 @@ class FitnessApp(MDApp):
         if logger_df.shape[0] == 0:
             return
         activities_df = helper_functions.get_activity_collection()
-        # all_buddys_df = helper_functions.get_buddys()
 
         # [workout_name]
         FitnessApp.chat_variables_dict["[workout_name]"] = activity
@@ -191,6 +198,7 @@ class FitnessApp(MDApp):
 
         # [total_logged_instances]
         FitnessApp.chat_variables_dict["[total_logged_instances]"] = str(logger_df.shape[0])
+        print("chat_variables_dict : ", FitnessApp.chat_variables_dict)
 
     # replaces variables in chat texts with actual info from chat_variables_dict
     def get_string_variable(self, text_string):
@@ -198,21 +206,25 @@ class FitnessApp(MDApp):
             text_string = text_string.replace(key, FitnessApp.chat_variables_dict[key])
         return text_string
 
+    # choose correct csv file for convo
+    def get_convo_csv(self, chattype):
+        if chattype == "workout":
+            csv_name = FitnessApp.convo_buddy + "_workout_chat.csv"
+        elif chattype == "chat":
+            csv_name = FitnessApp.convo_buddy + "_chat.csv"
+        try:
+            buddy_convo_df = pd.read_csv(csv_name)
+        except FileNotFoundError:
+            return []
+        else:
+            return buddy_convo_df
+
     # fill conversation list
-    def fill_conversation_list(self, chat_type):
+    def fill_conversation_list(self, buddy_convo_df):
         logger_df = helper_functions.get_logger()
         activities_df = helper_functions.get_activity_collection()
         all_buddys_df = helper_functions.get_buddys()
         convo_list = []
-
-        # choose correct csv file for convo
-        if chat_type == "workout":
-            csv_name = FitnessApp.convo_buddy + "_workout_chat.csv"
-        elif chat_type == "chat":
-            csv_name = FitnessApp.convo_buddy + "_chat.csv"
-        else:
-            print("HELPP")
-        buddy_convo_df = pd.read_csv(csv_name)
 
         tag = "Intro"
         group = "nan"
@@ -220,8 +232,12 @@ class FitnessApp(MDApp):
         activity = FitnessApp.convo_activity
 
         while tag != "nan":
+
             # filter by tag
             subset_buddy_convo_df = buddy_convo_df.loc[buddy_convo_df["tag"] == tag]
+
+            i = 1
+            print(i, tag, "\n", subset_buddy_convo_df)
 
             # filter by friendship
             friendship_lvl = all_buddys_df.loc[all_buddys_df["buddy"] == convo_buddy, "friendship_level"].values[0]
@@ -269,13 +285,19 @@ class FitnessApp(MDApp):
             # filter by group
             subset_buddy_convo_df = subset_buddy_convo_df.loc[subset_buddy_convo_df["rec group"].astype(str) == group]
 
+            # 'error'-message if there is no sentence to choose from since the csv data is corrupted somehow
+            if subset_buddy_convo_df.empty:
+                convo_list.append("I'm sorry, I mixed up my sentences. Can we talk about another activity or chat chat a little?")
+                break
+
             # randomly select a suitable successor from the remaining lines
             next_line = subset_buddy_convo_df.loc[random.choice(subset_buddy_convo_df.index)]
             tag = str(next_line["next tag"])
-            # variablen in string einfügen
+            # add variable to string
             new_chat_line = self.get_string_variable(next_line["Text"])
             convo_list.append(new_chat_line)
             group = str(next_line["set group"])
+            print(convo_list, "\n", "-----------------------------------------------------")
         FitnessApp.convo_list = convo_list
 
     # convo: show next message:
@@ -318,7 +340,6 @@ class FitnessApp(MDApp):
             except KeyError:
                 source = "alert"
             self.root.ids.container.add_widget(ListItem(text=activity, icon=source))
-        print(self.root.ids.container.children)
 
     # handle new activity
     # by switching screens and saving new data to activity_collection.csv
