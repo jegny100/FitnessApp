@@ -279,6 +279,9 @@ MDScreen:
                             FitImage:
                                 source: "images/Bo.jpg"
                                 radius: [20,]
+                        
+                            MDLabel:
+                                size_hint_y : 0.01
                                 
                             MDRectangleFlatButton:
                                 id: bo_button
@@ -293,6 +296,9 @@ MDScreen:
                             FitImage:
                                 source: "images/Penguin.jpg"
                                 radius: [20,]
+                            
+                            MDLabel:
+                                size_hint_y : 0.01
                                 
                             MDRectangleFlatButton:
                                 id: penguin_button
@@ -307,6 +313,9 @@ MDScreen:
                             FitImage:
                                 source: "images/Robin.jpg"
                                 radius: [20,]
+                            
+                            MDLabel:
+                                size_hint_y : 0.01
                         
                             MDRectangleFlatButton:
                                 id: robin_button
