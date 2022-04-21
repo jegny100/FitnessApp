@@ -1,6 +1,3 @@
-import ast
-import random
-
 from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.metrics import dp
@@ -13,14 +10,15 @@ from kivymd.uix.label import MDLabel
 from kivymd.uix.list import OneLineAvatarIconListItem, OneLineListItem, OneLineIconListItem
 from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.picker import MDDatePicker
+from kivymd.uix.snackbar import Snackbar
+from kivymd.uix.swiper import MDSwiperItem
 from datetime import datetime, timedelta
 import os
 import re
-import pandas as pd
-from kivymd.uix.snackbar import Snackbar
-from kivymd.uix.swiper import MDSwiperItem
-
+import ast
+import random
 import main_kivy
+import pandas as pd
 import helper_functions
 
 Window.size = (350, 600)
