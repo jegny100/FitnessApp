@@ -79,6 +79,7 @@ MDScreen:
                             halign : 'center'
                             valign : 'top'
                             font_style : 'H5'  
+                            parent_background: app.theme_cls.primary_color
                         MDLabel:
                     
                     MDBoxLayout:
@@ -107,7 +108,7 @@ MDScreen:
                             icon: 'plus'
                             spacing: '10dp'
                             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                            md_bg_color : (154 / 255.0, 212 / 255.0, 194 / 255.0, 1)
+                            md_bg_color: app.theme_cls.primary_color
                             on_release: 
                                 screen_manager.current = "logging"
                                 screen_manager.transition.direction = 'left'
@@ -137,7 +138,7 @@ MDScreen:
                         icon: 'plus'
                         spacing: '20dp'
                         pos_hint: {"center_x": .5, "center_y": .5}
-                        md_bg_color : (154 / 255.0, 212 / 255.0, 194 / 255.0, 1)
+                        md_bg_color: app.theme_cls.primary_color
                         on_release: 
                             screen_manager.current = "add_activity"
                             screen_manager.transition.direction = 'left'

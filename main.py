@@ -25,6 +25,55 @@ import pandas as pd
 import helper_functions
 
 Window.size = (350, 600)
+# Important hex: a4bccd
+colors = {
+    "Blue": {
+        "50": "a4bccd",
+        "100": "a4bccd",
+        "200": "a4bccd",
+        "300": "a4bccd",
+        "400": "a4bccd",
+        "500": "a4bccd",
+        "600": "5191b8",
+        "700": "487fa5",
+        "800": "426f91",
+        "900": "35506d",
+        "A100": "b9e1ee",
+        "A200": "91cee3",
+        "A400": "62acce",
+        "A700": "487fa5",
+    },
+    "Red": {
+        "50": "FFEBEE",
+        "100": "FFCDD2",
+        "200": "EF9A9A",
+        "300": "E57373",
+        "400": "EF5350",
+        "500": "F44336",
+        "600": "E53935",
+        "700": "D32F2F",
+        "800": "C62828",
+        "900": "B71C1C",
+        "A100": "FF8A80",
+        "A200": "FF5252",
+        "A400": "FF1744",
+        "A700": "D50000",
+    },
+    "Light": {
+        "StatusBar": "E0E0E0",
+        "AppBar": "F5F5F5",
+        "Background": "FAFAFA",
+        "CardsDialogs": "FFFFFF",
+        "FlatButtonDown": "cccccc",
+    },
+    "Dark": {
+        "StatusBar": "000000",
+        "AppBar": "212121",
+        "Background": "303030",
+        "CardsDialogs": "424242",
+        "FlatButtonDown": "999999",
+    }
+}
 
 
 # Menu class to navigate through screens
@@ -97,7 +146,8 @@ class FitnessApp(MDApp):
                       "weight": None}
 
     def build(self):
-        self.theme_cls.primary_palette = "Teal"
+        self.theme_cls.colors = colors
+        self.theme_cls.primary_palette = "Blue"
 
         # generate basic activity collection if not existent
         if not os.path.isfile('./activity_collection.csv'):
