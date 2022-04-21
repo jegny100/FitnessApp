@@ -1,8 +1,11 @@
 KV = '''
+# ListItem Object for the display of the activity collection including 
+# the correspondent buddy as an icon
 <ListItem>:
     IconRightWidget:
         icon: root.icon
 
+# ItemConfirm Object for Single Choice Dialog Windows
 <ItemConfirm>
     on_release: root.set_icon(check)
     
@@ -10,6 +13,7 @@ KV = '''
         id: check
         group: "check"
         
+# BuddyConfirm Object for adding a buddy to a new activity
 <BuddyConfirm>
     on_release: root.set_buddy(check)
     
@@ -17,6 +21,7 @@ KV = '''
         id: check
         group: "check"
 
+# Menu for Navigation through subpages
 <ContentNavigationDrawer>:
     ScrollView:
         MDList:            
@@ -40,7 +45,8 @@ KV = '''
                     root.nav_drawer.set_state("close")
                     root.screen_manager.current = "buddys"
                     root.screen_manager.transition.direction = 'left'
-                    
+   
+### THE APP ###                 
                     
 MDScreen:
     MDToolbar:
@@ -57,28 +63,56 @@ MDScreen:
         ScreenManager:
             id: screen_manager
             
+            # Home Screen
             MDScreen:
                 name: "homescreen"
             
                 MDBoxLayout:
                     orientation: "vertical"
                     padding: "32dp"
+                    
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        MDLabel:
+                            size_hint_y : 0.5
+                            text :'Welcome to your science-based fitness tracker!'
+                            halign : 'center'
+                            valign : 'top'
+                            font_style : 'H5'  
+                        MDLabel:
+                    
+                    MDBoxLayout:
+                        size_hint_y : 0.8
+                        orientation: "horizontal"
                         
-                    MDLabel:
-                        text :'Hello'
-                        halign : 'center'
-                        valign : 'top'
-                        font_style : 'H3'  
+                        FitImage:
+                            source: app.get_random_buddy_image()
+                            radius: [20,]
                         
-                    MDIconButton:
-                        icon: 'plus'
-                        spacing: '10dp'
-                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                        md_bg_color : (154 / 255.0, 212 / 255.0, 194 / 255.0, 1)
-                        on_release: 
-                            screen_manager.current = "logging"
-                            screen_manager.transition.direction = 'left'
-                        
+                        MDLabel:
+                            size_hint_x : 0.1
+                            
+                        MDLabel:
+                            id: random_image_name
+                            text: "Hi! Come and work out with me!"
+                    
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        MDLabel:
+                            text: "Log your new activity here:"
+                            halign : 'center'
+                            valign : 'bottom'
+
+                        MDIconButton:
+                            icon: 'plus'
+                            spacing: '10dp'
+                            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                            md_bg_color : (154 / 255.0, 212 / 255.0, 194 / 255.0, 1)
+                            on_release: 
+                                screen_manager.current = "logging"
+                                screen_manager.transition.direction = 'left'
+                    
+            # Activity Collection Screen
             MDScreen:
                 name: "activity_collection"
                 
@@ -108,6 +142,7 @@ MDScreen:
                             screen_manager.current = "add_activity"
                             screen_manager.transition.direction = 'left'
 
+            # Activity Collection Subscreen : Add New Activity to Collection
             MDScreen:
                 name: "add_activity"
                 
@@ -132,7 +167,6 @@ MDScreen:
                         MDIconButton:
                             id: buddy
                             icon: app.chosen_buddy
-                            #icon: 'images/Bo.jpg'
                             user_font_size: "100sp"
                             size: self.parent.size
                             on_release:
@@ -219,6 +253,7 @@ MDScreen:
                                 app.add_activity_to_collection(activity_name.text, duration_switch.active, repetition_switch.active, weight_switch.active)
                                 app.load_activity_collection_list()          
             
+            # Buddy Screen
             MDScreen:
                 name: "buddys"
                 
@@ -279,7 +314,8 @@ MDScreen:
                                 size_hint_y : 0.1
                                 on_press: 
                                     app.set_convo_info(robin_button.text)
-                                    
+            
+            # Buddy Screen Subscreen : Buddy Detail & Choose a chat                        
             MDScreen:
                 name: "buddy_page"
                 
@@ -345,6 +381,7 @@ MDScreen:
                         MDLabel:
                             size_hint_y : 0.2
                               
+            # Buddy Screen Subscreen : Conversation Screen
             MDScreen:
                 name: "convo_page"
                 
@@ -406,7 +443,7 @@ MDScreen:
                             MDLabel:
                                 size_hint_x : 0.1
                 
-            
+            # Activity Logger Screen
             MDScreen:
                 name: "logging"
                 
@@ -423,6 +460,7 @@ MDScreen:
                         font_style : 'H5' 
                         theme_text_color : 'Secondary'
                         
+                    # Chosen Activity for logging
                     MDBoxLayout:
                         orientation: "horizontal"
                         padding: '10dp'                        
@@ -438,6 +476,7 @@ MDScreen:
                             on_release: app.show_activities_dialog()
                             pos_hint: {"center_x": .5, "center_y": .5}
                     
+                    # Date
                     MDBoxLayout:
                         orientation: "horizontal"
                         padding: '10dp'
@@ -452,7 +491,7 @@ MDScreen:
                             on_release: app.show_date_picker()
                             pos_hint: {"center_x": .5, "center_y": .5}
                     
-                            
+                    # Duration        
                     MDBoxLayout:
                         orientation: "horizontal"
                         padding : '10dp'
@@ -481,7 +520,8 @@ MDScreen:
                                 id : logger_duration_sec
                                 hint_text: "s"
                                 mode : "rectangle"
-                            
+                    
+                    # Repetitions       
                     MDBoxLayout:
                         orientation: "horizontal"
                         padding: '10dp'
@@ -497,6 +537,7 @@ MDScreen:
                             size_hint_x: 0.5
                             pos_hint: {"center_x": .5, "center_y": .5}
                     
+                    # Weight 
                     MDBoxLayout:
                         orientation: "horizontal"
                         padding: '10dp'
@@ -512,6 +553,7 @@ MDScreen:
                             size_hint_x: 0.5
                             pos_hint: {"center_x": .5, "center_y": .5}
                             
+                    # Buttons for close / save
                     MDBoxLayout:
                         orientation: "horizontal"
                         padding: '10dp'
@@ -538,7 +580,8 @@ MDScreen:
                                 if not app.chosen_activity_check(): app.error_activity_dialog()
                                 if app.chosen_activity_check() and not app.check_collection_required() : app.error_required_dialog()
                                 if app.chosen_activity_check() and app.check_collection_required() : app.save_logger()
-                            
+        
+        # handle Object Properties                    
         MDNavigationDrawer:
             id: nav_drawer
 

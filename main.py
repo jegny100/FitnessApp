@@ -1,3 +1,6 @@
+from os import listdir
+from os.path import isfile, join
+
 from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.metrics import dp
@@ -108,9 +111,13 @@ class FitnessApp(MDApp):
 
     def on_start(self):
         self.load_activity_collection_list()
-        # self.generate_buddys()
 
     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+    # select a random buddy to display on homescreen
+    def get_random_buddy_image(self):
+        random_image = random.choice([f for f in listdir("images/") if isfile(join("images/", f))])
+        return str("images/" + random_image)
 
     # menu to select the activity to talk about with a buddy
     def callback_activity_menu(self):
@@ -183,7 +190,7 @@ class FitnessApp(MDApp):
 
         # [instances_last_week]
         instances_last_week = \
-        logger_df.loc[pd.to_datetime(logger_df["date"]) > (datetime.today() - timedelta(days=7))].shape[0]
+            logger_df.loc[pd.to_datetime(logger_df["date"]) > (datetime.today() - timedelta(days=7))].shape[0]
         FitnessApp.chat_variables_dict["[instances_last_week]"] = str(instances_last_week)
 
         # [difference]
@@ -279,7 +286,8 @@ class FitnessApp(MDApp):
 
             # 'error'-message if there is no sentence to choose from since the csv data is corrupted somehow
             if subset_buddy_convo_df.empty:
-                convo_list.append("I'm sorry, I mixed up my sentences. Can we talk about another activity or chat chat a little?")
+                convo_list.append(
+                    "I'm sorry, I mixed up my sentences. Can we talk about another activity or chat chat a little?")
                 break
 
             # randomly select a suitable successor from the remaining lines
@@ -297,6 +305,8 @@ class FitnessApp(MDApp):
             self.root.ids.convo_chat.text = self.convo_list[self.convo_id]
             self.convo_id += 1
 
+    # handling "back"-button in convo, by either showing the message before or
+    #  switching back to the select a chat window
     def last_message(self):
         if self.convo_id > 1:
             self.convo_id -= 1
@@ -374,7 +384,7 @@ class FitnessApp(MDApp):
     def confirm_error_new_activity(self, obj):
         self.dialogErrorNewActivity.dismiss()
 
-    # show Buddy list as dialog window
+    # show the list of alle current Buddys as a dialog window
     def show_buddy_dialog(self):
         if not self.dialogBuddy:
             buddys_df = helper_functions.get_buddys()
@@ -399,11 +409,13 @@ class FitnessApp(MDApp):
         self.empty_checkbox()
         self.dialogBuddy.dismiss()
 
+    # gets the source path of a given buddy
     def get_buddy_path(self, buddy):
         buddy_df = helper_functions.get_buddys()
         source = "images/" + str(buddy_df.loc[buddy_df['buddy'] == buddy, 'source'].values[0])
         return source
 
+    # gets the description of a given buddy
     def get_buddy_description(self, buddy):
         buddy_df = helper_functions.get_buddys()
         source = buddy_df.loc[buddy_df['buddy'] == buddy, 'description'].values[0]
@@ -550,6 +562,7 @@ class FitnessApp(MDApp):
         logged_activities_df.to_csv('logged_activities.csv')
         self.increase_friendship_lvl()
 
+    # everytime an activity is logged the friendship level of the corresponding buddy is increased
     def increase_friendship_lvl(self):
         activity = self.logger_capsule["activity"]
         activity_collection_df = helper_functions.get_activity_collection()
@@ -582,5 +595,6 @@ class FitnessApp(MDApp):
 
 
 FitnessApp().run()
+
 
 # NOTE: we know it's "buddies" not "buddys"
