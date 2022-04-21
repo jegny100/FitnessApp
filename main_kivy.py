@@ -132,7 +132,7 @@ MDScreen:
                         MDIconButton:
                             id: buddy
                             icon: app.chosen_buddy
-                            #icon: 'images/RedPanda.jpg'
+                            #icon: 'images/Bo.jpg'
                             user_font_size: "100sp"
                             size: self.parent.size
                             on_release:
@@ -241,16 +241,16 @@ MDScreen:
                         MDSwiperItem:
                             orientation: 'vertical'
                             FitImage:
-                                source: "images/RedPanda.jpg"
+                                source: "images/Bo.jpg"
                                 radius: [20,]
                                 
                             MDRectangleFlatButton:
-                                id: redpanda_button
-                                text: "Red Panda"
+                                id: bo_button
+                                text: "Bo"
                                 pos_hint: {"center_x": .5, "center_y": .5}
                                 size_hint_y : 0.1
                                 on_press: 
-                                    app.set_convo_info(redpanda_button.text)
+                                    app.set_convo_info(bo_button.text)
                                 
                         MDSwiperItem:
                             orientation: 'vertical'

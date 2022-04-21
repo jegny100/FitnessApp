@@ -1,13 +1,9 @@
 ,activity,buddy,duration,repetition,weight
-0,Joggen,Red Panda,1,0,0
-1,Liegestütze,Red Panda,0,1,0
+0,Joggen,Bo,1,0,0
+1,Liegestütze,Bo,0,1,0
 2,Spazieren,Robin,1,0,0
 3,Glute Bridge,Robin,0,1,0
 4,Schwimmen,Penguin,0,1,0
 5,Wandern,Robin,1,0,0
-6,test,Red Panda,0,1,0
-7,Yoga,Penguin,1,0,0
-8,bfsdjbfsd,Penguin,0,1,0
-9,aaaaaaaaaaaaaaa,Red Panda,1,0,0
-10,1,Robin,0,0,1
-11,2,Red Panda,1,0,0
+6,Yoga,Penguin,1,0,0
+

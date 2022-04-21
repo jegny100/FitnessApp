@@ -133,7 +133,6 @@ class FitnessApp(MDApp):
     # start preparations for a conversation based on the type of chat
     def start_convo(self, chattype):
         chat_df = self.get_convo_csv(chattype)
-        print("chat_dict : ", len(chat_df))
 
         if len(chat_df):
             self.get_dict_chat_variables()
@@ -196,7 +195,6 @@ class FitnessApp(MDApp):
 
         # [total_logged_instances]
         FitnessApp.chat_variables_dict["[total_logged_instances]"] = str(logger_df.shape[0])
-        print("chat_variables_dict : ", FitnessApp.chat_variables_dict)
 
     # replaces variables in chat texts with actual info from chat_variables_dict
     def get_string_variable(self, text_string):
