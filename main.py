@@ -232,12 +232,8 @@ class FitnessApp(MDApp):
         activity = FitnessApp.convo_activity
 
         while tag != "nan":
-
             # filter by tag
             subset_buddy_convo_df = buddy_convo_df.loc[buddy_convo_df["tag"] == tag]
-
-            i = 1
-            print(i, tag, "\n", subset_buddy_convo_df)
 
             # filter by friendship
             friendship_lvl = all_buddys_df.loc[all_buddys_df["buddy"] == convo_buddy, "friendship_level"].values[0]
@@ -297,7 +293,6 @@ class FitnessApp(MDApp):
             new_chat_line = self.get_string_variable(next_line["Text"])
             convo_list.append(new_chat_line)
             group = str(next_line["set group"])
-            print(convo_list, "\n", "-----------------------------------------------------")
         FitnessApp.convo_list = convo_list
 
     # convo: show next message:
