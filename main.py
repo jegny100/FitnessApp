@@ -311,13 +311,14 @@ class FitnessApp(MDApp):
 
     # fills the container with activities with pictures in the collection of activities
     def load_activity_collection_list(self):
+        self.root.ids.container.clear_widgets()
         for activity, buddy in helper_functions.get_activity_collection()[["activity", "buddy"]].values:
             try:
                 source = self.get_buddy_path(buddy)
             except KeyError:
                 source = "alert"
-            # TODO Bug of adding already added widgets
             self.root.ids.container.add_widget(ListItem(text=activity, icon=source))
+        print(self.root.ids.container.children)
 
     # handle new activity
     # by switching screens and saving new data to activity_collection.csv
