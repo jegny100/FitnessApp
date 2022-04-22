@@ -99,5 +99,5 @@ Determines the tag of the current text and determines which tag must follow next
 * Friendship min & Friendship max  
 Defines between which friendshiplevels a message is eligible. Both a lower and an upper limit can be specified.
 
-* Condition 1 | ... | Condition n  & other rec notes
+* Condition 1 | ... | Condition n  & other rec notes  
 Any other columns can be inserted to act as new filters. The last column 'other rec notes' serves as explanation of the condition. To include the new condition, it must be implemented in the 'fill_conversation_list()' function within the while loop to further delimit the subset_buddy_convo_df DataFrame.
