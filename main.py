@@ -25,6 +25,7 @@ import pandas as pd
 import helper_functions
 
 Window.size = (350, 600)
+
 # Important hex: a4bccd
 colors = {
     "Blue": {

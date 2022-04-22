@@ -45,7 +45,7 @@ KV = '''
                     root.nav_drawer.set_state("close")
                     root.screen_manager.current = "buddys"
                     root.screen_manager.transition.direction = 'left'
-                    Window.size = (351, 600)
+                    Window.size = (Window.size[0] + 1, Window.size[1])
    
 ### THE APP ###                 
                     
