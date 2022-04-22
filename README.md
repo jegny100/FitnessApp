@@ -58,3 +58,9 @@ flowchart of everything
 ## Sequel Bait
 What else could be added to this concept?
 Regarding workout tracking: more trackable data, such as trained body region – wider selection in measurement units (such as distance) and possibility to track multiple units per activity – more research to be put into data visualisation, feedback via conversation fits gamification elements, but also has disadvantages – graphs can provide more information at a glance – workout recaps could also go more into details, for example by celebrating whenever a personal best has been beaten – dialogues, which are actually monologues as of the current version, could be designed more interactively by giving user opportunities to reply – this would also support need for autonomy, through being able to make choices – avatar of buddies could change based on friendship, to represent growth – the underlying algorithm on how friendship increases could be improved, since it simply increases by one every time a workout is logged, making the phrase “algorithm” a bit of an understatement
+ 
+---
+## Implementation
+
+### Requirements
+As listed in `requirements.txt` and can be automatically installed with `pip3 install -r requirements.txt`
