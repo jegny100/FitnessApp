@@ -279,6 +279,9 @@ MDScreen:
                             FitImage:
                                 source: "images/Bo.jpg"
                                 radius: [20,]
+                        
+                            MDLabel:
+                                size_hint_y : 0.01
                                 
                             MDRectangleFlatButton:
                                 id: bo_button
@@ -293,6 +296,9 @@ MDScreen:
                             FitImage:
                                 source: "images/Penguin.jpg"
                                 radius: [20,]
+                            
+                            MDLabel:
+                                size_hint_y : 0.01
                                 
                             MDRectangleFlatButton:
                                 id: penguin_button
@@ -307,6 +313,9 @@ MDScreen:
                             FitImage:
                                 source: "images/Robin.jpg"
                                 radius: [20,]
+                            
+                            MDLabel:
+                                size_hint_y : 0.01
                         
                             MDRectangleFlatButton:
                                 id: robin_button
@@ -471,7 +480,7 @@ MDScreen:
                             halign: "center"
                             valign: "center"
                             
-                        MDFlatButton:
+                        MDRectangleFlatButton:
                             id: logger_chosen_activity
                             text: app.chosen_activity
                             on_release: app.show_activities_dialog()
@@ -486,7 +495,7 @@ MDScreen:
                             text: "Date"
                             halign: "center"
                             
-                        MDFlatButton:
+                        MDRectangleFlatButton:
                             id: logger_date
                             text: app.date
                             on_release: app.show_date_picker()
