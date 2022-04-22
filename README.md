@@ -22,12 +22,19 @@ Overall, self-quantification is meant to increase awareness, curiosity, and cons
 
 
 Gamification
+
 What is gamification?
-Use of game design elements in non-game contexts – intended to motivate and engage users – different to educational games, as the main activity is not gaming – EXAMPLE
-How is it used?
-Often used features are points, badges, and leader boards – very versatile, so they can be applied to different contexts, such as education, health, and commerce – research on how it affects motivation still ongoing – different features have different effects – no catch-all solution for engaging users – user personality and context also matters
+
+Gamification describes the use of game design elements in a non-game context, which are intended to motivate and engage users. As more and more people are picking up gaming as a hobby and become more familiar with game elements, gamification is likewise being used to enhance services more often. It is related to subjects such as educational games, but differs in the way that the main activity performed is not a game, but simply incorporates gameful features.
+
+> As a child you may have studied to improve your language skills by playing learning games and helping your favourite cartoon characters sort vocabulary, fight declination monsters, or unravel past tenses. This would be an educational game, not gamification, as the main activity was still gaming (and you were merely tricked into studying). Nowadays you may want to brush up on your language skills with the aid of an online learning platform such as Duolingo. In this app you can collect badges for a variety of activities and build up a streak by completing daily lessons. This is gamification, as the main activity is learning, with game elements to motivate you to keep going.
+
+Gamified applications most commonly feature points, badges or leader boards. These elements are very versatile, so they can be applied to many different contexts, such as education, health, and commerce. Research on how gamification affects motivation is still ongoing. The difference between external and internal motivation is something that especially interests researchers, but since these are difficult to measure directly and can only be seen in their behavioural outcomes, no definite connection can be made yet. Something that has become apparent though is that different game design elements have different effects and that the context they are being deployed in and the personality of the user matter. Because of this they are, though efficient at times, no catch-all solution for engaging users.
+
 Why do we think this is a good idea?
-Need for competence: feedback, through self-quantification – Need for autonomy: Choices and intentional and meaningful interactions, through gamification
+
+We think gamification will be a great addition to our app design, since it can complement self-quantification in our competence-autonomy dilemma: Users will feel competent through receiving feedback about their workout progress, guided by self-quantification tools. The game design elements can be chosen to satisfy a need for autonomy, for example by allowing users to make meaningful choices and seek out intentional interactions.
+
 
 
 ## Tests, Allies, and Enemies
