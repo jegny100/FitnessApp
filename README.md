@@ -62,5 +62,35 @@ Regarding workout tracking: more trackable data, such as trained body region –
 ---
 ## Implementation
 
+This app was developed using [Kivy](https://kivy.org/doc/stable/) and [KivyMD](https://kivymd.readthedocs.io/en/latest/#), a python based cross-platform GUI toolkit for touch applications that follows Google's [Material Design](https://material.io/design/introduction) system. 
+
+
 ### Requirements
-As listed in `requirements.txt` and can be automatically installed with `pip3 install -r requirements.txt`
+As listed in `requirements.txt` and can be automatically installed with the following after cloning this project.
+```
+pip3 install -r requirements.txt
+``` 
+
+### Functions
+The app is designed to track your fitness activities by logging your own workouts. You can add your own activities like meditation or caber toss, decide which unit of measurement is relevant, and choose a buddy to work out with to build a closer friendship. Talk to your buddy about your fitness progress or have a relaxed chat with them and get to know them better. 
+
+#### Conversations
+To have a chat with your buddy, you need a CSV file for both the workout conversation and the regular conversation, but both are treated the same. The matching CSV is first read in and mapped as a DataFrame (i.e. a matrix/table), where each row represents a message. The algorithm selects the next message by minimizing the set of all messages using filters from the other columns and randomly selecting one from these. In doing so, it is guided through the texts using tags until the conversation is over. From the following representation of the CSV, as well as the explanations the function of the algorithm becomes more clear. 
+
+The structure of the CSV_files is as follows: 
+
+| Text | Tag | Next-Tag | Friendship min | Friendship max | Condition 1 | ... | Condition n | other rec notes |
+| ---- | --- | -------- | -------------- | -------------- | ----------- | --- | ----------- | --------------- |
+| Hi! You wanna talk? | Intro | last workout | 0 |      2 |      1      |     |             | if any workout is logged with chosen buddy
+
+* Text  
+Displayed message in the conversation. Variables can be represented within the texts in square brackets [], which are read and filled in the code to provide the conversation with data from the app. The definitions of these variables are stored in the dictionary "chat_variables_dict". If you want to add new variables you can use the function "get_dict_chat_variables()" and the dictionary will be extended automatically.
+
+* Tag & Next-Tag  
+Determines the tag of the current text and determines which tag must follow next. The chat always starts with the tag 'Intro', first filters all messages based on this tag and takes over 'Next-Tag' to narrow down the next message when the message is selected. The chat ends as soon as there is no tag in Next-Tag.
+
+* Friendship min & Friendship max  
+Defines between which friendshiplevels a message is eligible. Both a lower and an upper limit can be specified.
+
+* Condition 1 | ... | Condition n  & other rec notes
+Any other columns can be inserted to act as new filters. The last column 'other rec notes' serves as explanation of the condition. To include the new condition, it must be implemented in the 'fill_conversation_list()' function within the while loop to further delimit the subset_buddy_convo_df DataFrame.
