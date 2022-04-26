@@ -7,7 +7,7 @@ from kivy.metrics import dp
 from kivy.properties import ObjectProperty, StringProperty
 from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.button import MDFlatButton
+from kivymd.uix.button import MDFlatButton, MDIconButton
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.label import MDLabel
 from kivymd.uix.list import OneLineAvatarIconListItem, OneLineListItem, OneLineIconListItem
@@ -20,6 +20,9 @@ import os
 import re
 import ast
 import random
+
+from kivymd.uix.tooltip import MDTooltip
+
 import main_kivy
 import pandas as pd
 import helper_functions
@@ -121,6 +124,10 @@ class BuddyConfirm(OneLineAvatarIconListItem):
         else:
             FitnessApp.chosen_buddy = "plus"
         FitnessApp.check_list = check_list
+
+
+class TooltipMDIconButton(MDIconButton, MDTooltip):
+    pass
 
 
 class ListItem(OneLineAvatarIconListItem):
