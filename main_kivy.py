@@ -137,88 +137,84 @@ MDScreen:
                         font_style : 'H5' 
                         theme_text_color : 'Secondary'
                         size_hint_y : 0.1
-                        
-                        
+                                
+                    # Reminder & Encouragement Box
                     MDBoxLayout:
                         orientation: "vertical"
-                                
-                        # Reminder & Encouragement Box
+                        padding: '10dp'   
+                        
+                        # headline
                         MDBoxLayout:
-                            orientation: "vertical"
-                            padding: '10dp'   
+                            orientation: "horizontal"
+                            MDLabel:
+                                text: "Reminder & Encouragement"
+                                font_style : 'H6'
+                                theme_text_color : 'Secondary'
                             
+                            TooltipMDIconButton:
+                                icon: "information-outline"  
+                                tooltip_text: "test"
+                                tooltip_bg_color: app.theme_cls.primary_color
+                                valign: "top"
+                         
+                        # Slider        
+                        MDBoxLayout:
+                            orientation: "horizontal"
+                        
+                            MDLabel:
+                                text: "Encouragement after logging a workout"
+                                size_hint_x : 0.8
+
                             MDBoxLayout:
-                                orientation: "horizontal"
-                                MDLabel:
-                                    text: "Reminder & Encouragement"
+                                orientation: "vertical"  
                                 
-                                TooltipMDIconButton:
-                                    icon: "information-outline"  
-                                    tooltip_text: "test"
-                                    tooltip_bg_color: app.theme_cls.primary_color
-                                    valign: "top"
+                                MDSlider:
+                                    id: setting_logg_encouragement
+                                    min: 0
+                                    max: 2
+                                    step: 1
+                                    hint: False
+                                    color: app.theme_cls.primary_color
                                     
-                            MDBoxLayout:
-                                orientation: "horizontal"
-                            
-                                MDLabel:
-                                    text: "Encouragement after logging a workout"
-                                    size_hint_x : 0.8
                                     
                                 MDBoxLayout:
-                                    orientation: "vertical"  
+                                    orientation: "horizontal"
                                     
-                                    MDSlider:
-                                        id: setting_logg_encouragement
-                                        min: 0
-                                        max: 2
-                                        step: 1
-                                        hint: False
-                                        color: app.theme_cls.primary_color
+                                    MDLabel:
+                                        text: "Never"
+                                        halign: "left"
+                                        valign: "center"
+                                        font_style: "Caption"
                                         
+                                    MDLabel:
+                                        text: "Sometimes"
+                                        halign: "left"
+                                        valign: "center"
+                                        font_style: "Caption"
+                                        size_hint_x: 1.2
                                         
-                                    MDBoxLayout:
-                                        orientation: "horizontal"
-                                        
-                                        MDLabel:
-                                            text: "Never"
-                                            halign: "left"
-                                            valign: "center"
-                                            font_style: "Caption"
-                                            
-                                        MDLabel:
-                                            text: "Sometimes"
-                                            halign: "left"
-                                            valign: "center"
-                                            font_style: "Caption"
-                                            size_hint_x: 1.2
-                                            
-                                        MDLabel:
-                                            text: "Always"
-                                            halign: "right"
-                                            valign: "center"
-                                            font_style: "Caption"            
-                    
-                    MDBoxLayout:
-                        orientation: "horizontal"
-                        padding: '10dp'                        
-                                  
-                        MDLabel:
-                            text: "Reminder on startscreen"
-                            halign: "left"
-                            valign: "center"
+                                    MDLabel:
+                                        text: "Always"
+                                        halign: "right"
+                                        valign: "center"
+                                        font_style: "Caption"            
+                        # switch
+                        MDBoxLayout:
+                            orientation: "horizontal"                     
+                                      
+                            MDLabel:
+                                text: "Reminder on startscreen"
                             
-                        MDSwitch:  
-                            id : 
-                            pos_hint: {"center_x": .9, "center_y": .5}
-
+                            MDSwitch:  
+                                id : setting_start_reminder
+                                pos_hint: {"center_x": .9, "center_y": .5}
                             
                     MDBoxLayout:
                         orientation: "horizontal"
                         padding: '10dp'
                     
                         MDIconButton:
-                            id: 
+                            id: settings_close
                             icon: 'close'
                             md_bg_color: app.theme_cls.primary_color      
                             on_release:
@@ -235,6 +231,7 @@ MDScreen:
                             on_release: 
                                 #app.add_activity_to_collection(activity_name.text, duration_switch.active, repetition_switch.active, weight_switch.active)
                                 #app.load_activity_collection_list()     
+                    
             
             # Activity Collection Screen
             MDScreen:
