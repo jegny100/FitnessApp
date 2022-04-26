@@ -46,6 +46,13 @@ KV = '''
                     root.screen_manager.current = "buddys"
                     root.screen_manager.transition.direction = 'left'
                     Window.size = (Window.size[0] + 1, Window.size[1])
+            
+            OneLineListItem:
+                text: "Settings"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "settings"
+                    root.screen_manager.transition.direction = 'left'
    
 ### THE APP ###                 
                     
@@ -114,6 +121,115 @@ MDScreen:
                                 screen_manager.current = "logging"
                                 screen_manager.transition.direction = 'left'
                     
+            MDScreen:
+                name: "settings"
+                
+                MDBoxLayout:
+                    orientation: "vertical"
+                    spacing : '15dp'
+                    padding : '12dp'
+                    
+                    MDLabel:
+                        text: "Settings"
+                        halign: "center"                        
+                        valign: "top"
+                        font_style : 'Subtitle1' 
+                        theme_text_color : 'Secondary'
+                    
+                    MDLabel:
+                            
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        padding: '10dp'   
+                        
+                        MDLabel: 
+                            text: "Encouragement after logging a workout"
+                            size_hint_x : 0.6                   
+                                  
+                        MDBoxLayout:
+                            orientation: "vertical"
+                            padding: '10dp'   
+                            
+                            MDSlider:
+                                id: setting_logg_encouragement
+                                min: 0
+                                max: 2
+                                step: 1
+                                hint: False
+                                color: app.theme_cls.primary_color
+                                
+                                
+                            MDBoxLayout:
+                                orientation: "horizontal"
+                                
+                                MDLabel:
+                                    text: "Never"
+                                    halign: "left"
+                                    valign: "center"
+                                    font_style: "Caption"
+                                    
+                                MDLabel:
+                                    text: "Sometimes"
+                                    halign: "left"
+                                    valign: "center"
+                                    font_style: "Caption"
+                                    size_hint_x: 1.2
+                                    
+                                MDLabel:
+                                    text: "Always"
+                                    halign: "right"
+                                    valign: "center"
+                                    font_style: "Caption"            
+                    
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        padding: '10dp'                        
+                                  
+                        MDLabel:
+                            text: "Repetitions Required"
+                            halign: "left"
+                            valign: "center"
+                            
+                        MDSwitch:  
+                            id : repetition_switch
+                            pos_hint: {"center_x": .9, "center_y": .5}
+
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        padding: '10dp'                        
+                                  
+                        MDLabel:
+                            text: "Weight Required"
+                            halign: "left"
+                            valign: "center"
+                            
+                        MDSwitch:  
+                            id : weight_switch
+                            pos_hint: {"center_x": .9, "center_y": .5}
+                            
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        padding: '10dp'
+                    
+                        MDIconButton:
+                            id: activity_cancel
+                            icon: 'close'
+                            md_bg_color: app.theme_cls.primary_color      
+                            on_release:
+                                screen_manager.transition.direction = 'right'
+                                screen_manager.current = "activity_collection"
+                            
+                        MDLabel:              
+                        
+                        MDIconButton:
+                            id: activity_confirm
+                            icon: 'check'
+                            text: 'CONFIRM'
+                            md_bg_color: app.theme_cls.primary_color
+                            on_release: 
+                                app.add_activity_to_collection(activity_name.text, duration_switch.active, repetition_switch.active, weight_switch.active)
+                                app.load_activity_collection_list()     
+            
             # Activity Collection Screen
             MDScreen:
                 name: "activity_collection"
