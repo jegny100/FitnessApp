@@ -38,8 +38,11 @@ We think gamification will be a great addition to our app design, since it can c
 
 
 ## Tests, Allies, and Enemies
-start looking for concrete gamification features and how they could help – first thought: badges/achievements – reflect users individual experiences (through unlocking different kinds of badges) and motivate to diversify workouts (to unlock new badges) – also, points to show progress – the more workouts a user has logged, the more points they collect, which gives them a feeling of competence
-none of these ideas are bad and an app incorporating them may very well be an enjoyable and motivating system – however, does not take one of main criticisms of gamification into account (which has been withheld for dramatic tension): – little variety of features utilised – should not just be about implementing a few reward mechanics, but  building meaningful experiences – maybe gamification is more than just slapping EXP and achievements on things?
+
+Now that we had decided on the two main elements or theories of how our app should work, we were ready to look into more concrete features, starting with game design elements. Our first approach was to go with the classics: Badges/achievements and points. Badges could reflect an user's individual experience and choices they made along the way (by seeing badges that fit their workouts), but also provide an incentive to diversify their workout (to unlock new badges). Points could show their overall progress, as the more workouts a user would logg, the more points they would collect. This would give them a feeling of competence, as well as rewarding interactions with the application.
+
+None of these ideas are bad, indeed there is a reason why these features are upon the current Top 3 most researched and deployed elements. An app incorporating these may very well be an enjoyable and motivating system - however, relying on them does not take one of the current main criticisms of gamification into account (which has been withheld for dramatic tension). Gamified systems overall show little variety in their utilised features. They thereby ignore that games are not just a collection of simple reward mechanisms, but come together to an overall meaningful experience. This is a lesson games themselves are already taking to heart, but which sadly has passed over many gamified applications. To be more frank, we were tasked with the challenge of how to see gamification as more than just slapping some EXP counters and achievements on a system and calling it a day.
+
 How do Games work? – Rapp (2018) examined how WoW engages players and drivers their behaviour – his paper was our main reason to rethink choice of game elements – main lesson we concentrated on: turn data into dynamic digital objects – these objects should tie into the mechanics of other features, provide information, and grow with the players
 How can we interweave game elements and self-quantification/data visualisation?
 Different ideas and why we decided against them:
@@ -89,7 +92,7 @@ The app is designed to track your fitness activities by logging your own workout
 - conversations with buddys about corresponding activites or 
 
 #### Conversations
-To have a chat with your buddy, you need a CSV file for both the workout conversation and the regular conversation, but both are treated the same. The matching CSV is first read in and mapped as a DataFrame (i.e. a matrix/table), where each row represents a message. The algorithm selects the next message by minimizing the set of all messages using filters from the other columns and randomly selecting one from these. In doing so, it is guided through the texts using tags until the conversation is over. From the following representation of the CSV, as well as the explanations the function of the algorithm becomes more clear. 
+To have a chat with your buddy, you need a CSV file for both the workout conversation and the regular conversation, but both are treated the same. The matching CSV is first read in and mapped as a DataFrame (i.e. a matrix/table), where each row represents a message. The algorithm selects the next message by minimizing the set of all messages using filters from the other columns and randomly selecting one from the resulting set. In doing so, it is guided through the texts using tags until the conversation is over. From the following representation of the CSV, as well as the explanations the function of the algorithm becomes more clear. 
 
 The structure of the CSV_files is as follows: 
 
@@ -98,7 +101,7 @@ The structure of the CSV_files is as follows:
 | Hi! You wanna talk? | Intro | last workout | 0 |      2 |      1      |     |             | if any workout is logged with chosen buddy
 
 * Text  
-Displayed message in the conversation. Variables can be represented within the texts in square brackets [], which are read and filled in the code to provide the conversation with data from the app. The definitions of these variables are stored in the dictionary "chat_variables_dict". If you want to add new variables you can use the function "get_dict_chat_variables()" and the dictionary will be extended automatically.
+Displayed message in the conversation. Variables can be represented within the texts in square brackets `[]`, which are read and filled in the code to provide the conversation with data from the app. The definitions of these variables are stored in the dictionary `chat_variables_dict`. If you want to add new variables you can use the function `get_dict_chat_variables()` and the dictionary will be extended automatically.
 
 * Tag & Next-Tag  
 Determines the tag of the current text and determines which tag must follow next. The chat always starts with the tag 'Intro', first filters all messages based on this tag and takes over 'Next-Tag' to narrow down the next message when the message is selected. The chat ends as soon as there is no tag in Next-Tag.
@@ -107,4 +110,34 @@ Determines the tag of the current text and determines which tag must follow next
 Defines between which friendshiplevels a message is eligible. Both a lower and an upper limit can be specified.
 
 * Condition 1 | ... | Condition n  & other rec notes  
-Any other columns can be inserted to act as new filters. The last column 'other rec notes' serves as explanation of the condition. To include the new condition, it must be implemented in the 'fill_conversation_list()' function within the while loop to further delimit the subset_buddy_convo_df DataFrame.
+Any other columns can be inserted to act as new filters. The last column 'other rec notes' serves as explanation of the condition. To include the new condition, it must be implemented in the `fill_conversation_list()` function within the while loop to further delimit the `subset_buddy_convo_df`-DataFrame.
+
+##### A little more in-depth explanation on how to extent the chat messages of your buddys
+If you want to insert a new text message, you can add a line to the corresponding CSV of a buddy. The most important part here is to pay attention to which tags you use, as the code will repeatedly move from tag to next tag, selecting the messages that will then be displayed in the chat. One can extend chats independently in different ways with different complexity. There are basically two options, with or without working on the code: 
+
+*Without Code : Simple Extensions without variables or new conditions*
+1. So you have to think up a new text. If at all, this should only contain already known variables in square brackets `[]`, i.e. variables that already occur in the other text messages or are already calculated in the code in the dictionary `chat_variables_dict`. 
+2. Next, you choose a tag. This can be new or an already known tag. If you want to start a new tag, you should make sure that another message refers to this new one in 'next-tag', otherwise the loop will never be able to find this message. If you choose an already existing tag, it means that the new message belongs to the same group of messages. So it should make sense in relation to the content of the message that comes before it. 
+3. Afterwards, it must be determined what kind of message follows next, i.e. set the next-tag. Again, you have the option to use known or new tags, paying attention to the logic as well: Is the new next-tag already a tag in another line or will you unintentionally end up with a dead end?  Do the messages that have the Next-tag set here really fit as follow-up messages to my message? In addition, you can also leave the field empty, which means that the conversation is over after that.
+4. With the columns Friendship min / max you can define how good you have to be friends with the buddy for that message. So you can set from which level a message can be displayed at all or from which level you are already so good friends that the buddy doesn't even say a certain message anymore. You probably wouldn't greet strangers with "Well, yIf you have several messages (i.e. lines) that match or build on each other thematically, you can set the column set_group instead of setting new tags for all of them. As soon as a message is selected that has been assigned to a group, this is adopted for all subsequent messages. As an example, Bo talks about potatoes in one message and later mentions that he now feels like fries. This ensures that topics are not suddenly dropped or appear without reference.ou old sock" or say goodbye to friends with "It was nice to meet you", would you?
+5. If you have several messages (i.e. lines/rows) that match or build on each other thematically, you can set the column set_group instead of setting new tags for all of them. As soon as a message is selected that has been assigned to a group, this is adopted for all subsequent messages. As an example, Bo talks about potatoes in one message and later mentions that he now feels like fries. This ensures that topics are not suddenly dropped or appear without reference.
+
+ *With Code: Complex conditions and new variables*
+- If you want to create new variables, you should observe the following in addition to the instructions "without code":  
+The code automatically reads the square brackets `[variable]` with the variable, then looks for this string in the keys of the dictionary `chat_variables_dict` and replaces that with the corresponding value. To create new variables, it is mandatory to extend the code and have an understanding of where to find the information you want to put there. So the theory, now for the practice:
+1. Find in `main.py` the function `get_dict_chat_variables()`. Inside the function, mark with comments which variable is defined at the position. Here you can add your new variable by setting it as a key in the class variable FitnessApp.chat_variables_dict["variable"] = value and assigning it a value calculated by you beforehand. To access data from the logger, the table is read in at the beginning of the function and stored in `logger_df` filtered directly according to the previously selected workout.  
+So what would the code look like if you wanted to specify when you first did the workout with your buddy? 
+```python
+# [date_first_logged]  
+# in DataFrame logger_df in column 'date', get the minimal date  
+date_first_logged= logger_df["date"].min()	
+# save to key "[date_first_logged]" the value of the first workout calculated before
+FitnessApp.chat_variables_dict["[date_first_logged]"] = date_first_logged	
+```
+ 2. In your CSV file, just write your new variable in the text (with spaces around it) and watch it get automatically replaced by your calculation.
+
+- Similar to new variables, the code for new conditions must be extended according to one's own wishes. In addition, a new column must be created in the CSV file, which must be used for all CSV files.
+1. Extending the CSV: If you want to display messages only on the basis of certain conditions, you should think of a logic for this. For example, a conversation about a workout is only started if the logger table for the workout is not empty. For this purpose, the column 'logged any' is used, whose entry is 0 if no workout has ever been logged. Within the code, the system checks whether more than 0 workouts have been logged. If this is the case, all lines that have a zero in the column are filtered out.
+If you want to make a new conditional statement, you have to create a new column and fill new rows according to your own logic.
+
+2. extend the code: In the code of `main.py` a new filter must be implemented under the function `fill_conversation_list()` within the while loop. Depending on the self-selected condition, the DataFrame `subset_buddy_convo_df` must then be delimited, which at the end determines which sentence is to be said next. 
