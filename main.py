@@ -172,6 +172,7 @@ class FitnessApp(MDApp):
 
     def on_start(self):
         self.load_activity_collection_list()
+        self.start_settings()
 
     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
@@ -182,6 +183,30 @@ class FitnessApp(MDApp):
     def get_random_buddy_image(self):
         random_image = random.choice([f for f in listdir("images/") if isfile(join("images/", f))])
         return str("images/" + random_image)
+
+    ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+    ''' SETTING FUNCTIONS '''
+
+    # save settings to json
+    def set_settings(self, logging_encouragement, reminder_start):
+        # get setting dict
+        with open('settings.json', 'r') as f:
+            settings = json.load(f)
+
+        # get updated info
+        settings['logging_encouragement'] = logging_encouragement
+        settings['reminder_start'] = reminder_start
+
+        # save updatet setting dict
+        with open('settings.json', 'w') as f:
+            json.dump(settings, f)
+
+    def start_settings(self):
+        with open('settings.json', 'r') as f:
+            settings = json.load(f)
+        self.root.ids.setting_logg_encouragement.value = settings['logging_encouragement']
+        self.root.ids.setting_start_reminder.active = settings['reminder_start']
 
     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
@@ -545,21 +570,21 @@ class FitnessApp(MDApp):
     def buddy_feedback_setting(self):
         with open('settings.json', 'r') as f:
             settings = json.load(f)
-        print(settings)
         if settings['logging_encouragement'] == 0:      # never feedback
             self.root.ids.screen_manager.current = "homescreen"
         elif settings['logging_encouragement'] == 1:    # sometimes feedback
             counter = settings["logging_encouragement_counter"]
-            print(counter)
             if counter < 3:
                 counter += 1
                 settings["logging_encouragement_counter"] = counter
+                self.root.ids.screen_manager.current = "homescreen"
             else:
                 settings["logging_encouragement_counter"] = 1
                 self.give_feedback()
 
             with open('settings.json', 'w') as f:
                 json.dump(settings, f)
+
         else:                                           # always feedback
             self.give_feedback()
 

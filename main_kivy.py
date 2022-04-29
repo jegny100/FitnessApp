@@ -254,7 +254,7 @@ MDScreen:
                                         halign: "right"
                                         valign: "center"
                                         font_style: "Caption"            
-                        # switch
+                        # Switch
                         MDBoxLayout:
                             orientation: "horizontal"                     
                                       
@@ -286,6 +286,7 @@ MDScreen:
                             md_bg_color: app.theme_cls.primary_color
                             on_release: 
                                 #app.change_settings()
+                                app.set_settings(int(setting_logg_encouragement.value), setting_start_reminder.active)
                                 screen_manager.current = "homescreen" 
                     
             
