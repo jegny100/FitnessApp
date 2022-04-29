@@ -1,3 +1,4 @@
+import json
 from os import listdir
 from os.path import isfile, join
 
@@ -541,24 +542,32 @@ class FitnessApp(MDApp):
     ''' ACTIVITY LOGGER FUNCTIONS '''
 
     # give buddy feedback depending on setting and activity
-    def buddy_feedback(self):
-        # TODO get setting on frequency of feedback
+    def buddy_feedback_setting(self):
+        with open('settings.json', 'r') as f:
+            settings = json.load(f)
+        print(settings)
+        if settings['logging_encouragement'] == 0:      # never feedback
+            self.root.ids.screen_manager.current = "homescreen"
+        elif settings['logging_encouragement'] == 1:    # sometimes feedback
+            counter = settings["logging_encouragement_counter"]
+            print(counter)
+            if counter < 3:
+                counter += 1
+                settings["logging_encouragement_counter"] = counter
+            else:
+                settings["logging_encouragement_counter"] = 1
+                self.give_feedback()
 
+            with open('settings.json', 'w') as f:
+                json.dump(settings, f)
+        else:                                           # always feedback
+            self.give_feedback()
+
+    # filling feedback screen with text and image
+    def give_feedback(self):
         activity_collection_df = helper_functions.get_activity_collection()
         buddys_df = helper_functions.get_buddys()
-        buddy = activity_collection_df.loc[
-            activity_collection_df["activity"] == self.logger_capsule["activity"], "buddy"].values[0]
-        print(buddy)
-        # get workout name -> buddy
-        # if settint == never:
-        #   self.root.ids.screen_manager.current = "homescreen"
-        # if setting == always
-        #    dialog()
-        # else if setting == sometimes
-        #   get counter
-        #   wenn < 3 dann +1
-        #   wenn 3 = 1
-        #    dialog()
+        buddy = activity_collection_df.loc[activity_collection_df["activity"] == self.logger_capsule["activity"], "buddy"].values[0]
         self.root.ids.buddy_feedback_image.source = self.get_buddy_path(buddy)
         self.root.ids.feedback_buddy_name.text = buddy
         message = buddys_df.loc[buddys_df["buddy"] == buddy, "basic_logg_encouragement"].values[0]
@@ -620,9 +629,8 @@ class FitnessApp(MDApp):
     # Save data from logger, give feedback and reset
     def handle_logger(self):
         self.logger_save_to_csv()
-        self.buddy_feedback()
+        self.buddy_feedback_setting()
         self.empty_logger()
-        # self.root.ids.screen_manager.current = "homescreen"
 
     # checks if an activity is chosen, otherwise throws an error message
     def chosen_activity_check(self):
