@@ -186,11 +186,29 @@ class FitnessApp(MDApp):
 
         settings = self.get_settings()
         if settings['reminder_start']:
-            pass
-
+            logger_df = helper_functions.get_logger()
+            last_two_weeks_activities = set(logger_df.loc[
+                pd.to_datetime(logger_df["date"]) > (datetime.today() - timedelta(days=14)), 'activity'].values)
+            relevant_activities = set(logger_df['activity']) - last_two_weeks_activities
+            if (len(relevant_activities) != 0) and random.choice([True, False]):
+                self.set_nudging(relevant_activities)
+            else:
+                self.set_encouragement()
         else:
-            self.set_encouragement()        # self.root.ids.homescreen_image =
-        # self.root.ids.random_image_name =
+            self.set_encouragement()
+
+    # nudge activities that were the most frequent activity 14 days ago
+    def set_nudging(self, relevant_activities):
+        activity = random.choice(list(relevant_activities))
+
+        collection_df = helper_functions.get_activity_collection()
+        buddy = collection_df.loc[collection_df['activity'] == activity, 'buddy'].values[0]
+
+        buddy_df = helper_functions.get_buddys()
+        message = buddy_df.loc[buddy_df['buddy'] == buddy, 'startscreen_nudging'].values[0]
+
+        self.root.ids.homescreen_image.source = self.get_buddy_path(buddy)
+        self.root.ids.random_image_name.text = message.replace('[workout_name]', activity)
 
     def set_encouragement(self):
         # filter by logged last week
