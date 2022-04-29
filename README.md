@@ -89,7 +89,10 @@ The app is designed to track your fitness activities by logging your own workout
 - overview of all implemented activities in the collection
 - adding new activity definitions to the collection
 - overview of your fitness Buddys
-- conversations with buddys about corresponding activites or 
+- conversations with buddys about corresponding activites or just checking in with them
+- setting your preferences about encouraging or nudging messages:
+    - after logging a workout
+    - when opening the app
 
 #### Conversations
 To have a chat with your buddy, you need a CSV file for both the workout conversation and the regular conversation, but both are treated the same. The matching CSV is first read in and mapped as a DataFrame (i.e. a matrix/table), where each row represents a message. The algorithm selects the next message by minimizing the set of all messages using filters from the other columns and randomly selecting one from the resulting set. In doing so, it is guided through the texts using tags until the conversation is over. From the following representation of the CSV, as well as the explanations the function of the algorithm becomes more clear. 
