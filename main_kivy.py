@@ -218,8 +218,8 @@ MDScreen:
                             icon: 'close'
                             md_bg_color: app.theme_cls.primary_color      
                             on_release:
-                                #screen_manager.transition.direction = 'right'
-                                #screen_manager.current = "activity_collection"
+                                screen_manager.transition.direction = 'right'
+                                screen_manager.current = "homescreen"
                             
                         MDLabel:              
                         
@@ -229,8 +229,8 @@ MDScreen:
                             text: 'CONFIRM'
                             md_bg_color: app.theme_cls.primary_color
                             on_release: 
-                                #app.add_activity_to_collection(activity_name.text, duration_switch.active, repetition_switch.active, weight_switch.active)
-                                #app.load_activity_collection_list()     
+                                #app.change_settings()
+                                screen_manager.current = "homescreen" 
                     
             
             # Activity Collection Screen
@@ -709,7 +709,7 @@ MDScreen:
                                 app.get_logger([logger_duration_hour.text,logger_duration_min.text,logger_duration_sec.text],logger_repetition.text, logger_weight.text)
                                 if not app.chosen_activity_check(): app.error_activity_dialog()
                                 if app.chosen_activity_check() and not app.check_collection_required() : app.error_required_dialog()
-                                if app.chosen_activity_check() and app.check_collection_required() : app.save_logger()
+                                if app.chosen_activity_check() and app.check_collection_required() : app.handle_logger()
         
         # handle Object Properties                    
         MDNavigationDrawer:

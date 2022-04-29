@@ -172,10 +172,16 @@ class FitnessApp(MDApp):
 
     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
+    ''' HOMESCREEN FUNCTIONS '''
+
     # select a random buddy to display on homescreen
     def get_random_buddy_image(self):
         random_image = random.choice([f for f in listdir("images/") if isfile(join("images/", f))])
         return str("images/" + random_image)
+
+    ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+    ''' BUDDY PAGE & CHAT FUNCTIONS '''
 
     # menu to select the activity to talk about with a buddy
     def callback_activity_menu(self):
@@ -388,6 +394,8 @@ class FitnessApp(MDApp):
         # continue in ui
         self.root.ids.screen_manager.current = "buddy_page"
 
+    ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
     ''' ACTIVITY COLLECTION FUNCTIONS '''
 
     # fills the container with activities with pictures in the collection of activities
@@ -529,6 +537,36 @@ class FitnessApp(MDApp):
 
     ''' ACTIVITY LOGGER FUNCTIONS '''
 
+    def buddy_feedback(self):
+        # TODO get setting on frequency of feedback
+        # get workout name -> buddy
+        # if setting == always
+        #    dialog()
+        # else if setting == sometimes
+        #   get counter
+        #   wenn < 3 dann +1
+        #   wenn 3 = 1
+        #    dialog()
+        pass
+
+    def buddy_feedback_dialog(self): # TODO
+        if not self.dialogBuddy:
+            buddys_df = helper_functions.get_buddys()
+            self.items = [BuddyConfirm(text=X) for X in buddys_df["buddy"].to_list()]
+            self.dialogBuddy = MDDialog(
+                title="Choose your buddy",
+                type="confirmation",
+                items=self.items,
+                buttons=[MDFlatButton(text="CANCEL",
+                                      text_color=self.theme_cls.primary_color,
+                                      on_release=self.cancel_buddy_dialog),
+                         MDFlatButton(text="OK",
+                                      text_color=self.theme_cls.primary_color,
+                                      on_release=self.confirm_buddy_dialog)
+                         ],
+            )
+        self.dialogBuddy.open()
+
     # creates choose-an-activity-dialog
     def show_activities_dialog(self):
         if not self.dialogActivity:
@@ -581,10 +619,11 @@ class FitnessApp(MDApp):
         self.logger_capsule["repetition"] = repetition
         self.logger_capsule["weight"] = weight
 
-    # Save logger and reset
-    def save_logger(self):
+    # Save data from logger, give feedback and reset
+    def handle_logger(self):
         self.logger_save_to_csv()
         self.empty_logger()
+        # TODO buddy feedback self.buddy_feedback_logging()
         self.root.ids.screen_manager.current = "homescreen"
 
     # checks if an activity is chosen, otherwise throws an error message
@@ -653,6 +692,5 @@ class FitnessApp(MDApp):
 
 
 FitnessApp().run()
-
 
 # NOTE: we know it's "buddies" not "buddys"
