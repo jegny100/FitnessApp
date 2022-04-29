@@ -95,7 +95,8 @@ MDScreen:
                         orientation: "horizontal"
                         
                         FitImage:
-                            source: app.get_random_buddy_image()
+                            id: homescreen_image
+                            source: 
                             radius: [20,]
                         
                         MDLabel:
@@ -103,7 +104,7 @@ MDScreen:
                             
                         MDLabel:
                             id: random_image_name
-                            text: "Hi! Come and work out with me!"
+                            text: 
                     
                     MDBoxLayout:
                         orientation: "vertical"

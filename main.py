@@ -155,6 +155,7 @@ class FitnessApp(MDApp):
     logger_capsule = {"activity": None, "date": date,
                       "duration": None, "repetition": None,
                       "weight": None}
+    universal_encouragement = "I'm glad that we are work buddys! High five!"
 
     def build(self):
         self.theme_cls.colors = colors
@@ -173,6 +174,7 @@ class FitnessApp(MDApp):
     def on_start(self):
         self.load_activity_collection_list()
         self.start_settings()
+        self.homescreen_display()
 
     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
@@ -180,31 +182,67 @@ class FitnessApp(MDApp):
 
     # TODO make not random
     # select a random buddy to display on homescreen
-    def get_random_buddy_image(self):
-        random_image = random.choice([f for f in listdir("images/") if isfile(join("images/", f))])
-        return str("images/" + random_image)
+    def homescreen_display(self):
+
+        settings = self.get_settings()
+        if settings['reminder_start']:
+            pass
+
+        else:
+            self.set_encouragement()        # self.root.ids.homescreen_image =
+        # self.root.ids.random_image_name =
+
+    def set_encouragement(self):
+        # filter by logged last week
+        logger_df = helper_functions.get_logger()
+        # subset_logger_df = logger_df.loc[logger_df["activity"] == activity]
+        subset_logger_df = logger_df.loc[
+            pd.to_datetime(logger_df["date"]) > (datetime.today() - timedelta(days=7))]
+        if subset_logger_df.shape[0] > 0:
+            print("if true ")
+            # get activity name, buddy & message
+            activity = random.choice(subset_logger_df['activity'].unique())
+
+            collection_df = helper_functions.get_activity_collection()
+            buddy = collection_df.loc[collection_df['activity'] == activity, 'buddy'].values[0]
+
+            buddy_df = helper_functions.get_buddys()
+            message = buddy_df.loc[buddy_df['buddy'] == buddy, 'startscreen_encouragement'].values[0]
+
+            self.root.ids.homescreen_image.source = self.get_buddy_path(buddy)
+            self.root.ids.random_image_name.text = message.replace('[workout_name]', activity)
+        else:  # random image and universal message
+            print("else ")
+            random_image = random.choice([f for f in listdir("images/") if isfile(join("images/", f))])
+            self.root.ids.homescreen_image.source = str("images/" + random_image)
+            self.root.ids.random_image_name.text = self.universal_encouragement
 
     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
     ''' SETTING FUNCTIONS '''
 
+    # get settings
+    def get_settings(self):
+        with open('settings.json', 'r') as f:
+            settings = json.load(f)
+        return settings
+
     # save settings to json
     def set_settings(self, logging_encouragement, reminder_start):
         # get setting dict
-        with open('settings.json', 'r') as f:
-            settings = json.load(f)
+        settings = self.get_settings()
 
         # get updated info
         settings['logging_encouragement'] = logging_encouragement
         settings['reminder_start'] = reminder_start
 
-        # save updatet setting dict
+        # save updated setting dict
         with open('settings.json', 'w') as f:
             json.dump(settings, f)
 
+    # get settings from json and apply to app
     def start_settings(self):
-        with open('settings.json', 'r') as f:
-            settings = json.load(f)
+        settings = self.get_settings()
         self.root.ids.setting_logg_encouragement.value = settings['logging_encouragement']
         self.root.ids.setting_start_reminder.active = settings['reminder_start']
 
@@ -570,9 +608,9 @@ class FitnessApp(MDApp):
     def buddy_feedback_setting(self):
         with open('settings.json', 'r') as f:
             settings = json.load(f)
-        if settings['logging_encouragement'] == 0:      # never feedback
+        if settings['logging_encouragement'] == 0:  # never feedback
             self.root.ids.screen_manager.current = "homescreen"
-        elif settings['logging_encouragement'] == 1:    # sometimes feedback
+        elif settings['logging_encouragement'] == 1:  # sometimes feedback
             counter = settings["logging_encouragement_counter"]
             if counter < 3:
                 counter += 1
@@ -585,14 +623,15 @@ class FitnessApp(MDApp):
             with open('settings.json', 'w') as f:
                 json.dump(settings, f)
 
-        else:                                           # always feedback
+        else:  # always feedback
             self.give_feedback()
 
     # filling feedback screen with text and image
     def give_feedback(self):
         activity_collection_df = helper_functions.get_activity_collection()
         buddys_df = helper_functions.get_buddys()
-        buddy = activity_collection_df.loc[activity_collection_df["activity"] == self.logger_capsule["activity"], "buddy"].values[0]
+        buddy = activity_collection_df.loc[
+            activity_collection_df["activity"] == self.logger_capsule["activity"], "buddy"].values[0]
         self.root.ids.buddy_feedback_image.source = self.get_buddy_path(buddy)
         self.root.ids.feedback_buddy_name.text = buddy
         message = buddys_df.loc[buddys_df["buddy"] == buddy, "basic_logg_encouragement"].values[0]
