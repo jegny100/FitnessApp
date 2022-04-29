@@ -121,6 +121,62 @@ MDScreen:
                                 screen_manager.current = "logging"
                                 screen_manager.transition.direction = 'left'
             
+            # Buddy Feedback Screen                    
+            MDScreen: 
+                name : "buddy_feedback"
+                    
+                MDBoxLayout:
+                    orientation: "vertical"
+                    spacing : '15dp'
+                    padding : '12dp'
+                
+                    MDBoxLayout:
+                        orientation: 'horizontal'
+                        
+                        MDLabel:
+                            size_hint_x : 0.25
+                        FitImage:
+                            id: buddy_feedback_image
+                            radius: [20,]
+                            source: 
+                        MDLabel:
+                            size_hint_x : 0.25
+                            
+                    MDBoxLayout: 
+                        orientation: "vertical"
+                        
+                        MDLabel:
+                            id: feedback_buddy_name
+                            text: 
+                            font_style: 'H6'
+                            halign: "center"
+                            size_hint_y : 0.1
+                        
+                        MDBoxLayout: 
+                            orientation: "horizontal"
+                            MDLabel:
+                                size_hint_x : 0.1
+                            MDLabel:
+                                id: buddy_feedback_text
+                                text:
+                                halign: "center"
+                            MDLabel:
+                                size_hint_x : 0.1
+                            
+                        MDBoxLayout:
+                            size_hint_y : 0.3
+                            orientation: "horizontal"
+                            MDLabel:
+                                size_hint_x : 0.2
+                                    
+                            MDRectangleFlatButton:
+                                text: "Continue"
+                                pos_hint: {"center_x": .5, "center_y": .5}
+                                on_press:
+                                    screen_manager.current = "homescreen"
+                            MDLabel:
+                                size_hint_x : 0.2
+            
             # Settings Screen        
             MDScreen:
                 name: "settings"

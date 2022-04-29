@@ -5,6 +5,7 @@ from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.metrics import dp
 from kivy.properties import ObjectProperty, StringProperty
+from kivy.uix.boxlayout import BoxLayout
 from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.button import MDFlatButton, MDIconButton
@@ -22,6 +23,7 @@ import ast
 import random
 
 from kivymd.uix.tooltip import MDTooltip
+from kivymd.utils.fitimage import FitImage
 
 import main_kivy
 import pandas as pd
@@ -174,6 +176,7 @@ class FitnessApp(MDApp):
 
     ''' HOMESCREEN FUNCTIONS '''
 
+    # TODO make not random
     # select a random buddy to display on homescreen
     def get_random_buddy_image(self):
         random_image = random.choice([f for f in listdir("images/") if isfile(join("images/", f))])
@@ -289,7 +292,7 @@ class FitnessApp(MDApp):
     # fill conversation list
     def fill_conversation_list(self, buddy_convo_df):
         logger_df = helper_functions.get_logger()
-        activities_df = helper_functions.get_activity_collection()
+        # activities_df = helper_functions.get_activity_collection()
         all_buddys_df = helper_functions.get_buddys()
         convo_list = []
 
@@ -537,9 +540,18 @@ class FitnessApp(MDApp):
 
     ''' ACTIVITY LOGGER FUNCTIONS '''
 
+    # give buddy feedback depending on setting and activity
     def buddy_feedback(self):
         # TODO get setting on frequency of feedback
+
+        activity_collection_df = helper_functions.get_activity_collection()
+        buddys_df = helper_functions.get_buddys()
+        buddy = activity_collection_df.loc[
+            activity_collection_df["activity"] == self.logger_capsule["activity"], "buddy"].values[0]
+        print(buddy)
         # get workout name -> buddy
+        # if settint == never:
+        #   self.root.ids.screen_manager.current = "homescreen"
         # if setting == always
         #    dialog()
         # else if setting == sometimes
@@ -547,25 +559,11 @@ class FitnessApp(MDApp):
         #   wenn < 3 dann +1
         #   wenn 3 = 1
         #    dialog()
-        pass
-
-    def buddy_feedback_dialog(self): # TODO
-        if not self.dialogBuddy:
-            buddys_df = helper_functions.get_buddys()
-            self.items = [BuddyConfirm(text=X) for X in buddys_df["buddy"].to_list()]
-            self.dialogBuddy = MDDialog(
-                title="Choose your buddy",
-                type="confirmation",
-                items=self.items,
-                buttons=[MDFlatButton(text="CANCEL",
-                                      text_color=self.theme_cls.primary_color,
-                                      on_release=self.cancel_buddy_dialog),
-                         MDFlatButton(text="OK",
-                                      text_color=self.theme_cls.primary_color,
-                                      on_release=self.confirm_buddy_dialog)
-                         ],
-            )
-        self.dialogBuddy.open()
+        self.root.ids.buddy_feedback_image.source = self.get_buddy_path(buddy)
+        self.root.ids.feedback_buddy_name.text = buddy
+        message = buddys_df.loc[buddys_df["buddy"] == buddy, "basic_logg_encouragement"].values[0]
+        self.root.ids.buddy_feedback_text.text = message
+        self.root.ids.screen_manager.current = "buddy_feedback"
 
     # creates choose-an-activity-dialog
     def show_activities_dialog(self):
@@ -622,9 +620,9 @@ class FitnessApp(MDApp):
     # Save data from logger, give feedback and reset
     def handle_logger(self):
         self.logger_save_to_csv()
+        self.buddy_feedback()
         self.empty_logger()
-        # TODO buddy feedback self.buddy_feedback_logging()
-        self.root.ids.screen_manager.current = "homescreen"
+        # self.root.ids.screen_manager.current = "homescreen"
 
     # checks if an activity is chosen, otherwise throws an error message
     def chosen_activity_check(self):
