@@ -18,3 +18,6 @@ Exchange your findings under the issue (always remember the Code of Conduct - Bo
 
 - Science Question  
 As we already stated, research is a thing in this project. So if you have any questions about our theory section in our ReadMe or the sources we used, feel free to ask us!
+
+- Pull Request  
+If you're itching to get started and want to pound your keys, you can submit your changes to us through a pull request. If the changes are due to incorrect use of Git, disregard of programming gold standards or lack of programming skills, help us learn from them by giving us a description of the bugs, how they happened and how we can learn from them!
