@@ -74,6 +74,13 @@ Regarding workout tracking: more trackable data, such as trained body region –
 
 This app was developed using [Kivy](https://kivy.org/doc/stable/) and [KivyMD](https://kivymd.readthedocs.io/en/latest/#), a python based cross-platform GUI toolkit for touch applications that follows Google's [Material Design](https://material.io/design/introduction) system. 
 
+<details>
+<summary markdown="span">My (jegny100) personal expierence with Kivy & KivyMD</summary>
+I would describe myself, at least at the start, as a beginner in such extensive programming projects. Using multiple classes and continuously running Python loops, as is the case with apps, is new territory for me, let alone learning how to use Kivy and KivyMD. Therefore, at many points it has been difficult for me to distinguish whether a problem is due to my general programming skills reaching their limits or whether it is due to Kivy/KivyMD itself, its docs or even my IDE.
+Nevertheless, one thing is certain: Kivy gave me the courage to develop an app on my own in the first place, because I had a solid understanding of Python and thus a big hurdle of a new programming language was taken away from me. KivyMD then gave me hope that this app could actually have something in terms of design.
+Overall, I can recommend Kivy as an introduction to app programming if you have mainly worked with Python so far. It's easy to learn how the Kivy language is structured and you quickly get a sense of achievement with KivyMD, as the app looks appealing straight away. However, I did reach some of the limits of Kivy when, for example, I wanted to display dialog widgets in more than just a simple rectangular shape, but I was able to implement most of my ideas solidly, as you can see from this great result. So go for it!
+</details>
+
 
 ### Requirements
 As listed in `requirements.txt` and can be automatically installed with the following after cloning this project.
