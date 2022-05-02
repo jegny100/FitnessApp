@@ -1,34 +1,28 @@
-import json
-from os import listdir
-from os.path import isfile, join
-
-from kivy.core.window import Window
-from kivy.lang import Builder
-from kivy.metrics import dp
-from kivy.properties import ObjectProperty, StringProperty
-from kivy.uix.boxlayout import BoxLayout
-from kivymd.app import MDApp
-from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.button import MDFlatButton, MDIconButton
-from kivymd.uix.dialog import MDDialog
-from kivymd.uix.label import MDLabel
-from kivymd.uix.list import OneLineAvatarIconListItem, OneLineListItem, OneLineIconListItem
-from kivymd.uix.menu import MDDropdownMenu
-from kivymd.uix.picker import MDDatePicker
-from kivymd.uix.snackbar import Snackbar
-from kivymd.uix.swiper import MDSwiperItem
-from datetime import datetime, timedelta
 import os
 import re
 import ast
+import json
 import random
-
-from kivymd.uix.tooltip import MDTooltip
-from kivymd.utils.fitimage import FitImage
-
 import main_kivy
 import pandas as pd
 import helper_functions
+
+from os import listdir
+from kivy.metrics import dp
+from kivymd.app import MDApp
+from kivy.lang import Builder
+from os.path import isfile, join
+from kivy.core.window import Window
+from kivymd.uix.dialog import MDDialog
+from kivymd.uix.tooltip import MDTooltip
+from kivymd.uix.snackbar import Snackbar
+from datetime import datetime, timedelta
+from kivymd.uix.menu import MDDropdownMenu
+from kivymd.uix.picker import MDDatePicker
+from kivymd.uix.boxlayout import MDBoxLayout
+from kivymd.uix.list import OneLineAvatarIconListItem
+from kivymd.uix.button import MDFlatButton, MDIconButton
+from kivy.properties import ObjectProperty, StringProperty
 
 Window.size = (350, 600)
 
@@ -180,7 +174,6 @@ class FitnessApp(MDApp):
 
     ''' HOMESCREEN FUNCTIONS '''
 
-    # TODO make not random
     # select a random buddy to display on homescreen
     def homescreen_display(self):
 
