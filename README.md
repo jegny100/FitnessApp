@@ -20,11 +20,9 @@ Self-quantification can be applied to many aspects of life, such as nutrition, h
 
 Overall, self-quantification is meant to increase awareness, curiosity, and consciousness (Orji, 2018). It can show problematic behaviour that users may not have noticed otherwise and inspire to improve oneself by comparing data to others’ or the former self’s. But of course it also has some disadvantages and weaknesses. Continuously striving to best one self or others can turn into unhealthy behaviour, if it disregards other needs. When using tools such as apps, these apps often assume that users are already motivated to quantify themselves and offer little motivational affordances outside of self-quantification. This is a weak point especially since people can perceive feedback quite differently, based on how control or autonomy oriented they are (Mekler, Brühlmann, Tuch & Opwis, 2017). Control oriented users may feel controlled by receiving feedback, while autonomy oriented users will see it as informational and feel more competent. These last two points (lack of motivational affordances and differences in perception) made us look for another motivational factor, which might mitigate these effects.
 
-<div class="panel panel-info">
-**Sources**
-{: .panel-heading}
-<div class="panel-body">
-
+| **Sources** |
+|-------------|
+|
 Quantified Self. What is Quantified Self? Retrieved from https://quantifiedself.com/about/what-is-quantified-self/
 
 Almalki, M., Gray, K., & Sanchez, F. M. (2015). The use of self-quantification systems for personal health information: big data management activities and prospects. Health information science and systems, 3(1), 1-11.
@@ -32,8 +30,7 @@ Almalki, M., Gray, K., & Sanchez, F. M. (2015). The use of self-quantification s
 Orji, R. (2018). The Costs and Benefits of Self-Monitoring for Health and Wellness. Retrieved from:  https://blogs.ucl.ac.uk/cbc-digi-hub-blog/2018/09/21/the-costs-and-benefits-of-self-monitoring-for-health-and-wellness/
 
 Mekler, E. D., Brühlmann, F., Tuch, A. N., & Opwis, K. (2017). Towards understanding the effects of individual gamification elements on intrinsic motivation and performance. Computers in Human Behavior, 71, 525-534.
-</div>
-</div>
+|
 
 ## Gamification
 
@@ -47,19 +44,15 @@ Gamified applications most commonly feature points, badges or leader boards (Ham
 ### Why do we think this is a good idea?
 We think gamification will be a great addition to our app design, since it can complement self-quantification in our competence-autonomy dilemma: Users will feel competent through receiving feedback about their workout progress, guided by self-quantification tools. The game design elements can be chosen to satisfy a need for autonomy, for example by allowing users to make meaningful choices and seek out intentional interactions
 
-<div class="panel panel-info">
-**Sources**
-{: .panel-heading}
-<div class="panel-body">
-
+| **Sources** |
+|-------------|
+|
 Deterding, S., Dixon, D., Khaled, R., & Nacke, L. (2011, September). From game design elements to gamefulness: defining" gamification". In Proceedings of the 15th international academic MindTrek conference: Envisioning future media environments (pp. 9-15).
  
 J. Hamari, J. Koivisto and H. Sarsa, "Does Gamification Work? -- A Literature Review of Empirical Studies on Gamification," 2014 47th Hawaii International Conference on System Sciences, 2014, pp. 3025-3034, doi: 10.1109/HICSS.2014.377.
 
 Dahlstrøm, C. (2017). Impacts of gamification on intrinsic motivation.
-
-</div>
-</div>
+|
 
 ## Tests, Allies, and Enemies
 
@@ -87,11 +80,9 @@ Motivation to purchase can also be differentiated by two factors: it can either 
 
 We therefore took our avatar based app idea and decided to substitute the player-representing avatar for NPCs. In a Gacha game type manner users could unlock new items for these NPCs, which would each represent a different workout type. What was lacking in this concept was a concrete way the collection of items would reward the user, besides some vague commitment to an NPC, and the little control over the rewards through the random drop mechanic. This would not only thwart the need for autonomy in some users, but can also be a general source of annoyance and frustration to users of all types. To see how commitment to a character could “pay off”, we went to look at what made NPCs appealing to users in the first place. Players of different game genres stated that they especially liked uncovering hidden aspects of characters as they continued to interact with them (Shibuya, Okura, Shoun & Asou, 2019). We derived from that, that our app should reward players for collecting items, or directly logging workouts, by growing closer to a character they chose. This also solves our randomness issue, as this reveal of character aspects would of course not be randomised but predetermined. 
 
-<div class="panel panel-info">
-**Sources**
-{: .panel-heading}
-<div class="panel-body">
-
+| **Sources** |
+|-------------|
+|
 Sailer, M., Hense, J. U., Mayr, S. K., & Mandl, H. (2017). How gamification motivates: An experimental study of the effects of specific game design elements on psychological need satisfaction. Computers in human behavior, 69, 371-380.
 
 J. Hamari, J. Koivisto and H. Sarsa, "Does Gamification Work? -- A Literature Review of Empirical Studies on Gamification," 2014 47th Hawaii International Conference on System Sciences, 2014, pp. 3025-3034, doi: 10.1109/HICSS.2014.377.
@@ -103,9 +94,7 @@ Rapp, A., Hopfgartner, F., Hamari, J., Linehan, C., & Cena, F. (2019). Strengthe
 Marder, B., Gattig, D., Collins, E., Pitt, L., Kietzmann, J., & Erz, A. (2019). The Avatar's new clothes: Understanding why players purchase non-functional items in free-to-play games. Computers in Human Behavior, 91, 72-83.
 
 Shibuya, A., Okura, H., Shoun, A., & Asou, N. (2019). Male and Female Game Players' Preferences for Game Characters and Real-world Personalities in Japan. In DiGRA Conference.
-
-</div>
-</div>
+|
 
 ## The Ultimate Boon
 With this idea we developed a new idea of how the app would look like and as you can probably deduce from the section heading, it is the one we stuck with. We did not immediately have all the details figured out and still had to do a bunch of tweaking during development, but for the sake of brevity(-ish…) we will simply describe the end construct here. 
