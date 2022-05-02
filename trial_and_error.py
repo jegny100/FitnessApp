@@ -1,21 +1,8 @@
-import json
+import pandas as pd
+import helper_functions
 
-#setting_dict = {'logging_encouragement': 2, 'logging_encouragement_counter': 2, 'reminder_start': 1}
-# e.g. file = './data.json'
-#with open('settings.json', 'w') as f:
-#    json.dump(setting_dict, f)
+logger_df = helper_functions.get_logger()
+values = logger_df['activity'].value_counts()
 
-with open('settings.json', 'r') as f:
-    data = json.load(f)
-
-print(data)
-
-data['logging_encouragement'] = 1
-
-with open('settings.json', 'w') as f:
-    json.dump(data, f)
-
-with open('settings.json', 'r') as f:
-    read = json.load(f)
-
-print("read ", read)
+print(values)
+print("\n Activity  ",values.idxmin())

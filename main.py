@@ -162,11 +162,11 @@ class FitnessApp(MDApp):
         self.theme_cls.primary_palette = "Blue"
 
         # generate basic activity collection if not existent
-        if not os.path.isfile('./activity_collection.csv'):
+        if not os.path.isfile('files/activity_collection.csv'):
             activity_collection_df = pd.DataFrame(columns=["activity", "buddy", "duration", "repetition", "weight"])
             activity_row = {'activity': 'Liegestütze', 'buddy': "", 'duration': 0, 'repetition': 1, 'weight': 0}
             activity_collection_df = activity_collection_df.append(activity_row, ignore_index=True)
-            activity_collection_df.to_csv('activity_collection.csv')
+            activity_collection_df.to_csv('files/activity_collection.csv')
         helper_functions.get_activity_collection()
 
         return Builder.load_string(main_kivy.KV)
@@ -217,7 +217,6 @@ class FitnessApp(MDApp):
         subset_logger_df = logger_df.loc[
             pd.to_datetime(logger_df["date"]) > (datetime.today() - timedelta(days=7))]
         if subset_logger_df.shape[0] > 0:
-            print("if true ")
             # get activity name, buddy & message
             activity = random.choice(subset_logger_df['activity'].unique())
 
@@ -230,7 +229,6 @@ class FitnessApp(MDApp):
             self.root.ids.homescreen_image.source = self.get_buddy_path(buddy)
             self.root.ids.random_image_name.text = message.replace('[workout_name]', activity)
         else:  # random image and universal message
-            print("else ")
             random_image = random.choice([f for f in listdir("images/") if isfile(join("images/", f))])
             self.root.ids.homescreen_image.source = str("images/" + random_image)
             self.root.ids.random_image_name.text = self.universal_encouragement
@@ -241,7 +239,7 @@ class FitnessApp(MDApp):
 
     # get settings
     def get_settings(self):
-        with open('settings.json', 'r') as f:
+        with open('files/settings.json', 'r') as f:
             settings = json.load(f)
         return settings
 
@@ -255,7 +253,7 @@ class FitnessApp(MDApp):
         settings['reminder_start'] = reminder_start
 
         # save updated setting dict
-        with open('settings.json', 'w') as f:
+        with open('files/settings.json', 'w') as f:
             json.dump(settings, f)
 
     # get settings from json and apply to app
@@ -365,7 +363,7 @@ class FitnessApp(MDApp):
         elif chattype == "chat":
             csv_name = FitnessApp.convo_buddy + "_chat.csv"
         try:
-            buddy_convo_df = pd.read_csv(csv_name)
+            buddy_convo_df = pd.read_csv("files/" + csv_name)
         except FileNotFoundError:
             return []
         else:
@@ -515,7 +513,7 @@ class FitnessApp(MDApp):
                    'repetition': repetition, 'weight': weight}
             # update to csv
             activity_collection_df = helper_functions.get_activity_collection().append(row, ignore_index=True)
-            activity_collection_df.to_csv('activity_collection.csv')
+            activity_collection_df.to_csv('files/activity_collection.csv')
         else:
             self.error_new_activity()
 
@@ -585,7 +583,7 @@ class FitnessApp(MDApp):
     def check_collection_required(self):
         if self.chosen_activity_check():
             # check which activity was chosen
-            activity_collection_df = pd.read_csv('activity_collection.csv', index_col="Unnamed: 0")
+            activity_collection_df = pd.read_csv('files/activity_collection.csv', index_col="Unnamed: 0")
             activity_collection_df.set_index('activity', inplace=True)
             activity_collection_df = activity_collection_df.T
             tmp = activity_collection_df[FitnessApp.chosen_activity] == 1
@@ -624,7 +622,7 @@ class FitnessApp(MDApp):
 
     # give buddy feedback depending on setting and activity
     def buddy_feedback_setting(self):
-        with open('settings.json', 'r') as f:
+        with open('files/settings.json', 'r') as f:
             settings = json.load(f)
         if settings['logging_encouragement'] == 0:  # never feedback
             self.root.ids.screen_manager.current = "homescreen"
@@ -638,7 +636,7 @@ class FitnessApp(MDApp):
                 settings["logging_encouragement_counter"] = 1
                 self.give_feedback()
 
-            with open('settings.json', 'w') as f:
+            with open('files/settings.json', 'w') as f:
                 json.dump(settings, f)
 
         else:  # always feedback
@@ -739,12 +737,12 @@ class FitnessApp(MDApp):
 
     # save data to df and csv
     def logger_save_to_csv(self):
-        if os.path.isfile('./logged_activities.csv'):
-            logged_activities_df = pd.read_csv('logged_activities.csv', index_col="Unnamed: 0")
+        if os.path.isfile('files/logged_activities.csv'):
+            logged_activities_df = pd.read_csv('files/logged_activities.csv', index_col="Unnamed: 0")
         else:
             logged_activities_df = pd.DataFrame(columns=["activity", "date", "duration", "repetition", "weight"])
         logged_activities_df = logged_activities_df.append(self.logger_capsule, ignore_index=True)
-        logged_activities_df.to_csv('logged_activities.csv')
+        logged_activities_df.to_csv('files/logged_activities.csv')
         self.increase_friendship_lvl()
 
     # everytime an activity is logged the friendship level of the corresponding buddy is increased
@@ -754,7 +752,7 @@ class FitnessApp(MDApp):
         buddys_df = helper_functions.get_buddys()
         buddy = activity_collection_df.loc[activity_collection_df["activity"] == activity, "buddy"].values[0]
         buddys_df.loc[buddys_df["buddy"] == buddy, "friendship_level"] += 1
-        buddys_df.to_csv("buddys.csv")
+        buddys_df.to_csv("files/buddys.csv")
 
     # RESET LOGGER
     # reset all variables of the logger
