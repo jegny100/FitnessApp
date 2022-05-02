@@ -1,4 +1,3 @@
-logger.json
 *.pyc
-__pycache__/*
+__pycache__\*
 \__pycache__\main_kivy.cpython-37.pyc
