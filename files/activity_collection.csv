@@ -1,10 +1,10 @@
 ,activity,buddy,duration,repetition,weight
-0,Joggen,Bo,1,0,0
-1,Liegestütze,Bo,0,1,0
-2,Spazieren,Robin,1,0,0
+0,Running,Bo,1,0,0
+1,Push Up,Bo,0,1,0
+2,Walking,Robin,1,0,0
 3,Glute Bridge,Robin,0,1,0
-4,Schwimmen,Penguin,0,1,0
-5,Wandern,Robin,1,0,0
+4,Swimming,Penguin,0,1,0
+5,Hiking,Robin,1,0,0
 6,Yoga,Penguin,1,0,0
-7,Wattwandern,Penguin,1,0,0
+7,Mudflat hiking,Penguin,1,0,0
 8,Meditate,Bo,1,0,0
