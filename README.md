@@ -1,4 +1,6 @@
-## Call to adventure/ Introduction
+# Theoretical Background
+
+## Call to Adventure
 This is what we’re doing and how this supposedly works
 Why are we doing this?
 
@@ -22,23 +24,21 @@ Overall, self-quantification is meant to increase awareness, curiosity, and cons
 
 | **Sources** |
 |-------------|
-|Quantified Self. What is Quantified Self? Retrieved from https://quantifiedself.com/about/what-is-quantified-self/ <br/> Almalki, M., Gray, K., & Sanchez, F. M. (2015). The use of self-quantification systems for personal health information: big data management activities and prospects. Health information science and systems, 3(1), 1-11. <br/> Orji, R. (2018). The Costs and Benefits of Self-Monitoring for Health and Wellness. Retrieved from:  https://blogs.ucl.ac.uk/cbc-digi-hub-blog/2018/09/21/the-costs-and-benefits-of-self-monitoring-for-health-and-wellness/ <br/> Mekler, E. D., Brühlmann, F., Tuch, A. N., & Opwis, K. (2017). Towards understanding the effects of individual gamification elements on intrinsic motivation and performance. Computers in Human Behavior, 71, 525-534. |
+|Quantified Self. What is Quantified Self? Retrieved from https://quantifiedself.com/about/what-is-quantified-self/ <br/><br/> Almalki, M., Gray, K., & Sanchez, F. M. (2015). The use of self-quantification systems for personal health information: big data management activities and prospects. Health information science and systems, 3(1), 1-11. <br/><br/> Orji, R. (2018). The Costs and Benefits of Self-Monitoring for Health and Wellness. Retrieved from:  https://blogs.ucl.ac.uk/cbc-digi-hub-blog/2018/09/21/the-costs-and-benefits-of-self-monitoring-for-health-and-wellness/ <br/><br/> Mekler, E. D., Brühlmann, F., Tuch, A. N., & Opwis, K. (2017). Towards understanding the effects of individual gamification elements on intrinsic motivation and performance. Computers in Human Behavior, 71, 525-534. |
 
-## Gamification
-
-### What is gamification?
+### Gamification
 Gamification describes the use of game design elements in a non-game context, which are intended to motivate and engage users (Deterding, Dixon, Khaled, & Nacke, 2011). As more and more people are picking up gaming as a hobby and become more familiar with game elements, gamification is likewise being used to enhance services more often. It is related to subjects such as educational games, but differs in the way that the main activity performed is not a game, but simply incorporates gameful features.
 
 > As a child you may have studied to improve your language skills by playing learning games and helping your favourite cartoon characters sort vocabulary, fight declination monsters, or unravel past tenses. This would be an educational game, not gamification, as the main activity was still gaming (and you were merely tricked into studying). Nowadays you may want to brush up on your language skills with the aid of an online learning platform such as Duolingo. In this app you can collect badges for a variety of activities and build up a streak by completing daily lessons. This is gamification, as the main activity is learning, with game elements to motivate you to keep going.
 
 Gamified applications most commonly feature points, badges or leader boards (Hamari, Koivisto & Sarsa, 2014). These elements are very versatile, so they can be applied to many different contexts , such as education, health, and commerce. Research on how gamification affects motivation is still ongoing. The difference between extrinsic and intrinsic motivation is something that especially interests researchers, but since these are difficult to measure directly and can only be seen in their behavioural outcomes, no definite connection can be made yet. Something that has become apparent though is that different game design elements have different effects and that the context they are being deployed in and the personality of the user matter (Dahlstrøm, 2017). Because of this they are, though efficient at times, no catch-all solution for engaging users.
 
-### Why do we think this is a good idea?
+#### Why do we think this is a good idea?
 We think gamification will be a great addition to our app design, since it can complement self-quantification in our competence-autonomy dilemma: Users will feel competent through receiving feedback about their workout progress, guided by self-quantification tools. The game design elements can be chosen to satisfy a need for autonomy, for example by allowing users to make meaningful choices and seek out intentional interactions
 
 | **Sources** |
 |-------------|
-|Deterding, S., Dixon, D., Khaled, R., & Nacke, L. (2011, September). From game design elements to gamefulness: defining" gamification". In Proceedings of the 15th international academic MindTrek conference: Envisioning future media environments (pp. 9-15). <br/> J. Hamari, J. Koivisto and H. Sarsa, "Does Gamification Work? -- A Literature Review of Empirical Studies on Gamification," 2014 47th Hawaii International Conference on System Sciences, 2014, pp. 3025-3034, doi: 10.1109/HICSS.2014.377. <br/> Dahlstrøm, C. (2017). Impacts of gamification on intrinsic motivation. |
+|Deterding, S., Dixon, D., Khaled, R., & Nacke, L. (2011, September). From game design elements to gamefulness: defining" gamification". In Proceedings of the 15th international academic MindTrek conference: Envisioning future media environments (pp. 9-15). <br/><br/> J. Hamari, J. Koivisto and H. Sarsa, "Does Gamification Work? -- A Literature Review of Empirical Studies on Gamification," 2014 47th Hawaii International Conference on System Sciences, 2014, pp. 3025-3034, doi: 10.1109/HICSS.2014.377. <br/><br/> Dahlstrøm, C. (2017). Impacts of gamification on intrinsic motivation. |
 
 ## Tests, Allies, and Enemies
 
@@ -68,7 +68,7 @@ We therefore took our avatar based app idea and decided to substitute the player
 
 | **Sources** |
 |-------------|
-| Sailer, M., Hense, J. U., Mayr, S. K., & Mandl, H. (2017). How gamification motivates: An experimental study of the effects of specific game design elements on psychological need satisfaction. Computers in human behavior, 69, 371-380. <br/> J. Hamari, J. Koivisto and H. Sarsa, "Does Gamification Work? -- A Literature Review of Empirical Studies on Gamification," 2014 47th Hawaii International Conference on System Sciences, 2014, pp. 3025-3034, doi: 10.1109/HICSS.2014.377. <br/> Rapp, A. (2017). From games to gamification: A classification of rewards in World of Warcraft for the design of gamified systems. Simulation & Gaming, 48(3), 381-401. <br/> Rapp, A., Hopfgartner, F., Hamari, J., Linehan, C., & Cena, F. (2019). Strengthening gamification studies: Current trends and future opportunities of gamification research. International Journal of Human-Computer Studies, 127, 1-6. <br/> Marder, B., Gattig, D., Collins, E., Pitt, L., Kietzmann, J., & Erz, A. (2019). The Avatar's new clothes: Understanding why players purchase non-functional items in free-to-play games. Computers in Human Behavior, 91, 72-83. <br/> Shibuya, A., Okura, H., Shoun, A., & Asou, N. (2019). Male and Female Game Players' Preferences for Game Characters and Real-world Personalities in Japan. In DiGRA Conference. |
+| Sailer, M., Hense, J. U., Mayr, S. K., & Mandl, H. (2017). How gamification motivates: An experimental study of the effects of specific game design elements on psychological need satisfaction. Computers in human behavior, 69, 371-380. <br/><br/> J. Hamari, J. Koivisto and H. Sarsa, "Does Gamification Work? -- A Literature Review of Empirical Studies on Gamification," 2014 47th Hawaii International Conference on System Sciences, 2014, pp. 3025-3034, doi: 10.1109/HICSS.2014.377. <br/><br/> Rapp, A. (2017). From games to gamification: A classification of rewards in World of Warcraft for the design of gamified systems. Simulation & Gaming, 48(3), 381-401. <br/><br/> Rapp, A., Hopfgartner, F., Hamari, J., Linehan, C., & Cena, F. (2019). Strengthening gamification studies: Current trends and future opportunities of gamification research. International Journal of Human-Computer Studies, 127, 1-6. <br/><br/> Marder, B., Gattig, D., Collins, E., Pitt, L., Kietzmann, J., & Erz, A. (2019). The Avatar's new clothes: Understanding why players purchase non-functional items in free-to-play games. Computers in Human Behavior, 91, 72-83. <br/><br/> Shibuya, A., Okura, H., Shoun, A., & Asou, N. (2019). Male and Female Game Players' Preferences for Game Characters and Real-world Personalities in Japan. In DiGRA Conference. |
 
 ## The Ultimate Boon
 With this idea we developed a new idea of how the app would look like and as you can probably deduce from the section heading, it is the one we stuck with. We did not immediately have all the details figured out and still had to do a bunch of tweaking during development, but for the sake of brevity(-ish…) we will simply describe the end construct here. 
