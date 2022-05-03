@@ -77,24 +77,23 @@ MDScreen:
             
                 MDBoxLayout:
                     orientation: "vertical"
-                    padding: "32dp"
+                    padding: "16dp"
                     
                     MDBoxLayout:
                         orientation: "vertical"
                         MDLabel:
-                            size_hint_y : 0.5
                             text :'Welcome to your science-based fitness tracker!'
                             halign : 'center'
                             valign : 'top'
                             font_style : 'H5'  
                             parent_background: app.theme_cls.primary_color
-                        MDLabel:
                     
                     MDBoxLayout:
-                        size_hint_y : 0.8
+                        size_hint_y : 1.8
                         orientation: "horizontal"
                         
                         FitImage:
+                            size_hint_x : 1
                             id: homescreen_image
                             source: 
                             radius: [20,]
@@ -107,6 +106,7 @@ MDScreen:
                             text: 
                     
                     MDBoxLayout:
+                        size_hint_y : 0.75
                         orientation: "vertical"
                         MDLabel:
                             text: "Log your new activity here:"
