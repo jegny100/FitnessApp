@@ -16,6 +16,7 @@ from kivy.core.window import Window
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.tooltip import MDTooltip
 from kivymd.uix.snackbar import Snackbar
+from kivymd.uix.swiper import MDSwiperItem
 from datetime import datetime, timedelta
 from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.picker import MDDatePicker
@@ -82,6 +83,14 @@ class ContentNavigationDrawer(MDBoxLayout):
     screen_manager = ObjectProperty()
     nav_drawer = ObjectProperty()
 
+class BuddySwiperItem(MDSwiperItem):
+    button_text = StringProperty()
+    image_source = StringProperty()
+
+    def __init__(self, button_text, image_source):
+        self.button_text = button_text
+        self.image_source = image_source
+        super().__init__()
 
 # Dialog Choice Confirmation (Single Choice)
 class ItemConfirm(OneLineAvatarIconListItem):
@@ -163,7 +172,16 @@ class FitnessApp(MDApp):
             activity_collection_df.to_csv('files/activity_collection.csv')
         helper_functions.get_activity_collection()
 
-        return Builder.load_string(main_kivy.KV)
+        build_app = Builder.load_string(main_kivy.KV)
+
+        swiper = build_app.ids["buddy_swiper"]
+
+        # TODO: Populate Buddys from loaded Data
+        swiper.add_widget(BuddySwiperItem("Bo", "images/Bo.jpg"))
+        swiper.add_widget(BuddySwiperItem("Penguin", "images/Penguin.jpg"))
+        swiper.add_widget(BuddySwiperItem("Robin", "images/Robin.jpg"))
+
+        return build_app
 
     def on_start(self):
         self.load_activity_collection_list()
