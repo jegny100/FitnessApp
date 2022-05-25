@@ -155,8 +155,15 @@ The app is designed to track your fitness activities by logging your own workout
     - after logging a workout
     - when opening the app
 
+https://user-images.githubusercontent.com/49160252/170266041-80073841-be21-45f0-b9b1-151c05114690.mp4
+
+App_picture.PNG
 #### Conversations
-To have a chat with your buddy, you need a CSV file for both the workout conversation and the regular conversation, but both are treated the same. The matching CSV is first read in and mapped as a DataFrame (i.e. a matrix/table), where each row represents a message. The algorithm selects the next message by minimizing the set of all messages using filters from the other columns and randomly selecting one from the resulting set. In doing so, it is guided through the texts using tags until the conversation is over. From the following representation of the CSV, as well as the explanations the function of the algorithm becomes more clear. 
+To have a chat with your buddy, you need a CSV file for both the workout conversation and the regular conversation, but both are treated the same. The matching CSV is first read in and mapped as a DataFrame (i.e. a matrix/table), where each row represents a message. The algorithm selects the next message by minimizing the set of all messages using filters from the othe
+
+
+
+r columns and randomly selecting one from the resulting set. In doing so, it is guided through the texts using tags until the conversation is over. From the following representation of the CSV, as well as the explanations the function of the algorithm becomes more clear. 
 
 The structure of the CSV_files is as follows: 
 
