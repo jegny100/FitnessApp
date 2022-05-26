@@ -1,3 +1,10 @@
+*Last updated on 03 May, written by jegny100 & palebDUE*
+
+# Description
+For our Knowledge Management course, we were on a mission to find a fun project that tackles the curriculum of our course and our personal interests. So we fell into a research rabbit hole and found: Self-quantification and gamification - data and games, magical words to our ears. We made a plan for the big adventure ahead of us: creating an app on a scientific foundation that combines those two topics. And the outcome is a tool for personal/individual knowledge and information management for your fitness data. But there is more: You are not alone in your workouts. In our app you can add new activities to the collection according to your own favourite activities and choose a buddy that works out with you. Whenever you workout, your buddy will do it too and the connection between the both of you grows bigger and bigger. You can have conversations with your buddies, like a quick chat or an overview about one of your activities, giving you some insights about your fitness performance.
+
+If you want to learn more about our journey to the outcome, there is more from our adventure:
+
 # Theoretical Background
 
 ## Call to Adventure
@@ -122,6 +129,7 @@ There are also some more technical improvements that might not be visible when a
 
 Currently, the two CSV files (chat and workout_chat) needed for conversations have the same structure, but are separated to avoid confusion between the two types of dialogue. Perhaps a better system could be developed for this and they could be merged with another column to classify them as workout_chat or chat. This way, when new texts and new columns are added, both CSVs do not always have to be changed. The same applies to the CSV files in relation to the different buddies.
 Some parts of the programme had to be integrated statically. For example, when developing the overview of buddies in the MDSwiper, no possibility could be found to read them in dynamically so that they are hardcoded in the Kivy file. This is not desirable, because if you want to include new buddies, you have to work within the Kivy code in addition to the CSV files, which makes the procedure more time-consuming.
+\[Update 26.05.\: A contributor found a way to move the kivy code into the python file, so theoretically, we can now dynamically read in all buddies, thank you for that!]
  
 ---
 ## Implementation
@@ -157,13 +165,16 @@ The app is designed to track your fitness activities by logging your own workout
 
 https://user-images.githubusercontent.com/49160252/170266041-80073841-be21-45f0-b9b1-151c05114690.mp4
 
-App_picture.PNG
+#### Buddys
+To add your own buddy, you need to add a row to the csv file 'buddys.csv', add an image and two conversation CSV files (what is described in the following section). 
+
+The structure of the CSV_files is as follows:
+| Buddy | Source | Description     | Friendship_level | basic_logg_encouragement | startscreen_encouragement | startescreen_nudging  |
+| ----- | ------ | --------------- | ---------------- | ------------------------ | ------------------------- | --------------------  |
+| Bo    | Bo.jpg |That's the lad...|                2 | "Whew, what a workout... | "I'm still recovering ... | I've been wondering...|
+
 #### Conversations
-To have a chat with your buddy, you need a CSV file for both the workout conversation and the regular conversation, but both are treated the same. The matching CSV is first read in and mapped as a DataFrame (i.e. a matrix/table), where each row represents a message. The algorithm selects the next message by minimizing the set of all messages using filters from the othe
-
-
-
-r columns and randomly selecting one from the resulting set. In doing so, it is guided through the texts using tags until the conversation is over. From the following representation of the CSV, as well as the explanations the function of the algorithm becomes more clear. 
+To have a chat with your buddy, you need a CSV file for both the workout conversation and the regular conversation, but both are treated the same. The matching CSV is first read in and mapped as a DataFrame (i.e. a matrix/table), where each row represents a message. The algorithm selects the next message by minimizing the set of all messages using filters from the other columns and randomly selecting one from the resulting set. In doing so, it is guided through the texts using tags until the conversation is over. From the following representation of the CSV, as well as the explanations the function of the algorithm becomes more clear. 
 
 The structure of the CSV_files is as follows: 
 
@@ -212,3 +223,6 @@ FitnessApp.chat_variables_dict["[date_first_logged]"] = date_first_logged
 If you want to make a new conditional statement, you have to create a new column and fill new rows according to your own logic.
 
 2. extend the code: In the code of `main.py` a new filter must be implemented under the function `fill_conversation_list()` within the while loop. Depending on the self-selected condition, the DataFrame `subset_buddy_convo_df` must then be delimited, which at the end determines which sentence is to be said next. 
+
+# Acknowledgements
+We would especially like to thank our instructor and mentor Maria, who accompanied our project from the beginning full of helpfulness, discussed every new crazy idea we had with us and gave us the help and support we individually needed to realise this project. 🌼
