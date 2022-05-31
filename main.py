@@ -170,16 +170,13 @@ class FitnessApp(MDApp):
             activity_row = {'activity': 'Liegestütze', 'buddy': "", 'duration': 0, 'repetition': 1, 'weight': 0}
             activity_collection_df = activity_collection_df.append(activity_row, ignore_index=True)
             activity_collection_df.to_csv('files/activity_collection.csv')
-        helper_functions.get_activity_collection()
 
         build_app = Builder.load_string(main_kivy.KV)
 
+        # read buddys from csv file to build Swiper Widget
         swiper = build_app.ids["buddy_swiper"]
-
-        # TODO: Populate Buddys from loaded Data
-        swiper.add_widget(BuddySwiperItem("Bo", "images/Bo.jpg"))
-        swiper.add_widget(BuddySwiperItem("Penguin", "images/Penguin.jpg"))
-        swiper.add_widget(BuddySwiperItem("Robin", "images/Robin.jpg"))
+        buddys = helper_functions.get_buddys()
+        buddys.T.apply(lambda x: swiper.add_widget(BuddySwiperItem(x['buddy'], "images/"+ x['source'])))
 
         return build_app
 
