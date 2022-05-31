@@ -53,7 +53,26 @@ KV = '''
                     root.nav_drawer.set_state("close")
                     root.screen_manager.current = "settings"
                     root.screen_manager.transition.direction = 'left'
-   
+
+<BuddySwiperItem>
+    id: swiper_item
+    # These exist in the BuddySwiperItem class in main.py as StringProperties: image_source, button_text
+    
+    orientation: 'vertical'
+    FitImage:
+        source: swiper_item.image_source
+        radius: [20,]
+
+    MDLabel:
+        size_hint_y : 0.01
+        
+    MDRectangleFlatButton:
+        text: swiper_item.button_text
+        pos_hint: {"center_x": .5, "center_y": .5}
+        size_hint_y : 0.1
+        on_press: 
+            app.set_convo_info(swiper_item.button_text)
+
 ### THE APP ###                 
                     
 MDScreen:
@@ -451,57 +470,7 @@ MDScreen:
                         theme_text_color : 'Secondary'
                         
                     MDSwiper:
-                        
-                        MDSwiperItem:
-                            orientation: 'vertical'
-                            FitImage:
-                                source: "images/Bo.jpg"
-                                radius: [20,]
-                        
-                            MDLabel:
-                                size_hint_y : 0.01
-                                
-                            MDRectangleFlatButton:
-                                id: bo_button
-                                text: "Bo"
-                                pos_hint: {"center_x": .5, "center_y": .5}
-                                size_hint_y : 0.1
-                                on_press: 
-                                    app.set_convo_info(bo_button.text)
-                                
-                        MDSwiperItem:
-                            orientation: 'vertical'
-                            FitImage:
-                                source: "images/Penguin.jpg"
-                                radius: [20,]
-                            
-                            MDLabel:
-                                size_hint_y : 0.01
-                                
-                            MDRectangleFlatButton:
-                                id: penguin_button
-                                text: "Penguin"
-                                pos_hint: {"center_x": .5, "center_y": .5}
-                                size_hint_y : 0.1
-                                on_press: 
-                                    app.set_convo_info(penguin_button.text)
-                        
-                        MDSwiperItem:
-                            orientation: 'vertical'
-                            FitImage:
-                                source: "images/Robin.jpg"
-                                radius: [20,]
-                            
-                            MDLabel:
-                                size_hint_y : 0.01
-                        
-                            MDRectangleFlatButton:
-                                id: robin_button
-                                text: "Robin"
-                                pos_hint: {"center_x": .5, "center_y": .5}
-                                size_hint_y : 0.1
-                                on_press: 
-                                    app.set_convo_info(robin_button.text)
+                        id: buddy_swiper
             
             # Buddy Screen Subscreen : Buddy Detail & Choose a chat                        
             MDScreen:
