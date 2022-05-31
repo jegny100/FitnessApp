@@ -166,12 +166,21 @@ The app is designed to track your fitness activities by logging your own workout
 https://user-images.githubusercontent.com/49160252/170266041-80073841-be21-45f0-b9b1-151c05114690.mp4
 
 #### Buddys
-To add your own buddy, you need to add a row to the csv file 'buddys.csv', add an image and two conversation CSV files (what is described in the following section). 
+To add your own buddy, you need to add a row to the csv file 'buddys.csv', add an image and two conversation CSV files (which are described in the following section). 
 
 The structure of the CSV_files is as follows:
 | Buddy | Source | Description     | Friendship_level | basic_logg_encouragement | startscreen_encouragement | startescreen_nudging  |
 | ----- | ------ | --------------- | ---------------- | ------------------------ | ------------------------- | --------------------  |
 | Bo    | Bo.jpg |That's the lad...|                2 | "Whew, what a workout... | "I'm still recovering ... | I've been wondering...|
+
+* Buddy, Source, Description & Friendship_level  
+These are the simplest columns. Add a name for your buddy, that is distinct from the others. Save your buddy's image in the `images` folder and add the file name in the `source` column. Write down a description and add a friendship level. 
+
+* basic_logg_encouragement  
+This message is shown after you logged a workout, depending on your settings. It's a way to get a nice message from your buddy after you worked out with them.
+
+* startscreen_encouragement & startescreen_nudging  
+When you open the app your buddy can encourage you with a simple reminder of your previuos workout or by a little nudging. Add according messages in these two columns.
 
 #### Conversations
 To have a chat with your buddy, you need a CSV file for both the workout conversation and the regular conversation, but both are treated the same. The matching CSV is first read in and mapped as a DataFrame (i.e. a matrix/table), where each row represents a message. The algorithm selects the next message by minimizing the set of all messages using filters from the other columns and randomly selecting one from the resulting set. In doing so, it is guided through the texts using tags until the conversation is over. From the following representation of the CSV, as well as the explanations the function of the algorithm becomes more clear. 
