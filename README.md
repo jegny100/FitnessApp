@@ -128,8 +128,8 @@ The other main facet to evaluate would be the practical implementation, in this 
 There are also some more technical improvements that might not be visible when actually running the app, but are nonetheless beneficial to the overall performance, by making maintenance less complicated:
 
 Currently, the two CSV files (chat and workout_chat) needed for conversations have the same structure, but are separated to avoid confusion between the two types of dialogue. Perhaps a better system could be developed for this and they could be merged with another column to classify them as workout_chat or chat. This way, when new texts and new columns are added, both CSVs do not always have to be changed. The same applies to the CSV files in relation to the different buddies.
-Some parts of the programme had to be integrated statically. For example, when developing the overview of buddies in the MDSwiper, no possibility could be found to read them in dynamically so that they are hardcoded in the Kivy file. This is not desirable, because if you want to include new buddies, you have to work within the Kivy code in addition to the CSV files, which makes the procedure more time-consuming.
-\[Update 26.05.\: A contributor found a way to move the kivy code into the python file, so theoretically, we can now dynamically read in all buddies, thank you for that!]
+Some parts of the programme had to be integrated statically. For example, when developing the overview of buddies in the MDSwiper, no possibility could be found to read them in dynamically so that they are hardcoded in the Kivy file. This is not desirable, because if you want to include new buddies, you have to work within the Kivy code in addition to the CSV files, which makes the procedure more time-consuming.  
+\[Update 26.05. \: A contributor found a way to move the kivy code into the python file, so theoretically, now we can dynamically read in all buddies, thank you for that!]  \[Update 31.05. \: It's not theoretical anymore, buddys are now actually read in and dynamically added to the Swiper! Jippie!]  
  
 ---
 ## Implementation
