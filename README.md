@@ -149,7 +149,7 @@ Some parts of the programme had to be integrated statically. For example, when d
 \[Update 26.05. \: A contributor found a way to move the kivy code into the python file, so theoretically, now we can dynamically read in all buddies, thank you for that!]  \[Update 31.05. \: It's not theoretical anymore, buddys are now actually read in and dynamically added to the Swiper! Jippie!]  
  
 ---
-## Implementation
+## 👩🏽‍💻 Implementation
 
 This app was developed using [Kivy](https://kivy.org/doc/stable/) and [KivyMD](https://kivymd.readthedocs.io/en/latest/#), a python based cross-platform GUI toolkit for touch applications that follows Google's [Material Design](https://material.io/design/introduction) system. 
 
