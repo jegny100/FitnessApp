@@ -1,10 +1,11 @@
 *Last updated on 03 May, written by jegny100 & palebDUE*
-
-# Description
+# Science Based Fitness Tracker App
 
 |                      |                   |                |   |
 | -------------------- | ----------------- | -------------- |-- |
 |<img src="md_images/App_picture.PNG" width="240"> | <img src="md_images/add_activity.PNG" width = "240"> |  <img src="md_images/chat_pic.PNG" width = "240"> | <img src="md_images/acutal_chat.PNG" width = "240"> |
+
+# Description
 
 For our Knowledge Management course, we were on a mission to find a fun project that tackles the curriculum of our course and our personal interests. So we fell into a research rabbit hole and found: Self-quantification and gamification - data and games, magical words to our ears. We made a plan for the big adventure ahead of us: creating an app on a scientific foundation that combines those two topics. And the outcome is a tool for personal/individual knowledge and information management for your fitness data. But there is more: You are not alone in your workouts. In our app you can add new activities to the collection according to your own favourite activities and choose a buddy that works out with you. Whenever you workout, your buddy will do it too and the connection between the both of you grows bigger and bigger. You can have conversations with your buddies, like a quick chat or an overview about one of your activities, giving you some insights about your fitness performance.
 
