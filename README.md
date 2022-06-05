@@ -13,11 +13,11 @@ If you want to learn more about our journey to the outcome, there is more from o
 
 # Theoretical Background
 
-## Call to Adventure
+## 🎈 Call to Adventure
 This is what we’re doing and how this supposedly works
 Why are we doing this?
 
-## Meeting the Mentor(s) & Crossing the Threshold 
+## 🧙‍♀️ Meeting the Mentor(s) & Crossing the Threshold 
 ### Self-Quantification
 
 Self-Quantification is described by the Quantified Self movement as “self-knowledge through numbers” (quantifiedself.com). Users collect data about themselves and use them to gain insights into their behaviours and habits. The process of collecting data is often called self-tracking, which becomes self-quantification only after this data is put into a quantitative or qualitative context.  
@@ -53,7 +53,7 @@ We think gamification will be a great addition to our app design, since it can c
 |-------------|
 |Deterding, S., Dixon, D., Khaled, R., & Nacke, L. (2011, September). From game design elements to gamefulness: defining" gamification". In Proceedings of the 15th international academic MindTrek conference: Envisioning future media environments (pp. 9-15). <br/><br/> J. Hamari, J. Koivisto and H. Sarsa, "Does Gamification Work? -- A Literature Review of Empirical Studies on Gamification," 2014 47th Hawaii International Conference on System Sciences, 2014, pp. 3025-3034, doi: 10.1109/HICSS.2014.377. <br/><br/> Dahlstrøm, C. (2017). Impacts of gamification on intrinsic motivation. |
 
-## Tests, Allies, and Enemies
+## ⚔️ Tests, Allies, and Enemies
 
 Now that we had decided on the two main elements or theories of how our app should work, we were ready to look into more concrete features, starting with game design elements. Our first approach was to go with the classics: Badges/achievements and points. Badges could reflect a user's individual experience and choices they made along the way (by seeing badges that fit their workouts), but also provide an incentive to diversify their workout (to unlock new badges). Points could show their overall progress, as the more workouts a user would logg, the more points they would collect. This would give them a feeling of competence, as well as rewarding interactions with the application (Sailer, Hense, Mayr & Mandl, 2017).
 
@@ -92,7 +92,7 @@ We therefore took our avatar based app idea and decided to substitute the player
 |-------------|
 | Sailer, M., Hense, J. U., Mayr, S. K., & Mandl, H. (2017). How gamification motivates: An experimental study of the effects of specific game design elements on psychological need satisfaction. Computers in human behavior, 69, 371-380. <br/><br/> J. Hamari, J. Koivisto and H. Sarsa, "Does Gamification Work? -- A Literature Review of Empirical Studies on Gamification," 2014 47th Hawaii International Conference on System Sciences, 2014, pp. 3025-3034, doi: 10.1109/HICSS.2014.377. <br/><br/> Rapp, A. (2017). From games to gamification: A classification of rewards in World of Warcraft for the design of gamified systems. Simulation & Gaming, 48(3), 381-401. <br/><br/> Rapp, A., Hopfgartner, F., Hamari, J., Linehan, C., & Cena, F. (2019). Strengthening gamification studies: Current trends and future opportunities of gamification research. International Journal of Human-Computer Studies, 127, 1-6. <br/><br/> Marder, B., Gattig, D., Collins, E., Pitt, L., Kietzmann, J., & Erz, A. (2019). The Avatar's new clothes: Understanding why players purchase non-functional items in free-to-play games. Computers in Human Behavior, 91, 72-83. <br/><br/> Shibuya, A., Okura, H., Shoun, A., & Asou, N. (2019). Male and Female Game Players' Preferences for Game Characters and Real-world Personalities in Japan. In DiGRA Conference. |
 
-## The Ultimate Boon
+## 💎 The Ultimate Boon
 With this idea we developed a new idea of how the app would look like and as you can probably deduce from the section heading, it is the one we stuck with. We did not immediately have all the details figured out and still had to do a bunch of tweaking during development, but for the sake of brevity(-ish…) we will simply describe the end construct here. 
 
 The main feature of the app is a buddy system, where users can choose an NPC to accompany them on their workouts. The more they work out together, the more dialogue options they unlock. Through this users can grow closer to the characters.
@@ -102,7 +102,7 @@ When a user registers a new activity, they choose a buddy that will accompany th
 
 <img src="md_images/flow chart.jpg" >
 
-## Master of two Worlds
+## 🌅 Master of two Worlds
 As we approach our figurative return to the Shire/ train back to platform 9 ¾ / medal ceremony with subsequent Jedi training, it is only appropriate to look back at all the lessons we have learned and see how they were implemented in our final system. Since you already had to read quite a lot of text, we decided to put this into a convenient table:
 | Lesson learned: | Feature added: |
 |-----------------|----------------|
@@ -122,7 +122,7 @@ As we approach our figurative return to the Shire/ train back to platform 9 ¾ /
 Overall these are quite a lot of insights we borrowed from the papers we read and managed to incorporate into only a small selection of features. Keeping our list of features brief was important to us, as we had to implement them without much experience in app-programming and also wanted to focus on doing a few things well instead of dabbling in a bit of everything. Still we are aware that we have barely scratched the surface of possibilities of some topics, which leads into the last section of this theoretical background: Further research, limitations or just…
 
 
-## Sequel Bait
+## 🔮 Sequel Bait
 ### What else could be added to this concept?
 Obviously, a lot! Here are some ideas that we either had to drop because of time restrains or only came up a bit late:
 *  More trackable workout data! Users could, for example, mark which body region each activity is training. A wider selection of measurement units (such as distance for activities such as hiking) and the possibility to track multiple units per activity could also aid in self-quantification. <details><summary>:framed_picture: Mock-up here</summary><img src="md_images/professioneles mock up2.jpg" width = "255"></details>
