@@ -5,17 +5,12 @@
 | -------------------- | ----------------- | -------------- |-- |
 |<img src="md_images/App_picture.PNG" width="240"> | <img src="md_images/add_activity.PNG" width = "240"> |  <img src="md_images/chat_pic.PNG" width = "240"> | <img src="md_images/acutal_chat.PNG" width = "240"> |
 
-# Description
-
-For our Knowledge Management course, we were on a mission to find a fun project that tackles the curriculum of our course and our personal interests. So we fell into a research rabbit hole and found self-quantification and gamification - data and games, magical words to our ears. We made a plan for the big adventure ahead of us: creating an app on a scientific foundation that combines those two topics. The outcome is a tool for personal/individual knowledge and information management for your fitness data, but there is more. You are not alone in your workouts. In our app you can add new activities to the collection according to your own favourite activities and choose a buddy that works out with you. Whenever you workout, your buddy will as well and the connection between the both of you grows stronger. You can have conversations with your buddies, like a quick chat or an overview about one of your activities. Through this, your buddy will accompany you through encouragement and insights, or just as a neat little distraction while you rest after your workout session.
-
-If you want to learn more about our journey to the outcome, there is more from our adventure:
-
 # Theoretical Background
 
 ## 🎈 Call to Adventure
-This is what we’re doing and how this supposedly works
-Why are we doing this?
+For our Knowledge Management course, we were on a mission to find a fun project that tackles the curriculum of our course and our personal interests. So we fell into a research rabbit hole and found self-quantification and gamification - data and games, magical words to our ears. We made a plan for the big adventure ahead of us: creating an app on a scientific foundation that combines those two topics. The outcome is a tool for personal/individual knowledge and information management for your fitness data, but there is more. You are not alone in your workouts. In our app you can add new activities to the collection according to your own favourite activities and choose a buddy that works out with you. Whenever you workout, your buddy will as well and the connection between the both of you grows stronger. You can have conversations with your buddies, like a quick chat or an overview about one of your activities. Through this, your buddy will accompany you through encouragement and insights, or just as a neat little distraction while you rest after your workout session.
+
+If you want to learn more about our journey to the outcome, there is more from our adventure:
 
 ## 🧙‍♀️ Meeting the Mentor(s) & Crossing the Threshold 
 ### Self-Quantification
