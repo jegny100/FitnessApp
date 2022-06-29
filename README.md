@@ -44,11 +44,7 @@ Overall, self-quantification is meant to increase awareness, curiosity, and cons
 
 | **Sources** |
 |-------------|
-|Quantified Self. What is Quantified Self? Retrieved from https://quantifiedself.com/about/what-is-quantified-self/ 
- <br/><br/> Almalki, M., Gray, K., & Sanchez, F. M. (2015). The use of self-quantification systems for personal health information: big data management activities and prospects. Health information science and systems, 3(1), 1-11. 
- <br/><br/> Orji, R. (2018). The Costs and Benefits of Self-Monitoring for Health and Wellness. Retrieved from:  https://blogs.ucl.ac.uk/cbc-digi-hub-blog/2018/09/21/the-costs-and-benefits-of-self-monitoring-for-health-and-wellness/ 
- <br/><br/> Mekler, E. D., Brühlmann, F., Tuch, A. N., & Opwis, K. (2017). Towards understanding the effects of individual gamification elements on intrinsic motivation and performance. Computers in Human Behavior, 71, 525-534. 
- <br/><br/> Probst, G. J. (1998). Practical knowledge management: A model that works. PRISM-CAMBRIDGE MASSACHUSETTS-, 17-30.|
+|Quantified Self. What is Quantified Self? Retrieved from https://quantifiedself.com/about/what-is-quantified-self/ <br/><br/> Almalki, M., Gray, K., & Sanchez, F. M. (2015). The use of self-quantification systems for personal health information: big data management activities and prospects. Health information science and systems, 3(1), 1-11. <br/><br/> Orji, R. (2018). The Costs and Benefits of Self-Monitoring for Health and Wellness. Retrieved from:  https://blogs.ucl.ac.uk/cbc-digi-hub-blog/2018/09/21/the-costs-and-benefits-of-self-monitoring-for-health-and-wellness/ <br/><br/> Mekler, E. D., Brühlmann, F., Tuch, A. N., & Opwis, K. (2017). Towards understanding the effects of individual gamification elements on intrinsic motivation and performance. Computers in Human Behavior, 71, 525-534. <br/><br/> Probst, G. J. (1998). Practical knowledge management: A model that works. PRISM-CAMBRIDGE MASSACHUSETTS-, 17-30.|
 
 ### Gamification
 Gamification describes the use of game design elements in a non-game context, which are intended to motivate and engage users (Deterding, Dixon, Khaled, & Nacke, 2011). As more and more people are picking up gaming as a hobby and become more familiar with game elements, gamification is likewise being used to enhance services more often. It is related to subjects such as educational games, but differs in the way that the main activity performed is not a game, but simply incorporates gameful features.
@@ -62,9 +58,7 @@ We think gamification will be a great addition to our app design, since it can c
 
 | **Sources** |
 |-------------|
-|Deterding, S., Dixon, D., Khaled, R., & Nacke, L. (2011, September). From game design elements to gamefulness: defining" gamification". In Proceedings of the 15th international academic MindTrek conference: Envisioning future media environments (pp. 9-15). 
-<br/><br/> J. Hamari, J. Koivisto and H. Sarsa, "Does Gamification Work? -- A Literature Review of Empirical Studies on Gamification," 2014 47th Hawaii International Conference on System Sciences, 2014, pp. 3025-3034, doi: 10.1109/HICSS.2014.377. 
-<br/><br/> Dahlstrøm, C. (2017). Impacts of gamification on intrinsic motivation. |
+|Deterding, S., Dixon, D., Khaled, R., & Nacke, L. (2011, September). From game design elements to gamefulness: defining" gamification". In Proceedings of the 15th international academic MindTrek conference: Envisioning future media environments (pp. 9-15). <br/><br/> J. Hamari, J. Koivisto and H. Sarsa, "Does Gamification Work? -- A Literature Review of Empirical Studies on Gamification," 2014 47th Hawaii International Conference on System Sciences, 2014, pp. 3025-3034, doi: 10.1109/HICSS.2014.377. <br/><br/> Dahlstrøm, C. (2017). Impacts of gamification on intrinsic motivation. |
 
 ### A few things to keep in mind
 Our two “mentors” already gave us a great theoretical foundation for further research and a plethora of features to choose from. We also felt it important to include our own experiences and intuitions into the app design - maybe not as a (figurative) mentor, but more of a sidekick. So while we had previously let research guide us to which models to build upon, we now went to look for what we personally felt was still missing and check whether these were valid points supported by empirical research.
@@ -82,17 +76,7 @@ To summarise, our sidekick, or by now our group of sidekicks, are supposed to re
 
 | **Sources** |
 |-------------|
-|Wohllebe, A. (2020). Consumer Acceptance of App Push Notifications: Systematic Review on the Influence of Frequency.
-
-<br/><br/>Baker, D. A. (2020). Four ironies of self-quantification: wearable technologies and the quantified self. Science and Engineering Ethics, 26(3), 1477-1498.
-
-<br/><br/>Andrade, F. R., Mizoguchi, R., & Isotani, S. (2016, June). The bright and dark sides of gamification. In International conference on intelligent tutoring systems (pp. 176-186). Springer, Cham.
-
-<br/><br/>Almalki, M., Gray, K., & Sanchez, F. M. (2015). The use of self-quantification systems for personal health information: big data management activities and prospects. Health information science and systems, 3(1), 1-11.
-
-<br/><br/>Ayobi, A., Marshall, P., Cox, A. L., & Chen, Y. (2017, May). Quantifying the body and caring for the mind: self-tracking in multiple sclerosis. In Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems (pp. 6889-6901).
-
-<br/><br/>Almourad, M. B., Alrobai, A., Skinner, T., Hussain, M., & Ali, R. (2021). Digital wellbeing tools through users lens. Technology in Society, 67, 101778.|
+|Wohllebe, A. (2020). Consumer Acceptance of App Push Notifications: Systematic Review on the Influence of Frequency. <br/><br/>Baker, D. A. (2020). Four ironies of self-quantification: wearable technologies and the quantified self. Science and Engineering Ethics, 26(3), 1477-1498. <br/><br/>Andrade, F. R., Mizoguchi, R., & Isotani, S. (2016, June). The bright and dark sides of gamification. In International conference on intelligent tutoring systems (pp. 176-186). Springer, Cham. <br/><br/>Almalki, M., Gray, K., & Sanchez, F. M. (2015). The use of self-quantification systems for personal health information: big data management activities and prospects. Health information science and systems, 3(1), 1-11. <br/><br/>Ayobi, A., Marshall, P., Cox, A. L., & Chen, Y. (2017, May). Quantifying the body and caring for the mind: self-tracking in multiple sclerosis. In Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems (pp. 6889-6901). <br/><br/>Almourad, M. B., Alrobai, A., Skinner, T., Hussain, M., & Ali, R. (2021). Digital wellbeing tools through users lens. Technology in Society, 67, 101778. |
 
 
 ## ⚔️ Tests, Allies, and Enemies
@@ -134,10 +118,7 @@ We therefore took our avatar based app idea and decided to substitute the player
 
 | **Sources** |
 |-------------|
-| Sailer, M., Hense, J. U., Mayr, S. K., & Mandl, H. (2017). How gamification motivates: An experimental study of the effects of specific game design elements on psychological need satisfaction. Computers in human behavior, 69, 371-380. <br/><br/> J. Hamari, J. Koivisto and H. Sarsa, "Does Gamification Work? -- A Literature Review of Empirical Studies on Gamification," 2014 47th Hawaii International Conference on System Sciences, 2014, pp. 3025-3034, doi: 10.1109/HICSS.2014.377. <br/><br/> Rapp, A. (2017). From games to gamification: A classification of rewards in World of Warcraft for the design of gamified systems. Simulation & Gaming, 48(3), 381-401. <br/><br/> Rapp, A., Hopfgartner, F., Hamari, J., Linehan, C., & Cena, F. (2019). Strengthening gamification studies: Current trends and future opportunities of gamification research. International Journal of Human-Computer Studies, 127, 1-6. <br/><br/> Marder, B., Gattig, D., Collins, E., Pitt, L., Kietzmann, J., & Erz, A. (2019). The Avatar's new clothes: Understanding why players purchase non-functional items in free-to-play games. Computers in Human Behavior, 91, 72-83. <br/><br/> Shibuya, A., Okura, H., Shoun, A., & Asou, N. (2019). Male and Female Game Players' Preferences for Game Characters and Real-world Personalities in Japan. In DiGRA Conference. <br/><br/>Barratt, P. (2017). Healthy competition: A qualitative study investigating persuasive technologies and the gamification of cycling. Health & place, 46, 328-336.
-
-<br/><br/>Andrade, F. R., Mizoguchi, R., & Isotani, S. (2016, June). The bright and dark sides of gamification. In International conference on intelligent tutoring systems (pp. 176-186). Springer, Cham.
-|
+| Sailer, M., Hense, J. U., Mayr, S. K., & Mandl, H. (2017). How gamification motivates: An experimental study of the effects of specific game design elements on psychological need satisfaction. Computers in human behavior, 69, 371-380. <br/><br/> J. Hamari, J. Koivisto and H. Sarsa, "Does Gamification Work? -- A Literature Review of Empirical Studies on Gamification," 2014 47th Hawaii International Conference on System Sciences, 2014, pp. 3025-3034, doi: 10.1109/HICSS.2014.377. <br/><br/> Rapp, A. (2017). From games to gamification: A classification of rewards in World of Warcraft for the design of gamified systems. Simulation & Gaming, 48(3), 381-401. <br/><br/> Rapp, A., Hopfgartner, F., Hamari, J., Linehan, C., & Cena, F. (2019). Strengthening gamification studies: Current trends and future opportunities of gamification research. International Journal of Human-Computer Studies, 127, 1-6. <br/><br/> Marder, B., Gattig, D., Collins, E., Pitt, L., Kietzmann, J., & Erz, A. (2019). The Avatar's new clothes: Understanding why players purchase non-functional items in free-to-play games. Computers in Human Behavior, 91, 72-83. <br/><br/> Shibuya, A., Okura, H., Shoun, A., & Asou, N. (2019). Male and Female Game Players' Preferences for Game Characters and Real-world Personalities in Japan. In DiGRA Conference. <br/><br/>Barratt, P. (2017). Healthy competition: A qualitative study investigating persuasive technologies and the gamification of cycling. Health & place, 46, 328-336. <br/><br/>Andrade, F. R., Mizoguchi, R., & Isotani, S. (2016, June). The bright and dark sides of gamification. In International conference on intelligent tutoring systems (pp. 176-186). Springer, Cham. |
 
 ## 💎 The Ultimate Boon
 With this idea we developed a new idea of how the app would look like and as you can probably deduce from the section heading, it is the one we stuck with. We did not immediately have all the details figured out and still had to do a bunch of tweaking during development, but for the sake of brevity(-ish…) we will simply describe the end construct here. 
@@ -171,9 +152,7 @@ As some of you might have realised, there is no graphical representation of the 
 
 | **Sources** |
 |-------------|
-| Azzam, T., Evergreen, S., Germuth, A. A., & Kistler, S. J. (2013). Data visualization and evaluation. New Directions for Evaluation, 2013(139), 7-32.
-
-<br></br> Bresciani, S., & Eppler, M. J. (2009). The risks of visualization. Identität und Vielfalt der Kommunikations-wissenschaft (2009), 165-178.|
+| Azzam, T., Evergreen, S., Germuth, A. A., & Kistler, S. J. (2013). Data visualization and evaluation. New Directions for Evaluation, 2013(139), 7-32. <br></br> Bresciani, S., & Eppler, M. J. (2009). The risks of visualization. Identität und Vielfalt der Kommunikations-wissenschaft (2009), 165-178. |
 
 Overall these are quite a lot of insights we borrowed from the papers we read and managed to incorporate into only a small selection of features. Keeping our list of features brief was important to us, as we had to implement them without much experience in app-programming and also wanted to focus on doing a few things well instead of dabbling in a bit of everything. Still we are aware that we have barely scratched the surface of possibilities of some topics, which leads into the last section of this theoretical background: Further research, limitations or just…
 
