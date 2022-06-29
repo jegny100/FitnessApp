@@ -5,6 +5,15 @@
 | -------------------- | ----------------- | -------------- |-- |
 |<img src="md_images/App_picture.PNG" width="240"> | <img src="md_images/add_activity.PNG" width = "240"> |  <img src="md_images/chat_pic.PNG" width = "240"> | <img src="md_images/acutal_chat.PNG" width = "240"> |
 
+Keeping track of things can be quite hard and keeping track of yourself even harder. Maybe you have already tried some of the wide variety of self-quantification apps out there but found them just a bit overwhelming, with daily goals, reminders to just squeeze in a few more steps or dramatic up- and downward graphs. Finding a tool that’s not pestering you for constant improvement while also being more fun than just a sheet of paper or your phone's note app can be quite the task. That’s the niche this app is trying to fill. Log your workouts at your own pace, without any requirements attached to them. You will get positive feedback from your digital workout buddy along the way and can chat with them about your activities or whatever is at their mind at the moment.
+
+Here is how it works: You can input any activity type you want (whether it be swimming, jogging, Quidditch or jousting) and choose a workout buddy to accompany you. Whenever you log a new workout of that type, your buddy will remember this. You can later chat with them about your workouts this week and your overall performance. Your buddy will also grow closer to you the more you two work out together and you will have more topics to talk about. They won’t judge you whenever you decide to “skip” a week or just go for a five minute stroll instead of hiking up and down the nearest mountain. They’ll just be your personal hype person - cheering you on when you keep up the pace and being understanding whenever you need a little rest.
+
+The whole application is still very much a work in progress. The version you will find here is functional, but of course we are happy about everyone who contributes. Please feel invited to join us and add any features, lines of dialogue or whole buddies. Following you will find a description of the development journey, including the scientific background to the overall design and individual elements. You will also find a simple guide on how to use the app and ways to add new buddies or dialogue without having to comb through the existing code first.
+
+Thank you for your time and we very much hope that you all will enjoy this little application we put together - whether it be from a user or developer side :)
+
+
 # Theoretical Background
 
 ## 🎈 Call to Adventure
@@ -22,6 +31,9 @@ Self-Quantification is described by the Quantified Self movement as “self-know
 Self-quantification itself can also be split up into sub-activities (Almalki, Gray & Sanchez, 2015): First the collected data is managed, which includes digital or analog storage as well as organising it in a manner that makes it understandable for the user (and/or any self-quantification systems that interact with it). Then, users can reflect on data, by which they derive meaning from it.
 
 > For sake of convenience, you may write down your sleeping schedule on a notepad next to your bed. Since these notes are very cluttered, you decide to copy them into a table in a separate notepad, in chronological order. This is managing your data. Once you have collected a sufficient amount of data points, you sit down with your notes, think of any questions you have, and see how your notes can answer them. By this you are reflecting on your data.
+
+This breakdown of self-quantification fitted our idea of what our app should do really well. It furthermore gave us an in through being less focused on the psychology of physical health and exercising itself, but on the handling of the resulting data and information. With this perspective, we could relate the subject to other fields of study. As many of you will likely already have experienced, finding a path from the knowledge you already have to what you’re trying to learn can be a huge boost, and we felt the same. In particular we looked at the study of knowledge management. Probst (1998) defined the building blocks of knowledge management, which consist of an inner and outer cycle of activities. Self-quantification can assist in two activities of the outer cycle: Knowledge Measurement becoming Data Management and Knowledge Goals becoming Reflection on Data. 
+
 <details>
 <summary markdown="span">Why go into so much detail?</summary>
 Splitting self-quantification (and later topics that will be brought up) into all these sub-tasks might seem nitpicky at first. It is however very useful when trying to incorporate it into another service, such as we will be doing shortly. By looking at the process in detail, we can ensure that we do not miss any important components and really understand how the whole concept is supposed to function.
@@ -32,7 +44,11 @@ Overall, self-quantification is meant to increase awareness, curiosity, and cons
 
 | **Sources** |
 |-------------|
-|Quantified Self. What is Quantified Self? Retrieved from https://quantifiedself.com/about/what-is-quantified-self/ <br/><br/> Almalki, M., Gray, K., & Sanchez, F. M. (2015). The use of self-quantification systems for personal health information: big data management activities and prospects. Health information science and systems, 3(1), 1-11. <br/><br/> Orji, R. (2018). The Costs and Benefits of Self-Monitoring for Health and Wellness. Retrieved from:  https://blogs.ucl.ac.uk/cbc-digi-hub-blog/2018/09/21/the-costs-and-benefits-of-self-monitoring-for-health-and-wellness/ <br/><br/> Mekler, E. D., Brühlmann, F., Tuch, A. N., & Opwis, K. (2017). Towards understanding the effects of individual gamification elements on intrinsic motivation and performance. Computers in Human Behavior, 71, 525-534. |
+|Quantified Self. What is Quantified Self? Retrieved from https://quantifiedself.com/about/what-is-quantified-self/ 
+ <br/><br/> Almalki, M., Gray, K., & Sanchez, F. M. (2015). The use of self-quantification systems for personal health information: big data management activities and prospects. Health information science and systems, 3(1), 1-11. 
+ <br/><br/> Orji, R. (2018). The Costs and Benefits of Self-Monitoring for Health and Wellness. Retrieved from:  https://blogs.ucl.ac.uk/cbc-digi-hub-blog/2018/09/21/the-costs-and-benefits-of-self-monitoring-for-health-and-wellness/ 
+ <br/><br/> Mekler, E. D., Brühlmann, F., Tuch, A. N., & Opwis, K. (2017). Towards understanding the effects of individual gamification elements on intrinsic motivation and performance. Computers in Human Behavior, 71, 525-534. 
+ <br/><br/> Probst, G. J. (1998). Practical knowledge management: A model that works. PRISM-CAMBRIDGE MASSACHUSETTS-, 17-30.|
 
 ### Gamification
 Gamification describes the use of game design elements in a non-game context, which are intended to motivate and engage users (Deterding, Dixon, Khaled, & Nacke, 2011). As more and more people are picking up gaming as a hobby and become more familiar with game elements, gamification is likewise being used to enhance services more often. It is related to subjects such as educational games, but differs in the way that the main activity performed is not a game, but simply incorporates gameful features.
@@ -46,11 +62,44 @@ We think gamification will be a great addition to our app design, since it can c
 
 | **Sources** |
 |-------------|
-|Deterding, S., Dixon, D., Khaled, R., & Nacke, L. (2011, September). From game design elements to gamefulness: defining" gamification". In Proceedings of the 15th international academic MindTrek conference: Envisioning future media environments (pp. 9-15). <br/><br/> J. Hamari, J. Koivisto and H. Sarsa, "Does Gamification Work? -- A Literature Review of Empirical Studies on Gamification," 2014 47th Hawaii International Conference on System Sciences, 2014, pp. 3025-3034, doi: 10.1109/HICSS.2014.377. <br/><br/> Dahlstrøm, C. (2017). Impacts of gamification on intrinsic motivation. |
+|Deterding, S., Dixon, D., Khaled, R., & Nacke, L. (2011, September). From game design elements to gamefulness: defining" gamification". In Proceedings of the 15th international academic MindTrek conference: Envisioning future media environments (pp. 9-15). 
+<br/><br/> J. Hamari, J. Koivisto and H. Sarsa, "Does Gamification Work? -- A Literature Review of Empirical Studies on Gamification," 2014 47th Hawaii International Conference on System Sciences, 2014, pp. 3025-3034, doi: 10.1109/HICSS.2014.377. 
+<br/><br/> Dahlstrøm, C. (2017). Impacts of gamification on intrinsic motivation. |
+
+### A few things to keep in mind
+Our two “mentors” already gave us a great theoretical foundation for further research and a plethora of features to choose from. We also felt it important to include our own experiences and intuitions into the app design - maybe not as a (figurative) mentor, but more of a sidekick. So while we had previously let research guide us to which models to build upon, we now went to look for what we personally felt was still missing and check whether these were valid points supported by empirical research.
+
+Something that was extremely important to both of us, was that we do not want to rush users to change their behaviour or log their workouts at a certain frequency. This should firstly be reflected in the choice of features. For example, we did not want our app to send push notifications. Our intuition was that this would stress users, a claim we could not find a clear support or rebuttal for. However, a 2020 literature review (Wohllebe, 2020) found that while push notifications increase engagement with an app, they are also often perceived as a disruption or interruption. Valuing these benefits and disadvantages against each other, we decided to stick with not wanting any push notifications. 
+
+Our commitment to a relaxed approach to self-quantification should also show in more indirect ways, such as the language used in the in-app texts. Going into detail and setting up criteria for how to do this would have been beyond the scope of this project. We instead focused on non-intrusive language, nudging users to keep engaging with the app, and allowing them the possibility to customise their experiences (Almourad, et al., 2021). This includes the option to turn off any form of nudging and instead just receiving positive feedback for logged activities. 
+
+Another thing to keep in mind were the downsides that both self-quantification and gamification have. These were a reminder, not for the users, but for us to take things slow and consider what was actually useful and when we were going a bit overboard. For this, our sidekick needed to be a bit of a buzzkill and sit us down to look up the disadvantages of our shiny new mentor friends.
+In a collection of prevalent criticisms of self-sensoring devices (Baker, 2020), tools often employed for self quantification, a lack of transparency in underlying algorithms was pointed out. By making the project code completely visible to any users, explaining our steps that led us there and presenting the logged data in a minimally processed form, we hope to counteract this. Self-quantification tools may also convey to the users a feeling of needing to know data about themselves to abide to an external degree of wellness. These standards can be set by the tool, peers or other sources. Instead of pushing users to change their behaviour to match any goals, whether they were set by us or themselves, we want to focus on simply managing and reflecting on data (Almalki, Gray & Sanchez, 2015). This should hopefully also boost self-quantification’s benefit of increased self-awareness, while alleviating the pressure to perform (Ayobi, et al., 2017).
+
+Lastly, we wanted all our elements to fit together organically (or as organically as a digital application can be at least). While we would have probably stuck to this principle just for the sake of organising the development process, there is actually a user benefit in it as well. Especially with gamification, game design elements that aren’t tied to other elements can lead to off-task behaviour (Andrade, Mizoguchi & Isotani, 2016). This means they are a distraction from the other functions instead of enhancing them. To avoid this we always checked how a new feature would interact with the other elements and to which end goal it would be used. For example we wanted to make sure our game elements weren’t just an experience bar that kept growing with no end, but that an, hypothetical, increase in experience would also unlock new ways to use the app. 
+
+To summarise, our sidekick, or by now our group of sidekicks, are supposed to remind us of the following principles: Take things slow and do not push users in any direction. Keep your mind open for any negative sides of self-quantification and gamification. Elements should lift each other up instead of distracting from each other. 
+
+| **Sources** |
+|-------------|
+|Wohllebe, A. (2020). Consumer Acceptance of App Push Notifications: Systematic Review on the Influence of Frequency.
+
+<br/><br/>Baker, D. A. (2020). Four ironies of self-quantification: wearable technologies and the quantified self. Science and Engineering Ethics, 26(3), 1477-1498.
+
+<br/><br/>Andrade, F. R., Mizoguchi, R., & Isotani, S. (2016, June). The bright and dark sides of gamification. In International conference on intelligent tutoring systems (pp. 176-186). Springer, Cham.
+
+<br/><br/>Almalki, M., Gray, K., & Sanchez, F. M. (2015). The use of self-quantification systems for personal health information: big data management activities and prospects. Health information science and systems, 3(1), 1-11.
+
+<br/><br/>Ayobi, A., Marshall, P., Cox, A. L., & Chen, Y. (2017, May). Quantifying the body and caring for the mind: self-tracking in multiple sclerosis. In Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems (pp. 6889-6901).
+
+<br/><br/>Almourad, M. B., Alrobai, A., Skinner, T., Hussain, M., & Ali, R. (2021). Digital wellbeing tools through users lens. Technology in Society, 67, 101778.|
+
 
 ## ⚔️ Tests, Allies, and Enemies
 
-Now that we had decided on the two main elements or theories of how our app should work, we were ready to look into more concrete features, starting with game design elements. Our first approach was to go with the classics: Badges/achievements and points. Badges could reflect a user's individual experience and choices they made along the way (by seeing badges that fit their workouts), but also provide an incentive to diversify their workout (to unlock new badges). Points could show their overall progress, as the more workouts a user would logg, the more points they would collect. This would give them a feeling of competence, as well as rewarding interactions with the application (Sailer, Hense, Mayr & Mandl, 2017).
+Now that we had decided on the two main elements or theories of how our app should work, we were ready to look into more concrete features, starting with game design elements. Our first approach was to go with the classics: Leaderboards or other comparative social features were ruled out as possible elements early on. They did not fit our ideal of not setting any expectations for users as they are, by nature, competitive. Indeed some users of gamified trackers have found being evaluated by their peers an uncomfortable experience (Barrat, 2019). Leaderboards especially can negatively affect the sense of competence (Andrade, Mizoguchi & Isotani, 2016), which may demotivate users from using a tracker or reduce their activities altogether.
+
+This left badges/achievements and points. Badges could reflect a user's individual experience and choices they made along the way (by seeing badges that fit their workouts), but also provide an incentive to diversify their workout (to unlock new badges). Points could show their overall progress, as the more workouts a user would logg, the more points they would collect. This would give them a feeling of competence, as well as rewarding interactions with the application (Sailer, Hense, Mayr & Mandl, 2017).
 
 <details>
  <summary> :framed_picture: Mock-up here</summary> 
@@ -85,7 +134,10 @@ We therefore took our avatar based app idea and decided to substitute the player
 
 | **Sources** |
 |-------------|
-| Sailer, M., Hense, J. U., Mayr, S. K., & Mandl, H. (2017). How gamification motivates: An experimental study of the effects of specific game design elements on psychological need satisfaction. Computers in human behavior, 69, 371-380. <br/><br/> J. Hamari, J. Koivisto and H. Sarsa, "Does Gamification Work? -- A Literature Review of Empirical Studies on Gamification," 2014 47th Hawaii International Conference on System Sciences, 2014, pp. 3025-3034, doi: 10.1109/HICSS.2014.377. <br/><br/> Rapp, A. (2017). From games to gamification: A classification of rewards in World of Warcraft for the design of gamified systems. Simulation & Gaming, 48(3), 381-401. <br/><br/> Rapp, A., Hopfgartner, F., Hamari, J., Linehan, C., & Cena, F. (2019). Strengthening gamification studies: Current trends and future opportunities of gamification research. International Journal of Human-Computer Studies, 127, 1-6. <br/><br/> Marder, B., Gattig, D., Collins, E., Pitt, L., Kietzmann, J., & Erz, A. (2019). The Avatar's new clothes: Understanding why players purchase non-functional items in free-to-play games. Computers in Human Behavior, 91, 72-83. <br/><br/> Shibuya, A., Okura, H., Shoun, A., & Asou, N. (2019). Male and Female Game Players' Preferences for Game Characters and Real-world Personalities in Japan. In DiGRA Conference. |
+| Sailer, M., Hense, J. U., Mayr, S. K., & Mandl, H. (2017). How gamification motivates: An experimental study of the effects of specific game design elements on psychological need satisfaction. Computers in human behavior, 69, 371-380. <br/><br/> J. Hamari, J. Koivisto and H. Sarsa, "Does Gamification Work? -- A Literature Review of Empirical Studies on Gamification," 2014 47th Hawaii International Conference on System Sciences, 2014, pp. 3025-3034, doi: 10.1109/HICSS.2014.377. <br/><br/> Rapp, A. (2017). From games to gamification: A classification of rewards in World of Warcraft for the design of gamified systems. Simulation & Gaming, 48(3), 381-401. <br/><br/> Rapp, A., Hopfgartner, F., Hamari, J., Linehan, C., & Cena, F. (2019). Strengthening gamification studies: Current trends and future opportunities of gamification research. International Journal of Human-Computer Studies, 127, 1-6. <br/><br/> Marder, B., Gattig, D., Collins, E., Pitt, L., Kietzmann, J., & Erz, A. (2019). The Avatar's new clothes: Understanding why players purchase non-functional items in free-to-play games. Computers in Human Behavior, 91, 72-83. <br/><br/> Shibuya, A., Okura, H., Shoun, A., & Asou, N. (2019). Male and Female Game Players' Preferences for Game Characters and Real-world Personalities in Japan. In DiGRA Conference. <br/><br/>Barratt, P. (2017). Healthy competition: A qualitative study investigating persuasive technologies and the gamification of cycling. Health & place, 46, 328-336.
+
+<br/><br/>Andrade, F. R., Mizoguchi, R., & Isotani, S. (2016, June). The bright and dark sides of gamification. In International conference on intelligent tutoring systems (pp. 176-186). Springer, Cham.
+|
 
 ## 💎 The Ultimate Boon
 With this idea we developed a new idea of how the app would look like and as you can probably deduce from the section heading, it is the one we stuck with. We did not immediately have all the details figured out and still had to do a bunch of tweaking during development, but for the sake of brevity(-ish…) we will simply describe the end construct here. 
@@ -102,7 +154,7 @@ As we approach our figurative return to the Shire/ train back to platform 9 ¾ /
 | Lesson learned: | Feature added: |
 |-----------------|----------------|
 | Need for competence requires feedback | Buddies give feedback in workout recap & after logging a new workout |
-| Need for autonomy needs choices and intentional interactions | Users have choice of buddies and can seek out interactions (conversations) themselves |
+| Need for autonomy needs choices and intentional interactions | Users have choice of buddies and can seek out interactions (conversations) themselves as well as the degree of feedback |
 | Need for autonomy needs meaningful experiences | Conversations with buddies will (hopefully) be meaningful to some users |
 | Data should be turned into digital objects, that… | Buddies are digital objects representing activitiesworkouts. |
 | … tie into other features. | They reference logged workouts in their workout recaps directly and change conversation options when interacting. |
@@ -113,6 +165,15 @@ As we approach our figurative return to the Shire/ train back to platform 9 ¾ /
 | … celebration of users’ achievements, … | Buddies praise the user for committing to their fitness activities. |
 | … and devotion to in-game characters. | Users can decide which characters they want to get to know better and spend time on their corresponding activities. |
 | NPCs become more likeable when users can uncover hidden aspects of their character. | This is utilised to motivate users to log more workouts with a buddy. |
+
+### Why no data visualisation?
+As some of you might have realised, there is no graphical representation of the user data in our current app concept. We preferred a narrative recapitulation by the buddies, as a way to elevate our main feature. Data visualisation is also better suited to illustrate relationships or connections between data points (Azzam, Evergreen & Kistler, 2013), for example by showing trends in activity. This is an interpretive step that we did not feel comfortable making at this point, rather opting to only do some minimal aggregation, to make the data more comprehensible. This also reduces the possibility of information overload and visual stress in the user, which is more likely to occur in data visualisations (Bresciani & Eppler, 2009).
+
+| **Sources** |
+|-------------|
+| Azzam, T., Evergreen, S., Germuth, A. A., & Kistler, S. J. (2013). Data visualization and evaluation. New Directions for Evaluation, 2013(139), 7-32.
+
+<br></br> Bresciani, S., & Eppler, M. J. (2009). The risks of visualization. Identität und Vielfalt der Kommunikations-wissenschaft (2009), 165-178.|
 
 Overall these are quite a lot of insights we borrowed from the papers we read and managed to incorporate into only a small selection of features. Keeping our list of features brief was important to us, as we had to implement them without much experience in app-programming and also wanted to focus on doing a few things well instead of dabbling in a bit of everything. Still we are aware that we have barely scratched the surface of possibilities of some topics, which leads into the last section of this theoretical background: Further research, limitations or just…
 
