@@ -21,6 +21,30 @@ For our Knowledge Management course, we were on a mission to find a fun project 
 
 If you want to learn more about our journey to the outcome, there is more from our adventure:
 
+
+## Table of Content
+
+1. [ 🧙‍♀️ Meeting the Mentor(s) & Crossing the Threshold](#Mentors)  
+    1.1 [Self-Quantification](#Mentors)    
+    1.2 [Gamification](#Gamification)  
+	1.3 [Why do we think this is a good idea?](#Why)  
+	1.4 [A few things to keep in mind](#Mind)  
+2. [ ⚔️ Tests, Allies, and Enemies](#Tests)  
+3. [ 💎 The Ultimate Boon](#Boon)  
+	3.1 [How it works](#How)  
+4. [ 🌅 Master of two Worlds](#Master)  
+	4.1 [Why no visualisation?](#visualisation)  
+5. [ 🔮 Sequel Bait](#Sequel)  
+	5.1 [What else could be added to this concept?](#Sequel)  
+	5.2 [Evaluation](#Evaluation)  
+	5.3 [Code improvements](#improvements)  
+6. [ 👩🏽‍💻 Implementation](#Implementation)  
+	6.1 [Requirements](#Requirements)  
+	6.2 [Functions](#Functions)  
+			6.2.1 [Buddys](#Buddys)  
+			6.2.2 [Conversations](#Conversations)  
+
+<a name="Mentors"></a>
 ## 🧙‍♀️ Meeting the Mentor(s) & Crossing the Threshold 
 ### Self-Quantification
 
@@ -46,6 +70,7 @@ Overall, self-quantification is meant to increase awareness, curiosity, and cons
 |-------------|
 |Quantified Self. What is Quantified Self? Retrieved from https://quantifiedself.com/about/what-is-quantified-self/ <br/><br/> Almalki, M., Gray, K., & Sanchez, F. M. (2015). The use of self-quantification systems for personal health information: big data management activities and prospects. Health information science and systems, 3(1), 1-11. <br/><br/> Orji, R. (2018). The Costs and Benefits of Self-Monitoring for Health and Wellness. Retrieved from:  https://blogs.ucl.ac.uk/cbc-digi-hub-blog/2018/09/21/the-costs-and-benefits-of-self-monitoring-for-health-and-wellness/ <br/><br/> Mekler, E. D., Brühlmann, F., Tuch, A. N., & Opwis, K. (2017). Towards understanding the effects of individual gamification elements on intrinsic motivation and performance. Computers in Human Behavior, 71, 525-534. <br/><br/> Probst, G. J. (1998). Practical knowledge management: A model that works. PRISM-CAMBRIDGE MASSACHUSETTS-, 17-30.|
 
+<a name="Gamification"></a>
 ### Gamification
 Gamification describes the use of game design elements in a non-game context, which are intended to motivate and engage users (Deterding, Dixon, Khaled, & Nacke, 2011). As more and more people are picking up gaming as a hobby and become more familiar with game elements, gamification is likewise being used to enhance services more often. It is related to subjects such as educational games, but differs in the way that the main activity performed is not a game, but simply incorporates gameful features.
 
@@ -53,6 +78,7 @@ Gamification describes the use of game design elements in a non-game context, wh
 
 Gamified applications most commonly feature points, badges or leader boards (Hamari, Koivisto & Sarsa, 2014). These elements are very versatile, so they can be applied to many different contexts , such as education, health, and commerce. Research on how gamification affects motivation is still ongoing. The difference between extrinsic and intrinsic motivation is something that especially interests researchers, but since these are difficult to measure directly and can only be seen in their behavioural outcomes, no definite connection can be made yet. Something that has become apparent though is that different game design elements have different effects and that the context they are being deployed in and the personality of the user matter (Dahlstrøm, 2017). Because of this they are, though efficient at times, no catch-all solution for engaging users.
 
+<a name="Why"></a>
 #### Why do we think this is a good idea?
 We think gamification will be a great addition to our app design, since it can complement self-quantification in our competence-autonomy dilemma: Users will feel competent through receiving feedback about their workout progress, guided by self-quantification tools. The game design elements can be chosen to satisfy a need for autonomy, for example by allowing users to make meaningful choices and seek out intentional interactions
 
@@ -60,6 +86,7 @@ We think gamification will be a great addition to our app design, since it can c
 |-------------|
 |Deterding, S., Dixon, D., Khaled, R., & Nacke, L. (2011, September). From game design elements to gamefulness: defining" gamification". In Proceedings of the 15th international academic MindTrek conference: Envisioning future media environments (pp. 9-15). <br/><br/> J. Hamari, J. Koivisto and H. Sarsa, "Does Gamification Work? -- A Literature Review of Empirical Studies on Gamification," 2014 47th Hawaii International Conference on System Sciences, 2014, pp. 3025-3034, doi: 10.1109/HICSS.2014.377. <br/><br/> Dahlstrøm, C. (2017). Impacts of gamification on intrinsic motivation. |
 
+<a name="Mind"></a>
 ### A few things to keep in mind
 Our two “mentors” already gave us a great theoretical foundation for further research and a plethora of features to choose from. We also felt it important to include our own experiences and intuitions into the app design - maybe not as a (figurative) mentor, but more of a sidekick. So while we had previously let research guide us to which models to build upon, we now went to look for what we personally felt was still missing and check whether these were valid points supported by empirical research.
 
@@ -78,7 +105,7 @@ To summarise, our sidekick, or by now our group of sidekicks, are supposed to re
 |-------------|
 |Wohllebe, A. (2020). Consumer Acceptance of App Push Notifications: Systematic Review on the Influence of Frequency. <br/><br/>Baker, D. A. (2020). Four ironies of self-quantification: wearable technologies and the quantified self. Science and Engineering Ethics, 26(3), 1477-1498. <br/><br/>Andrade, F. R., Mizoguchi, R., & Isotani, S. (2016, June). The bright and dark sides of gamification. In International conference on intelligent tutoring systems (pp. 176-186). Springer, Cham. <br/><br/>Almalki, M., Gray, K., & Sanchez, F. M. (2015). The use of self-quantification systems for personal health information: big data management activities and prospects. Health information science and systems, 3(1), 1-11. <br/><br/>Ayobi, A., Marshall, P., Cox, A. L., & Chen, Y. (2017, May). Quantifying the body and caring for the mind: self-tracking in multiple sclerosis. In Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems (pp. 6889-6901). <br/><br/>Almourad, M. B., Alrobai, A., Skinner, T., Hussain, M., & Ali, R. (2021). Digital wellbeing tools through users lens. Technology in Society, 67, 101778. |
 
-
+<a name="Tests"></a>
 ## ⚔️ Tests, Allies, and Enemies
 
 Now that we had decided on the two main elements or theories of how our app should work, we were ready to look into more concrete features, starting with game design elements. Our first approach was to go with the classics: Leaderboards or other comparative social features were ruled out as possible elements early on. They did not fit our ideal of not setting any expectations for users as they are, by nature, competitive. Indeed some users of gamified trackers have found being evaluated by their peers an uncomfortable experience (Barrat, 2019). Leaderboards especially can negatively affect the sense of competence (Andrade, Mizoguchi & Isotani, 2016), which may demotivate users from using a tracker or reduce their activities altogether.
@@ -120,16 +147,20 @@ We therefore took our avatar based app idea and decided to substitute the player
 |-------------|
 | Sailer, M., Hense, J. U., Mayr, S. K., & Mandl, H. (2017). How gamification motivates: An experimental study of the effects of specific game design elements on psychological need satisfaction. Computers in human behavior, 69, 371-380. <br/><br/> J. Hamari, J. Koivisto and H. Sarsa, "Does Gamification Work? -- A Literature Review of Empirical Studies on Gamification," 2014 47th Hawaii International Conference on System Sciences, 2014, pp. 3025-3034, doi: 10.1109/HICSS.2014.377. <br/><br/> Rapp, A. (2017). From games to gamification: A classification of rewards in World of Warcraft for the design of gamified systems. Simulation & Gaming, 48(3), 381-401. <br/><br/> Rapp, A., Hopfgartner, F., Hamari, J., Linehan, C., & Cena, F. (2019). Strengthening gamification studies: Current trends and future opportunities of gamification research. International Journal of Human-Computer Studies, 127, 1-6. <br/><br/> Marder, B., Gattig, D., Collins, E., Pitt, L., Kietzmann, J., & Erz, A. (2019). The Avatar's new clothes: Understanding why players purchase non-functional items in free-to-play games. Computers in Human Behavior, 91, 72-83. <br/><br/> Shibuya, A., Okura, H., Shoun, A., & Asou, N. (2019). Male and Female Game Players' Preferences for Game Characters and Real-world Personalities in Japan. In DiGRA Conference. <br/><br/>Barratt, P. (2017). Healthy competition: A qualitative study investigating persuasive technologies and the gamification of cycling. Health & place, 46, 328-336. <br/><br/>Andrade, F. R., Mizoguchi, R., & Isotani, S. (2016, June). The bright and dark sides of gamification. In International conference on intelligent tutoring systems (pp. 176-186). Springer, Cham. |
 
+
+<a name="Boon"></a>
 ## 💎 The Ultimate Boon
 With this idea we developed a new idea of how the app would look like and as you can probably deduce from the section heading, it is the one we stuck with. We did not immediately have all the details figured out and still had to do a bunch of tweaking during development, but for the sake of brevity(-ish…) we will simply describe the end construct here. 
 
 The main feature of the app is a buddy system, where users can choose an NPC to accompany them on their workouts. The more they work out together, the more dialogue options they unlock. Through this users can grow closer to the characters.
 
+<a name="How"></a>
 ### How it works
 When a user registers a new activity, they choose a buddy that will accompany them on these workouts. What this means is that whenever a new workout instance of this activity is logged, the friendship stat of this character is increased. This friendship is not directly visible to the user, but influences the conversation options for their buddy. They can “talk” to the NPCs, either to just chat or to get a recap of the past workouts they have logged together. When just chatting random lines are selected based on the friendship level. An NPCs that’s still unfamiliar with the user might behave slightly awkward around them or only make very surface level small talk. As they continue working out together that buddy will become more comfortable with the player though. In their recaps buddies talk about various aspects of activities, such as when the last workout was logged, whether the user was able to work out longer than previously, and how often they have worked out together. Besides this aggregated data, buddies also praise users for their commitment and determination.
 
 <img src="md_images/flow chart.jpg" >
 
+<a name="Master"></a>
 ## 🌅 Master of two Worlds
 As we approach our figurative return to the Shire/ train back to platform 9 ¾ / medal ceremony with subsequent Jedi training, it is only appropriate to look back at all the lessons we have learned and see how they were implemented in our final system. Since you already had to read quite a lot of text, we decided to put this into a convenient table:
 | Lesson learned: | Feature added: |
@@ -147,6 +178,7 @@ As we approach our figurative return to the Shire/ train back to platform 9 ¾ /
 | … and devotion to in-game characters. | Users can decide which characters they want to get to know better and spend time on their corresponding activities. |
 | NPCs become more likeable when users can uncover hidden aspects of their character. | This is utilised to motivate users to log more workouts with a buddy. |
 
+<a name="visualisation"></a>
 ### Why no data visualisation?
 As some of you might have realised, there is no graphical representation of the user data in our current app concept. We preferred a narrative recapitulation by the buddies, as a way to elevate our main feature. Data visualisation is also better suited to illustrate relationships or connections between data points (Azzam, Evergreen & Kistler, 2013), for example by showing trends in activity. This is an interpretive step that we did not feel comfortable making at this point, rather opting to only do some minimal aggregation, to make the data more comprehensible. This also reduces the possibility of information overload and visual stress in the user, which is more likely to occur in data visualisations (Bresciani & Eppler, 2009).
 
@@ -156,7 +188,7 @@ As some of you might have realised, there is no graphical representation of the 
 
 Overall these are quite a lot of insights we borrowed from the papers we read and managed to incorporate into only a small selection of features. Keeping our list of features brief was important to us, as we had to implement them without much experience in app-programming and also wanted to focus on doing a few things well instead of dabbling in a bit of everything. Still we are aware that we have barely scratched the surface of possibilities of some topics, which leads into the last section of this theoretical background: Further research, limitations or just…
 
-
+<a name="Sequel"></a>
 ## 🔮 Sequel Bait
 ### What else could be added to this concept?
 Obviously, a lot! Here are some ideas that we either had to drop because of time restrains or only came up a bit late:
@@ -169,6 +201,7 @@ Obviously, a lot! Here are some ideas that we either had to drop because of time
 * More elaborate friendship “algorithm”! The underlying algorithm determining how the friendship with a buddy increases could be improved. Aspects such as the duration/intensity of the workout could influence the amount of friendship. Right now every logged workout simply increases the friendship score by one, so even calling it an algorithm is kind of an overstatement. 
 * Customisation! Another aspect that can be considered in future work is more customisation options, such as choosing the colour design or integrating your own buddies for your favourite sports. This could also include a profile where further data can be stored to improve the overall experience with the buddies and the app, e.g. by being addressed with one's own name to strengthen the connection to the buddies.
 
+<a name="Evaluation"></a>
 ### Evaluation 
 Just adding more and more elements is not the only thing to further improve this app though. Getting some feedback on how the different features are perceived is key to improving in a meaningful way. There are some questions we already have and evaluation techniques that we think could really elevate the app:
 
@@ -176,6 +209,7 @@ Regarding the theoretical foundations and features, some insight into how the ch
 
 The other main facet to evaluate would be the practical implementation, in this case the app itself and its interface. Since this is an app, a usability test with the central question of how intuitive the design and use of the app is, is obvious. One could develop a survey questionnaire that assesses how comprehensive the design is, including the colour choices and elements used (such as buttons, icons and text input) as well as an additional supporting study to evaluate how easy it was to navigate to the functions of the app.
 
+<a name="improvements"></a>
 ### Code improvements
 There are also some more technical improvements that might not be visible when actually running the app, but are nonetheless beneficial to the overall performance, by making maintenance less complicated:
 
@@ -190,6 +224,7 @@ While programming, there was some confusion about object oriented programming in
 There are places in the code that can be optimised where unnecessary memory or computing time is consumed. These places were deliberately left there to avoid bugs at all costs. For example, the CSV files are re-read at every point where access to this data is needed to ensure that the latest data is available at all times. It is also possible to do it this way, as you cannot expect the CSV files to ever get too big to read in this way, but it is still unnecessary computing. Instead, the data could be read in once and only then read in again if something has been changed in them. 
  
 ---
+<a name="Implementation"></a>
 ## 👩🏽‍💻 Implementation
 
 This app was developed using [Kivy](https://kivy.org/doc/stable/) and [KivyMD](https://kivymd.readthedocs.io/en/latest/#), a python based cross-platform GUI toolkit for touch applications that follows Google's [Material Design](https://material.io/design/introduction) system. 
@@ -201,13 +236,14 @@ Nevertheless, one thing is certain: Kivy gave me the courage to develop an app o
 Overall, I can recommend Kivy as an introduction to app programming if you have mainly worked with Python so far. It's easy to learn how the Kivy language is structured and you quickly get a sense of achievement with KivyMD, as the app looks appealing straight away. However, I did reach some of the limits of Kivy when, for example, I wanted to display dialog widgets in more than just a simple rectangular shape, but I was able to implement most of my ideas solidly, as you can see from this great result. So go for it!
 </details>
 
-
+<a name="Requirements"></a>
 ### Requirements
 As listed in `requirements.txt` and can be automatically installed with the following after cloning this project.
 ```
 pip3 install -r requirements.txt
 ``` 
 
+<a name="Functions"></a>
 ### Functions
 The app is designed to track your fitness activities by logging your own workouts. You can add your own activities like mudflat hiking, caber toss or deep breathing, decide which unit of measurement (how long took your mudflat hike? how much did your caber weight or how many deep breaths did you take?) is relevant, and choose a buddy to work out with to build a closer friendship. Talk to your buddy about your fitness progress or have a relaxed chat with them and get to know them better. 
 
@@ -223,6 +259,7 @@ The app is designed to track your fitness activities by logging your own workout
 
 https://user-images.githubusercontent.com/49160252/170266041-80073841-be21-45f0-b9b1-151c05114690.mp4
 
+<a name="Buddys"></a>
 #### Buddys
 To add your own buddy, you need to add a row to the csv file 'buddys.csv', add an image and two conversation CSV files (which are described in the following section). 
 
@@ -240,6 +277,7 @@ This message is shown after you logged a workout, depending on your settings. It
 * startscreen_encouragement & startescreen_nudging  
 When you open the app your buddy can encourage you with a simple reminder of your previuos workout or by a little nudging. Add according messages in these two columns.
 
+<a name="Conversations"></a>
 #### Conversations
 To have a chat with your buddy, you need a CSV file for both the workout conversation and the regular conversation, but both are structured and processed the same way. The matching CSV is first read in and mapped as a DataFrame (i.e. a matrix/table), where each row represents a message. The algorithm selects the next message by minimizing the set of all messages using filters from the other columns and randomly selecting one from the resulting set. In doing so, it is guided through the texts using tags until the conversation is over. From the following representation of the CSV, as well as the explanations the function of the algorithm becomes more clear. 
 
@@ -264,7 +302,7 @@ Any other columns can be inserted to act as new filters. The last column 'other 
 <details>
 <summary markdown="span">
 
- #### A little more in-depth explanation on how to extent the chat messages of your buddys </summary>
+ ##### A little more in-depth explanation on how to extent the chat messages of your buddys </summary>
  If you want to insert a new text message, you can add a line to the corresponding CSV of a buddy. The most important part here is to pay attention to which tags you use, as the code will repeatedly move from tag to next tag, selecting the messages that will then be displayed in the chat. One can extend chats independently in different ways with different complexity. There are basically two options, with or without working on the code: 
 
  ##### *Without Code : Simple Extensions without variables or new conditions*
@@ -297,5 +335,6 @@ Similar to new variables, the code for **new conditions** must be extended accor
  
 </details>
 
+<a name="Acknowledgements"></a>
 # Acknowledgements
 We would especially like to thank our instructor and mentor Maria, who accompanied our project from the beginning full of helpfulness, discussed every new crazy idea we had with us and gave us the help and support we individually needed to realise this project. 🌼
