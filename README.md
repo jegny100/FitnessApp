@@ -40,9 +40,7 @@ If you want to learn more about our journey to the outcome, there is more from o
 	5.3 [Code improvements](#improvements)  
 6. [ 👩🏽‍💻 Implementation](#Implementation)  
 	6.1 [Requirements](#Requirements)  
-	6.2 [Functions](#Functions)  
-			6.2.1 [Buddys](#Buddys)  
-			6.2.2 [Conversations](#Conversations)  
+	6.2 [Functions](#Functions) 
 
 <a name="Mentors"></a>
 ## 🧙‍♀️ Meeting the Mentor(s) & Crossing the Threshold 
